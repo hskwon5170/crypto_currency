@@ -86,7 +86,7 @@ export const Coin = () => {
           <div onClick={() => setTab("price")}>Price</div>
         </div>
         {tab === "chart" && <div>차트입니다</div>}
-        {tab === "price" && <PriceTable />}
+        {tab === "price" && <PriceTable data={data?.quotes.USD} />}
       </section>
     </Layout>
   );
