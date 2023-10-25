@@ -1,15 +1,6 @@
 import axios from "axios";
 import { useQuery } from "react-query";
-
-interface CoinData {
-  id: string;
-  is_active: boolean;
-  is_new: boolean;
-  name: string;
-  rank: number;
-  symbol: string;
-  type: CoinData;
-}
+import { CoinData } from "../types";
 
 export const getCoins = (): Promise<CoinData[]> => {
   return axios
