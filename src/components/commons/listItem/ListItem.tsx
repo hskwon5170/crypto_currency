@@ -8,6 +8,7 @@ interface ListItemProps {
   initial: string;
   imageUrl?: string;
   id?: string;
+  isRanker?: boolean;
 }
 
 export const ListItem = ({
@@ -16,6 +17,7 @@ export const ListItem = ({
   initial,
   imageUrl,
   id,
+  isRanker = false,
 }: ListItemProps) => {
   const navigate = useNavigate();
   const goDetail = () => {
@@ -24,18 +26,35 @@ export const ListItem = ({
 
   return (
     <div
-      className="flex items-center justify-around w-full bg-white rounded-md p-4 cursor-pointer"
+      className={`${
+        isRanker
+          ? " w-36 h-36 bg-white flex flex-col p-2"
+          : "flex items-center justify-around w-full  p-4"
+      } cursor-pointer bg-white rounded-md`}
       onClick={goDetail}
     >
       <div className="px-3 text-primary font-black text-xl">{rank}</div>
-      <div className="min-w-[300px] flex gap-3 ">
-        <img src={imageUrl} alt="coin" className="w-12 h-12" />
-        <div className="flex flex-col">
-          <div className="font-black text-xl">{title}</div>
-          <div className="text-[#9D9D9D] font-md">{initial}</div>
+      {isRanker ? (
+        <div className="flex flex-col items-center">
+          <img src={imageUrl} alt="coin" className="w-10 h-10" />
+          <div className="mt-3 text-center">
+            <div className="font-black text-[13px] whitespace-nowrap">
+              {title}
+            </div>
+            <div className="text-[#9D9D9D] text-[12px]">{initial}</div>
+          </div>
         </div>
-      </div>
-      <IoIosArrowForward />
+      ) : (
+        <div className="min-w-[300px] flex gap-3 ">
+          <img src={imageUrl} alt="coin" className="w-12 h-12" />
+          <div className="flex flex-col">
+            <div className="font-black text-xl">{title}</div>
+            <div className="text-[#9D9D9D] font-md">{initial}</div>
+          </div>
+        </div>
+      )}
+
+      {!isRanker && <IoIosArrowForward />}
     </div>
   );
 };

@@ -7,6 +7,8 @@ import Logo from "../../public/kripto.png";
 
 export const Coins = () => {
   const { data } = useCoins();
+  const RankerCoins = data?.slice(0, 8);
+  const RestCoins = data?.slice(8);
   const navigate = useNavigate();
 
   return (
@@ -15,7 +17,21 @@ export const Coins = () => {
         <img src={Logo} alt="logo" className="w-10" />
         <div className="font-black text-primary text-3xl">CryptoPulse</div>
       </div>
-      {data?.map((coin) => (
+      <div className="grid grid-cols-4 gap-6 my-6">
+        {RankerCoins?.map((rcoin) => (
+          <div key={rcoin.id}>
+            <ListItem
+              imageUrl={`https://coinicons-api.vercel.app/api/icon/${rcoin.symbol.toLowerCase()}`}
+              title={rcoin.name}
+              initial={rcoin.symbol}
+              isRanker
+              {...rcoin}
+            />
+          </div>
+        ))}
+      </div>
+
+      {RestCoins?.map((coin) => (
         <div key={coin.id} className="py-3">
           <ListItem
             imageUrl={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}

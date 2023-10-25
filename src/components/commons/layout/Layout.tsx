@@ -8,7 +8,7 @@ interface LayoutProps {
 
 export const Layout = ({ title, children }: LayoutProps) => {
   return (
-    <div className="relative max-w-[35rem] min-h-screen m-auto ">
+    <div className="relative max-w-[40rem] min-h-screen m-auto ">
       {/* {isDetail && (
         <div className="flex">
           <IoIosArrowBack />
