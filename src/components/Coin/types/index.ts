@@ -18,6 +18,10 @@ interface USD_Dto {
   volume_24h_change_24h: number;
 }
 
+export interface Quotes_Dto {
+  USD: USD_Dto;
+}
+
 export interface CoinResponseDto {
   beta_value: number;
   circulating_supply: number;
@@ -26,7 +30,7 @@ export interface CoinResponseDto {
   last_updated: string;
   max_supply: number;
   name: string;
-  quotes: USD_Dto;
+  quotes: Quotes_Dto;
   rank: number;
   symbol: string;
   total_supply: number;
