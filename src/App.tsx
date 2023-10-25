@@ -1,11 +1,11 @@
 import React, { Suspense } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./routes/Routes";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { RecoilRoot } from "recoil";
 import { ErrorBoundary } from "./components/commons/errorBoundary/ErrorBoundary";
+import { Loader } from "./components/commons/loader/Loader";
 
 function App() {
   const queryClient = new QueryClient();
@@ -18,7 +18,7 @@ function App() {
               <div className="font-bold text-red-600">Error가 발생했습니다</div>
             }
           >
-            <Suspense fallback={<div>로딩중.....</div>}>
+            <Suspense fallback={<Loader />}>
               <AppRoutes />
             </Suspense>
           </ErrorBoundary>

@@ -7,10 +7,9 @@ import { useNavigate } from "react-router-dom";
 export const Coins = () => {
   const { data } = useCoins();
   const navigate = useNavigate();
-  // console.log("data", data);
 
   return (
-    <Layout title="MyKriptos">
+    <Layout title="CryptoPulse">
       {data?.map((coin) => (
         <div key={coin.id} className="py-3">
           <ListItem
