@@ -1,4 +1,5 @@
 import React from "react";
+import CoinLogo from "../../../public/kripto.png";
 
 interface LayoutProps {
   title: string;
@@ -7,9 +8,14 @@ interface LayoutProps {
 
 export const Layout = ({ title, children }: LayoutProps) => {
   return (
-    <div className="relative max-w-[480px] min-h-[100vh] m-auto">
-      <title>{title}</title>
-      {children}
+    <div className="relative max-w-[35rem] min-h-screen m-auto p-10 ">
+      <div className="flex gap-6">
+        <img src={CoinLogo} alt="logo" className="w-10 h-auto" />
+        <div className="text-4xl text-primary" style={{ fontWeight: 700 }}>
+          {title}
+        </div>
+      </div>
+      <div className="py-10">{children}</div>
     </div>
   );
 };

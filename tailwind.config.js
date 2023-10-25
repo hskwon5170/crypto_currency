@@ -11,9 +11,7 @@ module.exports = {
         btn: "#f1f3f5",
       },
       textColor: {
-        primary: "#04091a",
-        sub: "#04091a80",
-        card: "#04091a",
+        primary: "#2354e6",
       },
       borderColor: {
         theme: "#035FE8",
@@ -22,6 +20,11 @@ module.exports = {
       gradientColorStops: {
         theme: "#035FE8",
         accent: "#2354e6",
+      },
+      fontFamily: {
+        "nanum-pen": ['"Nanum Pen Script"', "cursive"],
+        "yeon-sung": ['"Yeon Sung"', "cursive"],
+        "noto-sans": ['"Noto Sans KR"', "sans-serif"],
       },
     },
   },

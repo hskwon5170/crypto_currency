@@ -1,6 +1,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;900&family=Yeon+Sung&display=swap");
 
 /* --- Tailwind's Base Styling Override --- */
 @layer base {
@@ -8,6 +9,7 @@
     @apply font-sans antialiased bg-primary;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-family: "Montserrat", cursive;
   }
 
   code {
