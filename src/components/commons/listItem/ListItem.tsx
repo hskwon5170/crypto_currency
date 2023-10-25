@@ -11,6 +11,9 @@ interface ListItemProps {
   isRanker?: boolean;
 }
 
+const hoverEffect =
+  "hover:bg-[#2354e6] hover:scale-105 hover:opacity-70 transition-all duration-30";
+
 export const ListItem = ({
   rank,
   title,
@@ -30,7 +33,7 @@ export const ListItem = ({
         isRanker
           ? " w-36 h-36 bg-white flex flex-col p-2"
           : "flex items-center justify-around w-full  p-4"
-      } cursor-pointer bg-white rounded-md`}
+      } cursor-pointer bg-white rounded-md shadow-sm hover:${hoverEffect}`}
       onClick={goDetail}
     >
       <div className="px-3 text-primary font-black text-xl">{rank}</div>

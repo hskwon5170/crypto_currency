@@ -4,6 +4,8 @@ import { useCoins } from "./api/useCoins";
 import { ListItem } from "../commons/listItem/ListItem";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../public/kripto.png";
+// 2354e6
+// scale opacity
 
 export const Coins = () => {
   const { data } = useCoins();
