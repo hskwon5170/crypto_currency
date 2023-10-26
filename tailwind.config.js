@@ -16,6 +16,7 @@ module.exports = {
       borderColor: {
         theme: "#035FE8",
         accent: "#2354e6",
+        primary: "#2354e6",
       },
       gradientColorStops: {
         theme: "#035FE8",

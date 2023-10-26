@@ -13,6 +13,7 @@ export const useCoins = () => {
     queryKey: ["coins"],
     queryFn: getCoins,
     select: (coins) => coins.slice(0, 100),
+    suspense: true,
   });
 
   return { data, ...rest };

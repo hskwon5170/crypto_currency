@@ -17,7 +17,7 @@ export const Coins = () => {
     <Layout title="CryptoPulse">
       <div className="flex justify-start items-center py-6 gap-3">
         <img src={Logo} alt="logo" className="w-10" />
-        <div className="font-black text-primary text-3xl">CryptoPulse</div>
+        <div className="font-black text-black text-3xl">CryptoPulse</div>
       </div>
       <div className="grid grid-cols-4 gap-6 my-6">
         {RankerCoins?.map((rcoin) => (

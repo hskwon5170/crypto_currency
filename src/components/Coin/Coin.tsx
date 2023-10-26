@@ -11,13 +11,18 @@ export const Coin = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { data, isLoading } = useCoin(id as string);
-  console.log("디테일", data);
-  const [tab, setTab] = useState("");
+  const [tab, setTab] = useState("price");
 
   const quoteChanges =
     data?.quotes.USD.percent_change_24h! > 0
       ? "text-[#13bf36]"
       : "text-[#f23d3d]";
+
+  const selectTabStyle = (currentTab: string) => {
+    return tab === currentTab
+      ? "font-bold text-primary border-b-4 border-primary"
+      : "";
+  };
 
   return (
     <Layout
@@ -82,8 +87,18 @@ export const Coin = () => {
 
       <section className="py-10">
         <div className="flex justify-around py-6">
-          <div onClick={() => setTab("chart")}>Chart</div>
-          <div onClick={() => setTab("price")}>Price</div>
+          <div
+            className={`${selectTabStyle("chart")}`}
+            onClick={() => setTab("chart")}
+          >
+            Chart
+          </div>
+          <div
+            className={`${selectTabStyle("price")}`}
+            onClick={() => setTab("price")}
+          >
+            Price
+          </div>
         </div>
         {tab === "chart" && <div>차트입니다</div>}
         {tab === "price" && <PriceTable data={data?.quotes.USD} />}
