@@ -12,6 +12,7 @@ export const useCoinChart = (coinId: string) => {
     queryKey: ["CoinChart", coinId],
     queryFn: () => getCoinChart(coinId),
     suspense: false,
+    retry: 1,
   });
 
   return { data, isError, isLoading, ...rest };
