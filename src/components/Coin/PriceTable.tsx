@@ -10,13 +10,16 @@ export const PriceTable = (data: any) => {
     <div className="bg-white rounded-md px-16 p-3">
       {keyOrder.map((key) => {
         const value = data.data[key];
-        console.log("key", key);
+        // console.log("key", key);
         return (
           <div key={key} className="flex justify-between my-6 border-b-2 py-4">
             <div className="flex items-center space-x-1">
               <div className="font-bold">{keyMapping[key] || key}</div>
               {key === "ath_price" && (
-                <div className="text-xs">( {data.data["ath_date"]} )</div>
+                <div className="text-xs">
+                  ({" "}
+                  {new Date(data.data["ath_date"]).toISOString().split("T")[0]})
+                </div>
               )}
             </div>
             <span

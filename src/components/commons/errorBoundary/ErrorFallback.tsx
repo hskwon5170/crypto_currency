@@ -6,7 +6,7 @@ interface ErrorFallbackProps {
 }
 
 const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error }) => {
-  console.log("error", error);
+  // console.log("error", error);
   return (
     <div className="h-screen w-screen bg-gray-100 flex items-center">
       <div className="container flex flex-col md:flex-row items-center justify-center px-5 text-gray-700">

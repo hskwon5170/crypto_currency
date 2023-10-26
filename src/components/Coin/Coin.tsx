@@ -12,12 +12,11 @@ import { Tooltip } from "antd";
 export const Coin = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data, isLoading } = useCoin(id as string);
+  const { data } = useCoin(id as string);
   const [tab, setTab] = useState("chart");
 
-  const { data: chartData } = useCoinChart(id as string);
-  // console.log("chartData", chartData);
-
+  const { data: chartData, isError, isLoading } = useCoinChart(id as string);
+  console.log("isLoading", isLoading);
   const quoteChanges =
     data?.quotes.USD.percent_change_24h! > 0
       ? "text-[#13bf36]"
@@ -42,15 +41,20 @@ export const Coin = () => {
         <span>{data?.symbol}</span>
       </div>
 
-      <section className="py-10 flex gap-3">
-        <img
-          src={`https://coinicons-api.vercel.app/api/icon/${data?.symbol.toLocaleLowerCase()}`}
-          alt="coinLogo"
-          className="w-14"
-        />
-        <span className="text-primary font-extrabold text-5xl">
-          {data?.name}
-        </span>
+      <section className="py-10 flex items-start justify-between">
+        <div className="flex items-center gap-3">
+          <img
+            src={`https://coinicons-api.vercel.app/api/icon/${data?.symbol?.toLowerCase()}`}
+            alt="coinLogo"
+            className="coin-logo w-14"
+          />
+          <span className="coin-name text-primary font-extrabold text-5xl">
+            {data?.name}
+          </span>
+        </div>
+        <div className="coin-rank bg-blue-200 p-2 rounded-lg shadow-md text-primary text-2xl font-semibold min-w-[200px] text-center">
+          <span className="pr-2">🏆</span> Rank # {data?.rank}
+        </div>
       </section>
 
       <section>
@@ -62,11 +66,25 @@ export const Coin = () => {
           {data?.quotes.USD.percent_change_24h + `%`}
         </div>
       </section>
+      {/* <Chart id={id as string} data={chartData} /> */}
+      <div className="py-11">
+        {isLoading ? (
+          <div className="w-full min-h-[300px] bg-transparent flex justify-center items-center">
+            <div className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
+          </div>
+        ) : chartData ? (
+          <Chart id={id as string} data={chartData} />
+        ) : (
+          <div className="flex justify-center items-center w-full min-h-[300px]">
+            <strong>Chart is Not Available</strong>
+          </div>
+        )}
+      </div>
 
       <section>
-        <div className="text-primary text-2xl py-6" style={{ fontWeight: 600 }}>
+        {/* <div className="text-primary text-2xl py-6" style={{ fontWeight: 600 }}>
           Rank # {data?.rank}
-        </div>
+        </div> */}
         <div className="grid grid-cols-2 bg-white rounded-md min-h-[100px]">
           <section className="flex flex-col items-center p-6 border-r-2 border-gray-200">
             <div className="flex items-center gap-1 text-gray-400">
@@ -95,7 +113,7 @@ export const Coin = () => {
       </section>
 
       <section className="py-10">
-        <div className="flex justify-around py-20">
+        {/* <div className="flex justify-around py-20">
           <div
             className={`${selectTabStyle("chart")} cursor-pointer`}
             onClick={() => setTab("chart")}
@@ -108,9 +126,10 @@ export const Coin = () => {
           >
             Price
           </div>
-        </div>
-        {tab === "chart" && <Chart id={id as string} data={chartData} />}
-        {tab === "price" && <PriceTable data={data?.quotes.USD} />}
+        </div> */}
+        {/* {tab === "chart" && <Chart id={id as string} data={chartData} />} */}
+        {/* {tab === "price" && <PriceTable data={data?.quotes.USD} />} */}
+        <PriceTable data={data?.quotes.USD} />
       </section>
     </Layout>
   );

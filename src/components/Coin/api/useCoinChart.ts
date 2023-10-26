@@ -8,11 +8,11 @@ export const getCoinChart = (coinId: string) => {
 };
 
 export const useCoinChart = (coinId: string) => {
-  const { data, ...rest } = useQuery({
+  const { data, isError, isLoading, ...rest } = useQuery({
     queryKey: ["CoinChart", coinId],
     queryFn: () => getCoinChart(coinId),
-    suspense: true,
+    suspense: false,
   });
 
-  return { data, ...rest };
+  return { data, isError, isLoading, ...rest };
 };

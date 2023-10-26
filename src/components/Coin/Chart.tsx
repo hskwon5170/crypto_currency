@@ -2,8 +2,8 @@ import React from "react";
 import { ChartProps } from "./types";
 import ApexCharts from "react-apexcharts";
 
-export const Chart = ({ id, data }: ChartProps) => {
-  console.log("잘넘어오나확인", data);
+export const Chart = ({ data }: ChartProps) => {
+  // console.log("잘넘어오나확인", data);
   return (
     <div>
       <ApexCharts

@@ -4,6 +4,19 @@ module.exports = {
   important: true,
   theme: {
     extend: {
+      keyframes: {
+        spin: {
+          from: {
+            transform: "rotate(0deg)",
+          },
+          to: {
+            transform: "rotate(360deg)",
+          },
+        },
+      },
+      animation: {
+        spin: "spin 1s linear infinite",
+      },
       backgroundColor: {
         primary: "#DDE9F5",
         coin: "#ffffff",

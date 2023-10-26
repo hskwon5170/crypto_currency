@@ -49,6 +49,6 @@ interface ChartData {
 }
 
 export interface ChartProps {
-  id: string;
+  id?: string;
   data: ChartData[];
 }
