@@ -1,17 +1,22 @@
-import React, { Suspense, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCoin } from "./api/useCoin";
 import { Layout } from "../commons/layout/Layout";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaCircleInfo } from "react-icons/fa6";
-import { InfoBox } from "./InfoBox";
 import { PriceTable } from "./PriceTable";
+import { useCoinChart } from "./api/useCoinChart";
+import { Chart } from "./Chart";
+import { Tooltip } from "antd";
 
 export const Coin = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { data, isLoading } = useCoin(id as string);
-  const [tab, setTab] = useState("price");
+  const [tab, setTab] = useState("chart");
+
+  const { data: chartData } = useCoinChart(id as string);
+  // console.log("chartData", chartData);
 
   const quoteChanges =
     data?.quotes.USD.percent_change_24h! > 0
@@ -32,7 +37,7 @@ export const Coin = () => {
       <div className="flex items-center text-2xl gap-3">
         <IoIosArrowBack
           onClick={() => navigate(-1)}
-          className="cursor-pointer"
+          className="cursor-pointer hover:text-primary"
         />
         <span>{data?.symbol}</span>
       </div>
@@ -66,7 +71,9 @@ export const Coin = () => {
           <section className="flex flex-col items-center p-6 border-r-2 border-gray-200">
             <div className="flex items-center gap-1 text-gray-400">
               <div>Market Cap</div>
-              <FaCircleInfo />
+              <Tooltip title="Current Price * Circulating Supply">
+                <FaCircleInfo />
+              </Tooltip>
             </div>
             <div className="font-semibold text-3xl">
               {(data?.quotes.USD.market_cap! / 1000000000).toFixed(2)}B
@@ -76,7 +83,9 @@ export const Coin = () => {
           <section className="flex flex-col items-center p-6 border-r-2 border-gray-200">
             <div className="flex items-center gap-1 text-gray-400">
               <div>24H Volume</div>
-              <FaCircleInfo />
+              <Tooltip title="Total value of crypto traded in the past 24 hours">
+                <FaCircleInfo />
+              </Tooltip>
             </div>
             <div className="font-semibold text-3xl">
               {(data?.quotes.USD.volume_24h! / 1000000000).toFixed(2)}B
@@ -86,21 +95,21 @@ export const Coin = () => {
       </section>
 
       <section className="py-10">
-        <div className="flex justify-around py-6">
+        <div className="flex justify-around py-20">
           <div
-            className={`${selectTabStyle("chart")}`}
+            className={`${selectTabStyle("chart")} cursor-pointer`}
             onClick={() => setTab("chart")}
           >
             Chart
           </div>
           <div
-            className={`${selectTabStyle("price")}`}
+            className={`${selectTabStyle("price")} cursor-pointer`}
             onClick={() => setTab("price")}
           >
             Price
           </div>
         </div>
-        {tab === "chart" && <div>차트입니다</div>}
+        {tab === "chart" && <Chart id={id as string} data={chartData} />}
         {tab === "price" && <PriceTable data={data?.quotes.USD} />}
       </section>
     </Layout>

@@ -6,6 +6,7 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import { RecoilRoot } from "recoil";
 import { ErrorBoundary } from "./components/commons/errorBoundary/ErrorBoundary";
 import { Loader } from "./components/commons/loader/Loader";
+import ErrorFallback from "./components/commons/errorBoundary/ErrorFallback";
 
 function App() {
   const queryClient = new QueryClient();
@@ -13,11 +14,7 @@ function App() {
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          <ErrorBoundary
-            fallback={
-              <div className="font-bold text-red-600">Error가 발생했습니다</div>
-            }
-          >
+          <ErrorBoundary fallback={(code) => <ErrorFallback error={code} />}>
             <Suspense fallback={<Loader />}>
               <AppRoutes />
             </Suspense>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useInfiniteQuery, useQuery } from "react-query";
 import { CoinData } from "../types";
 
 export const getCoins = (): Promise<CoinData[]> => {

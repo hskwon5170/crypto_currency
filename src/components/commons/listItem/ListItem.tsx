@@ -31,12 +31,12 @@ export const ListItem = ({
     <div
       className={`${
         isRanker
-          ? " w-36 h-36 bg-white flex flex-col p-2"
+          ? " w-[10rem] h-[10rem] bg-white flex flex-col p-2 sm:w-36 sm:h-36"
           : "flex items-center justify-around w-full  p-4"
-      } cursor-pointer bg-white rounded-md shadow-sm hover:${hoverEffect}`}
+      } cursor-pointer bg-white rounded-md shadow-sm hover:${hoverEffect} `}
       onClick={goDetail}
     >
-      <div className="px-3 text-primary font-black text-xl">{rank}</div>
+      <div className="px-3 text-primary font-black text-xl ">{rank}</div>
       {isRanker ? (
         <div className="flex flex-col items-center">
           <img src={imageUrl} alt="coin" className="w-10 h-10" />

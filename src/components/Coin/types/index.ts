@@ -35,3 +35,20 @@ export interface CoinResponseDto {
   symbol: string;
   total_supply: number;
 }
+
+// 차트
+interface ChartData {
+  close: string;
+  high: string;
+  low: string;
+  market_cap: number;
+  open: string;
+  time_close: number;
+  time_open: number;
+  volume: string;
+}
+
+export interface ChartProps {
+  id: string;
+  data: ChartData[];
+}

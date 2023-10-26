@@ -13,6 +13,9 @@ export const useCoin = (coinId: string) => {
     queryKey: ["coin", coinId],
     queryFn: () => getCoin(coinId),
     suspense: true,
+    onError: (error: any) => {
+      throw error;
+    },
   });
 
   return { data, isLoading, ...rest };

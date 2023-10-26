@@ -1,6 +1,6 @@
 import React from "react";
 
-interface ErrorStatus {
+export interface ErrorStatus {
   code?: number;
   message?: string;
   key?: string;
