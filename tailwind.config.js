@@ -15,7 +15,7 @@ module.exports = {
         },
       },
       animation: {
-        spin: "spin 1s linear infinite",
+        spin: "spin .4s linear infinite",
       },
       backgroundColor: {
         primary: "#DDE9F5",

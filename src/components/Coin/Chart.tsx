@@ -20,7 +20,7 @@ export const Chart = ({ data }: ChartProps) => {
           chart: {
             type: "candlestick",
             toolbar: {
-              show: true,
+              show: false,
             },
             background: "transparent",
           },
