@@ -1,18 +1,11 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;900&family=Yeon+Sung&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Gabarito:wght@500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-
 /* --- Tailwind's Base Styling Override --- */
 @layer base {
   body {
-    @apply font-sans antialiased bg-primary;
+    @apply font-sans antialiased;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: "Montserrat", cursive;

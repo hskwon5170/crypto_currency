@@ -18,11 +18,12 @@ export const Coins = () => {
       {/* <div className="grid grid-cols-4 gap-6 my-6"> */}
       <div className="grid grid-cols-2 justify-items-center align-items-center md:grid-cols-4 gap-6 my-6">
         {RankerCoins?.map((rcoin) => (
-          <div key={rcoin.id}>
+          <div key={rcoin.uuid}>
             <ListItem
-              imageUrl={`https://coinicons-api.vercel.app/api/icon/${rcoin.symbol.toLowerCase()}`}
+              imageUrl={rcoin.iconUrl}
               title={rcoin.name}
               initial={rcoin.symbol}
+              id={rcoin.uuid}
               isRanker
               {...rcoin}
             />
@@ -31,11 +32,12 @@ export const Coins = () => {
       </div>
 
       {RestCoins?.map((coin) => (
-        <div key={coin.id} className="py-3">
+        <div key={coin.uuid} className="py-3">
           <ListItem
-            imageUrl={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}
+            imageUrl={coin.iconUrl}
             title={coin.name}
             initial={coin.symbol}
+            id={coin.uuid}
             {...coin}
           />
         </div>
