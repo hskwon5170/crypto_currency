@@ -15,11 +15,11 @@ export const Coin = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { data } = useCoin(id as string);
-  const { data: newsData } = useNews(id as string);
+  // api limit 제한으로 주석처리함
+  // const { data: newsData } = useNews(id as string);
   const [tab, setTab] = useState("chart");
 
   const { data: chartData, isLoading } = useCoinChart(id as string);
-  // console.log("newsData", newsData);
   const quoteChanges =
     data?.quotes.USD.percent_change_24h! > 0
       ? "text-[#13bf36]"
@@ -112,13 +112,13 @@ export const Coin = () => {
         <section className="py-10">
           <PriceTable data={data?.quotes.USD} />
         </section>
-        <div className="bg-red-400">
+        {/* <div className="bg-red-400">
           {newsData &&
             newsData.map((news) => {
               console.log("news", news);
               return <News newsData={news} />;
             })}
-        </div>
+        </div> */}
       </Layout>
     </>
   );
