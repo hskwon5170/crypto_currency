@@ -1,50 +1,41 @@
 import React from "react";
-import { ChartProps } from "./types";
-import ApexCharts from "react-apexcharts";
+import { VictoryArea, VictoryChart, VictoryVoronoiContainer } from "victory";
 
-export const Chart = ({ data }: ChartProps) => {
+export const Chart = ({ chartData }: any) => {
   // console.log("잘넘어오나확인", data);
   return (
-    <div>
-      <ApexCharts
-        type="candlestick"
-        series={[
-          {
-            data: data?.map((item) => ({
-              x: new Date(item.time_close * 1000),
-              y: [item.open, item.high, item.low, item.close],
-            })),
-          },
-        ]}
-        options={{
-          chart: {
-            type: "candlestick",
-            toolbar: {
-              show: false,
-            },
-            background: "transparent",
-          },
-          title: {
-            text: "CandleStick for 2 weeks",
-            align: "center",
-          },
-          stroke: {
-            curve: "smooth",
-            width: 2,
-          },
-          yaxis: {
-            show: true,
-          },
-          xaxis: {
-            labels: {
-              formatter: function (val: any) {
-                const day = new Date(val);
-                return `${day.getMonth() + 1} / ${day.getDate()}`;
-              },
-            },
+    <VictoryChart
+      containerComponent={
+        <VictoryVoronoiContainer
+          mouseFollowTooltips
+          voronoiDimension="x"
+          labels={({ datum }) => {
+            // console.log(datum);
+            return `y:${datum._y.toFixed(4)}`;
+          }}
+        />
+      }
+    >
+      <defs>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#99bfff" />
+          <stop offset="100%" stopColor="white" />
+        </linearGradient>
+      </defs>
+      <VictoryArea
+        animate={{
+          duration: 2000,
+          onLoad: { duration: 1000 },
+        }}
+        style={{
+          data: {
+            fill: "url(#gradient)",
+            stroke: "#0061ff",
+            strokeWidth: 0.8,
           },
         }}
+        data={chartData}
       />
-    </div>
+    </VictoryChart>
   );
 };

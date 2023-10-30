@@ -4,7 +4,6 @@ import { useQuery } from "react-query";
 interface ChartProps {
   coinId?: string;
 }
-
 export const getChart = (coinId: string) => {
   return axios
     .get(`https://api.coingecko.com/api/v3/coins/${coinId}?sparkline=true`)
