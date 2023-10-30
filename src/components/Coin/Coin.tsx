@@ -13,47 +13,54 @@ export const Coin = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { data, isLoading } = useCoin(id as string);
+  // console.log("코인디테일", data);
   // data.
-  const sparkLineData = data?.sparkline.map(Number);
-  const chartName = String(data?.name.toLowerCase());
+  // const sparkLineData = data?.sparkline.map(Number);
+  // const chartName = String(data?.name.toLowerCase());
   // api limit 제한으로 주석처리함
   // const { data: newsData } = useNews(id as string);
   const [tab, setTab] = useState("chart");
 
-  const { data: chartData, isLoading: chartLoading } = useChart(chartName);
+  const { data: chartData, isLoading: chartLoading } = useChart(
+    data?.id as string
+  );
+  // console.log("chartData", chartData);
 
   const quoteChanges =
-    Number(data?.change) > 0 ? "text-[#13bf36]" : "text-[#f23d3d]";
+    Number(data?.market_data.market_cap_change_percentage_24h) > 0
+      ? "text-[#13bf36]"
+      : "text-[#f23d3d]";
 
-  const High = useMemo(() => {
-    if (data?.sparkline) {
-      const numericSparkLine = data?.sparkline.map(Number);
-      return Math.max(...numericSparkLine);
-    }
-    // return null;
-  }, [data?.sparkline]);
+  // const High = useMemo(() => {
+  //   if (data?.sparkline) {
+  //     const numericSparkLine = data?.sparkline.map(Number);
+  //     return Math.max(...numericSparkLine);
+  //   }
+  //   // return null;
+  // }, [data?.sparkline]);
 
-  const Low = useMemo(() => {
-    if (data?.sparkline) {
-      const numericSparkLine = data?.sparkline.map(Number);
-      return Math.min(...numericSparkLine);
-    }
-    // return null;
-  }, [data?.sparkline]);
+  // const Low = useMemo(() => {
+  //   if (data?.sparkline) {
+  //     const numericSparkLine = data?.sparkline.map(Number);
+  //     return Math.min(...numericSparkLine);
+  //   }
+  //   // return null;
+  // }, [data?.sparkline]);
 
-  const Average = useMemo(() => {
-    if (data?.sparkline) {
-      return (
-        data?.sparkline.reduce((acc, cur) => acc + parseFloat(cur), 0) /
-        data?.sparkline.length
-      );
-    }
-  }, [data?.sparkline]);
+  // const Average = useMemo(() => {
+  //   if (data?.sparkline) {
+  //     return (
+  //       data?.sparkline.reduce((acc, cur) => acc + parseFloat(cur), 0) /
+  //       data?.sparkline.length
+  //     );
+  //   }
+  // }, [data?.sparkline]);
 
   const priceValues: { [key: string]: number | undefined } = {
-    High: High,
-    Low: Low,
-    Average: Average,
+    High: data?.market_data.high_24h.usd,
+    Low: data?.market_data.low_24h.usd,
+    Average:
+      (data?.market_data.high_24h.usd + data?.market_data.low_24h.usd) / 2,
   };
 
   const options = {
@@ -82,7 +89,7 @@ export const Coin = () => {
 
         <section className="flex items-center  gap-3 p-2 py-10 border-b-2 border-[#cee1ff]">
           <img
-            src={`https://coinicons-api.vercel.app/api/icon/${data?.symbol?.toLowerCase()}`}
+            src={data?.image.large}
             alt="coinLogo"
             className="coin-logo w-10"
           />
@@ -91,11 +98,11 @@ export const Coin = () => {
           </span>
           <span className="text-[#737373]">{data?.symbol}</span>
           <div className="coin-rank bg-white p-[3px]  border-2 border-[#e9f2ff] text-md text-gray-600 text-[5px]  bottom-[4px]">
-            # {data?.rank}
+            # {data?.coingecko_rank}
           </div>
           <div className="flex items-center gap-3 pl-6  bottom-[3px]">
             <div className="font-semibold text-2xl">
-              {`$` + Number(data?.price).toFixed(3)}
+              {`$` + Number(data?.market_data.current_price.usd).toFixed(3)}
             </div>
             <div className="coin-rank bg-white p-[3px]  border-2 border-[#e9f2ff] text-md text-gray-600 text-[5px]  bottom-[4px]">
               Live
@@ -108,12 +115,12 @@ export const Coin = () => {
           <div className="coin-rank p-[3px]  bg-[#e9f2ff] text-md text-gray-600 text-[5px] font-extrabold ">
             by AI
           </div>
-          <div>{data?.description}</div>
+          <div className="truncate w-[85%]">{data?.description.en ?? ""}</div>
           <div
             className="text-primary font-bold border-b-4 border-primary cursor-pointer"
             onClick={() => {
-              if (data?.websiteUrl) {
-                window.open(data.websiteUrl);
+              if (data?.links.homepage) {
+                window.open(data?.links.homepage[0]);
               }
             }}
           >
@@ -125,8 +132,13 @@ export const Coin = () => {
           <strong className="mr-6">Price chart</strong>
           <div>24h</div>
           <div className={`${quoteChanges} font-semibold py-3 ml-3`}>
-            {Number(data?.change) > 0 ? "▲ " : "▼ "}
-            {data?.change + `%`}
+            {Number(
+              data?.market_data.market_cap_change_percentage_24h.toFixed(2)
+            ) > 0
+              ? "▲ "
+              : "▼ "}
+            {data?.market_data.market_cap_change_percentage_24h.toFixed(2) +
+              `%`}
           </div>
           <div className="flex ml-3 gap-3">
             {PriceItems.map((key) => {
@@ -147,7 +159,7 @@ export const Coin = () => {
             <div className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
           </div>
         ) : chartData ? (
-          <Chart chartData={chartData} />
+          <Chart chartData={chartData.market_caps} />
         ) : (
           <div className="flex justify-center items-center w-full min-h-[300px]">
             <strong>Chart is Not Available</strong>

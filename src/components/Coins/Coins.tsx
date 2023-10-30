@@ -18,12 +18,11 @@ export const Coins = () => {
       {/* <div className="grid grid-cols-4 gap-6 my-6"> */}
       <div className="grid grid-cols-2 justify-items-center align-items-center md:grid-cols-4 gap-6 my-6">
         {RankerCoins?.map((rcoin) => (
-          <div key={rcoin.uuid}>
+          <div key={rcoin.id}>
             <ListItem
-              imageUrl={rcoin.iconUrl}
+              imageUrl={rcoin.image}
               title={rcoin.name}
               initial={rcoin.symbol}
-              id={rcoin.uuid}
               isRanker
               {...rcoin}
             />
@@ -32,12 +31,11 @@ export const Coins = () => {
       </div>
 
       {RestCoins?.map((coin) => (
-        <div key={coin.uuid} className="py-3">
+        <div key={coin.id} className="py-3">
           <ListItem
-            imageUrl={coin.iconUrl}
+            imageUrl={coin.image}
             title={coin.name}
             initial={coin.symbol}
-            id={coin.uuid}
             {...coin}
           />
         </div>

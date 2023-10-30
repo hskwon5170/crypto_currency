@@ -3,7 +3,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
 interface ListItemProps {
-  rank: number;
+  rank?: number;
   title: string;
   initial: string;
   imageUrl?: string;

@@ -2,7 +2,11 @@ import React from "react";
 import { VictoryArea, VictoryChart, VictoryVoronoiContainer } from "victory";
 
 export const Chart = ({ chartData }: any) => {
-  // console.log("잘넘어오나확인", data);
+  // console.log("잘넘어오나확인", chartData);
+  const formattedData = chartData.map((item: number[]) => ({
+    x: item[0],
+    y: item[1],
+  }));
   return (
     <VictoryChart
       containerComponent={
@@ -10,7 +14,7 @@ export const Chart = ({ chartData }: any) => {
           mouseFollowTooltips
           voronoiDimension="x"
           labels={({ datum }) => {
-            // console.log(datum);
+            console.log(datum);
             return `y:${datum._y.toFixed(4)}`;
           }}
         />
@@ -34,7 +38,7 @@ export const Chart = ({ chartData }: any) => {
             strokeWidth: 0.8,
           },
         }}
-        data={chartData}
+        data={formattedData}
       />
     </VictoryChart>
   );

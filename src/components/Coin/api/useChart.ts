@@ -6,7 +6,10 @@ interface ChartProps {
 }
 export const getChart = (coinId: string) => {
   return axios
-    .get(`https://api.coingecko.com/api/v3/coins/${coinId}?sparkline=true`)
+    .get(
+      `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=7
+    `
+    )
     .then((res) => res.data);
 };
 
@@ -17,5 +20,5 @@ export const useChart = (coinId: string) => {
     retry: 1,
   });
 
-  return { data: data?.market_data.sparkline_7d.price, isLoading, ...rest };
+  return { data, isLoading, ...rest };
 };

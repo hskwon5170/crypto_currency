@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useQuery } from "react-query";
+import { CoinDetailResponse } from "../types";
 
 interface AllTimeHigh {
   price: string;
@@ -66,10 +67,13 @@ interface CoinDetailResponseDto {
   data: Coin;
 }
 
-export const getCoin = (uuid: string): Promise<CoinDetailResponseDto> => {
-  return axios
-    .get(`https://api.coinranking.com/v2/coin/${uuid}`)
-    .then((res) => res.data);
+export const getCoin = (uuid: string): Promise<CoinDetailResponse> => {
+  return (
+    axios
+      // .get(`https://api.coinranking.com/v2/coin/${uuid}`)?
+      .get(`https://api.coingecko.com/api/v3/coins/${uuid}`)
+      .then((res) => res.data)
+  );
 };
 
 export const useCoin = (uuid: string) => {
@@ -82,5 +86,5 @@ export const useCoin = (uuid: string) => {
     },
   });
 
-  return { data: data?.data.coin, isLoading, ...rest };
+  return { data, isLoading, ...rest };
 };
