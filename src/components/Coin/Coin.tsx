@@ -10,6 +10,8 @@ import { useCoinChart } from "./api/useCoinChart";
 import { Chart } from "./Chart";
 import { Tooltip } from "antd";
 import ApexCharts from "react-apexcharts";
+import { useChart } from "./api/useChart";
+import { VictoryChart, VictoryArea, VictoryVoronoiContainer } from "victory";
 
 const PriceItems = ["High", "Low", "Average"];
 
@@ -17,14 +19,19 @@ export const Coin = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { data, isLoading } = useCoin(id as string);
-  console.log("isLoading", isLoading);
+  // data.
+  // console.log("isLoading", isLoading);
   const sparkLineData = data?.sparkline.map(Number);
-  console.log("sparkLineData", sparkLineData);
+  // console.log("sparkLineData", sparkLineData);
+  const chartName = String(data?.name.toLowerCase());
+  // console.log("sparkLineData", sparkLineData);
   // api limit 제한으로 주석처리함
   // const { data: newsData } = useNews(id as string);
   const [tab, setTab] = useState("chart");
 
   // const { data: chartData, isLoading } = useCoinChart(id as string);
+  const { data: chartData, isLoading: chartLoading } = useChart(chartName);
+  console.log("chartData", chartData);
   const quoteChanges =
     Number(data?.change) > 0 ? "text-[#13bf36]" : "text-[#f23d3d]";
 
@@ -173,88 +180,121 @@ export const Coin = () => {
           }}
         /> */}
 
-        {isLoading ? (
+        {chartLoading ? (
           <div className="w-full min-h-[300px] bg-transparent flex justify-center items-center">
             <div className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
           </div>
-        ) : data?.sparkline ? (
+        ) : chartData ? (
           // <Chart id={id as string} data={chartData} />
-          <div>
-            <ApexCharts
-              height="400px"
-              series={[
-                {
-                  name: "Sparkline Data",
-                  data: data?.sparkline?.map(parseFloat) || [],
-                },
-              ]}
-              options={{
-                chart: {
-                  height: "100px",
-                  width: "150px",
-                  type: "area",
-                  stacked: false,
-                  zoom: {
-                    type: "x",
-                    enabled: true,
-                    autoScaleYaxis: true,
-                  },
-                  toolbar: {
-                    show: false,
-                  },
-                  // background: "transparent",
-                  animations: {
-                    enabled: true,
-                    easing: "easein",
-                    speed: 700,
-                  },
-                },
-                title: {
-                  text: "Line Chart for 24 Hours",
-                  align: "center",
-                },
-                stroke: {
-                  curve: "smooth",
-                  width: 5,
-                },
-                //
-
-                xaxis: {
-                  type: "datetime",
-                  labels: {
-                    formatter: function (
-                      val: any,
-                      timestamp: any,
-                      index: number
-                    ) {
-                      const hour = new Date(timestamp).getHours();
-                      return `${hour}:00`;
-                    },
-                  },
-                  categories: Array.from({ length: 24 }, (_, i) => {
-                    const d = new Date();
-                    d.setHours(d.getHours() - (23 - i), 0, 0, 0);
-                    return d.getTime();
-                  }),
-                },
-
-                fill: {
-                  type: "gradient",
-                  gradient: {
-                    shade: "light",
-                    type: "vertical",
-                    shadeIntensity: 0.4,
-                    gradientToColors: ["#50ffb0", "#0d008e"],
-                    inverseColors: true,
-                    opacityFrom: 1,
-                    opacityTo: 0.5,
-                    stops: [0, 100],
-                  },
+          <VictoryChart
+            containerComponent={
+              <VictoryVoronoiContainer
+                mouseFollowTooltips
+                voronoiDimension="x"
+                labels={({ datum }) => {
+                  // console.log(datum);
+                  return `y:${datum._y.toFixed(4)}`;
+                }}
+              />
+            }
+          >
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#99bfff" />
+                <stop offset="100%" stopColor="white" />
+              </linearGradient>
+            </defs>
+            <VictoryArea
+              style={{
+                data: {
+                  fill: "url(#gradient)",
+                  stroke: "#0061ff",
+                  strokeWidth: 0.8,
                 },
               }}
+              data={chartData}
             />
-          </div>
+          </VictoryChart>
         ) : (
+          // <div>
+          //   <ApexCharts
+          //     height="400px"
+          //     series={[
+          //       {
+          //         name: "Sparkline Data",
+          //         // data: data?.sparkline?.map(parseFloat) || [],
+          //         data: chartData || [],
+          //       },
+          //     ]}
+          //     options={{
+          //       chart: {
+          //         height: "100px",
+          //         width: "150px",
+          //         type: "area",
+          //         stacked: false,
+          //         zoom: {
+          //           type: "x",
+          //           enabled: true,
+          //           autoScaleYaxis: true,
+          //         },
+          //         toolbar: {
+          //           show: false,
+          //         },
+          //         // background: "transparent",
+          //         animations: {
+          //           enabled: true,
+          //           easing: "easein",
+          //           speed: 700,
+          //         },
+          //       },
+          //       title: {
+          //         text: "Line Chart for 7 Days",
+          //         align: "center",
+          //       },
+          //       stroke: {
+          //         curve: "smooth",
+          //         width: 5,
+          //       },
+          //       //
+
+          //       xaxis: {
+          //         type: "datetime",
+          //         labels: {
+          //           formatter: function (
+          //             val: any,
+          //             timestamp: any,
+          //             index: number
+          //           ) {
+          //             const hour = new Date(timestamp).getHours();
+          //             return `${hour}:00`;
+          //           },
+          //         },
+          //         categories: Array.from(
+          //           { length: chartData.length },
+          //           (_, i) => {
+          //             const d = new Date();
+          //             d.setHours(d.getHours() - (23 - i), 0, 0, 0);
+          //             return d.getTime();
+          //           }
+          //         ),
+          //       },
+
+          //       fill: {
+          //         type: "gradient",
+          //         gradient: {
+          //           shade: "light",
+          //           type: "vertical",
+          //           shadeIntensity: 0.4,
+          //           gradientToColors: ["#50ffb0", "#0d008e"],
+          //           inverseColors: true,
+          //           opacityFrom: 1,
+          //           opacityTo: 0.5,
+          //           stops: [0, 100],
+          //         },
+          //       },
+          //     }}
+          //   />
+          // </div>
           <div className="flex justify-center items-center w-full min-h-[300px]">
             <strong>Chart is Not Available</strong>
           </div>
