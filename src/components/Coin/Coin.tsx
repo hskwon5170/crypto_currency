@@ -12,68 +12,26 @@ const PriceItems = ["High", "Low", "Average"];
 export const Coin = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  const { data, isLoading } = useCoin(id as string);
-  // console.log("코인디테일", data);
-  // data.
-  // const sparkLineData = data?.sparkline.map(Number);
-  // const chartName = String(data?.name.toLowerCase());
+  const { data } = useCoin(id as string);
+
   // api limit 제한으로 주석처리함
   // const { data: newsData } = useNews(id as string);
-  const [tab, setTab] = useState("chart");
+  // const [tab, setTab] = useState("chart");
 
   const { data: chartData, isLoading: chartLoading } = useChart(
     data?.id as string
   );
-  // console.log("chartData", chartData);
 
   const quoteChanges =
     Number(data?.market_data.market_cap_change_percentage_24h) > 0
       ? "text-[#13bf36]"
       : "text-[#f23d3d]";
 
-  // const High = useMemo(() => {
-  //   if (data?.sparkline) {
-  //     const numericSparkLine = data?.sparkline.map(Number);
-  //     return Math.max(...numericSparkLine);
-  //   }
-  //   // return null;
-  // }, [data?.sparkline]);
-
-  // const Low = useMemo(() => {
-  //   if (data?.sparkline) {
-  //     const numericSparkLine = data?.sparkline.map(Number);
-  //     return Math.min(...numericSparkLine);
-  //   }
-  //   // return null;
-  // }, [data?.sparkline]);
-
-  // const Average = useMemo(() => {
-  //   if (data?.sparkline) {
-  //     return (
-  //       data?.sparkline.reduce((acc, cur) => acc + parseFloat(cur), 0) /
-  //       data?.sparkline.length
-  //     );
-  //   }
-  // }, [data?.sparkline]);
-
   const priceValues: { [key: string]: number | undefined } = {
     High: data?.market_data.high_24h.usd,
     Low: data?.market_data.low_24h.usd,
     Average:
       (data?.market_data.high_24h.usd + data?.market_data.low_24h.usd) / 2,
-  };
-
-  const options = {
-    chart: {
-      type: "line" as const,
-      height: 350,
-      zoom: {
-        enabled: true,
-      },
-    },
-    xaxis: {
-      type: "datetime",
-    },
   };
 
   return (
@@ -97,14 +55,14 @@ export const Coin = () => {
             {data?.name}
           </span>
           <span className="text-[#737373]">{data?.symbol}</span>
-          <div className="coin-rank bg-white p-[3px]  border-2 border-[#e9f2ff] text-md text-gray-600 text-[5px]  bottom-[4px]">
+          <div className="coin-rank bg-white p-[3px]  border-2 border-[#e9f2ff] font-bold text-md text-gray-600 text-[5px]  bottom-[4px]">
             # {data?.coingecko_rank}
           </div>
           <div className="flex items-center gap-3 pl-6  bottom-[3px]">
             <div className="font-semibold text-2xl">
               {`$` + Number(data?.market_data.current_price.usd).toFixed(3)}
             </div>
-            <div className="coin-rank bg-white p-[3px]  border-2 border-[#e9f2ff] text-md text-gray-600 text-[5px]  bottom-[4px]">
+            <div className="coin-rank bg-white p-[3px]  border-2 border-[#e9f2ff] font-bold text-md text-gray-600 text-[5px]  bottom-[4px]">
               Live
             </div>
           </div>
@@ -159,7 +117,7 @@ export const Coin = () => {
             <div className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
           </div>
         ) : chartData ? (
-          <Chart chartData={chartData.market_caps} />
+          <Chart chartData={chartData.prices} />
         ) : (
           <div className="flex justify-center items-center w-full min-h-[300px]">
             <strong>Chart is Not Available</strong>
