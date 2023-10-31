@@ -5,7 +5,7 @@ import { CoinData, CoinDetail } from "../types";
 export const getCoins = (): Promise<CoinDetail[]> => {
   return axios
     .get(
-      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&limit=100&sparkline=false"
+      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&limit=100&sparkline=true"
     )
     .then((res) => res.data);
 };
