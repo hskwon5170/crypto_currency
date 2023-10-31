@@ -13,7 +13,7 @@ function Table({ columns, data, onRowClick }: any) {
             {headerGroup.headers.map((column) => (
               <th
                 {...column.getHeaderProps()}
-                className="text-center align-middle"
+                className="text-center align-middle pb-6"
               >
                 {column.render("Header")}
               </th>
@@ -33,7 +33,7 @@ function Table({ columns, data, onRowClick }: any) {
               {row.cells.map((cell: any) => (
                 <td
                   {...cell.getCellProps()}
-                  className="text-center align-middle"
+                  className="text-center align-middle border-t-2 border-[#cee1ff]"
                 >
                   {cell.render("Cell")}
                 </td>

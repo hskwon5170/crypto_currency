@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Layout } from "../commons/layout/Layout";
 import { useCoins } from "./api/useCoins";
 import { ListItem } from "../commons/listItem/ListItem";
@@ -16,17 +16,19 @@ type Column<T extends object> = {
 };
 
 export const Coins = () => {
+  const navigate = useNavigate();
+
   const { data } = useCoins();
-  // console.log("data", data);
+  console.log("data", data);
   const RankerCoins = data?.slice(0, 8);
   const RestCoins = data?.slice(8);
+
+  const [colorStatus, setColorStatus] = useState("");
 
   const returnValueAsBillion = (value: number) => {
     const billion = 1000000000;
     return (Number(value) / billion).toFixed(2) + " billion";
   };
-
-  const navigate = useNavigate();
 
   const handleCoinClick = (coinId: any) => {
     navigate(`/coins/${coinId}`);
@@ -36,6 +38,23 @@ export const Coins = () => {
   //   Number(data) > 0
   //     ? "text-[#13bf36]"
   //     : "text-[#f23d3d]";
+
+  const quoteChanges = (num: number) => {
+    if (num > 0) {
+      return (
+        <span className="text-white bg-[#13bf36] rounded-md p-1 font-bold">
+          ▲ {Math.abs(Number(num)).toFixed(2)} %
+        </span>
+      );
+    } else {
+      // console.log(num);
+      return (
+        <span className="text-white bg-[#f23d3d] rounded-md p-1 font-bold">
+          ▼ {Math.abs(Number(num)).toFixed(2)} %
+        </span>
+      );
+    }
+  };
 
   const columns = useMemo<Column<CoinDetail>[]>(
     () => [
@@ -61,6 +80,20 @@ export const Coins = () => {
               <span className="font-bold text-lg">{row.original.id}</span>
               <span>{row.original.symbol}</span>
             </div>
+          </div>
+        ),
+      },
+      {
+        accessor: "price_change_24h",
+        Header: "Price change",
+        Cell: ({ row }: any) => (
+          <div>
+            <div className="font-bold pb-3">
+              {+Number(row.original.price_change_24h).toFixed(2) + " $"}
+            </div>
+            <span className="quoteChangeClass">
+              {quoteChanges(row.original.price_change_percentage_24h)}
+            </span>
           </div>
         ),
       },
@@ -100,7 +133,13 @@ export const Coins = () => {
         Header: "7 Days",
         Cell: ({ row }: any) => {
           const { price } = row.original.sparkline_in_7d;
+          // console.log("^*^", row.original.price_change_percentage_24h);
+          const priceChange = row.original.price_change_percentage_24h;
 
+          const color = priceChange > 0 ? "#13bf36" : "#f23d3d";
+          // row.original.price_change_percentage_24h > 0
+          //   ? setColorStatus("#13bf36")
+          //   : setColorStatus("#f23d3d");
           // Canvas를 그릴 때 사용할 함수
           const drawSparkline = (canvas: HTMLCanvasElement) => {
             if (!canvas) return;
@@ -128,7 +167,7 @@ export const Coins = () => {
               );
             });
 
-            ctx.strokeStyle = "#0061ff";
+            ctx.strokeStyle = color;
             ctx.stroke();
           };
 
@@ -140,41 +179,18 @@ export const Coins = () => {
         },
       },
     ],
-    []
+    [colorStatus]
   );
 
   return (
-    <Layout title="CryptoPulse">
-      <div className="flex justify-start items-center py-6 gap-3">
-        <img src={Logo} alt="logo" className="w-10" />
-        <div className="font-black text-black text-3xl">CryptoPulse</div>
-      </div>
-      <Table columns={columns} data={data} onRowClick={handleCoinClick} />
-
-      {/* <div className="grid grid-cols-2 justify-items-center align-items-center md:grid-cols-4 gap-6 my-6">
-        {RankerCoins?.map((rcoin) => (
-          <div key={rcoin.id}>
-            <ListItem
-              imageUrl={rcoin.image}
-              title={rcoin.name}
-              initial={rcoin.symbol}
-              isRanker
-              {...rcoin}
-            />
-          </div>
-        ))}
-      </div>
-
-      {RestCoins?.map((coin) => (
-        <div key={coin.id} className="py-3">
-          <ListItem
-            imageUrl={coin.image}
-            title={coin.name}
-            initial={coin.symbol}
-            {...coin}
-          />
+    <Layout isListPage title="List">
+      <div>
+        <div className="flex justify-start items-center py-6 gap-3">
+          <img src={Logo} alt="logo" className="w-10" />
+          <div className="font-black text-black text-3xl">CryptoCurrency</div>
         </div>
-      ))} */}
+        <Table columns={columns} data={data} onRowClick={handleCoinClick} />
+      </div>
     </Layout>
   );
 };
