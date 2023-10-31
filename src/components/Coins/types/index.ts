@@ -43,3 +43,9 @@ export interface CoinDetail {
   total_supply: number;
   total_volume: number;
 }
+
+export type Column<T extends object> = {
+  accessor: keyof T;
+  Header: string | React.ReactNode;
+  Cell?: (cellProps: { value: any }) => React.ReactNode;
+};

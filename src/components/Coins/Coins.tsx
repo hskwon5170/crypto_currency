@@ -1,29 +1,14 @@
 import React, { useMemo, useState } from "react";
 import { Layout } from "../commons/layout/Layout";
 import { useCoins } from "./api/useCoins";
-import { ListItem } from "../commons/listItem/ListItem";
 import Logo from "../../public/kripto.png";
 import Table from "../commons/Table/Table";
-import { CoinDetail } from "./types";
-import { Chart } from "../Coin/Chart";
+import { CoinDetail, Column } from "./types";
 import { useNavigate } from "react-router-dom";
-import CellChart from "./CellChart";
-
-type Column<T extends object> = {
-  accessor: keyof T;
-  Header: string;
-  Cell?: (cellProps: { value: any }) => React.ReactNode;
-};
 
 export const Coins = () => {
   const navigate = useNavigate();
-
   const { data } = useCoins();
-  console.log("data", data);
-  const RankerCoins = data?.slice(0, 8);
-  const RestCoins = data?.slice(8);
-
-  const [colorStatus, setColorStatus] = useState("");
 
   const returnValueAsBillion = (value: number) => {
     const billion = 1000000000;
@@ -34,11 +19,6 @@ export const Coins = () => {
     navigate(`/coins/${coinId}`);
   };
 
-  // const quoteChanges =
-  //   Number(data) > 0
-  //     ? "text-[#13bf36]"
-  //     : "text-[#f23d3d]";
-
   const quoteChanges = (num: number) => {
     if (num > 0) {
       return (
@@ -47,7 +27,6 @@ export const Coins = () => {
         </span>
       );
     } else {
-      // console.log(num);
       return (
         <span className="text-white bg-[#f23d3d] rounded-md p-1 font-bold">
           ▼ {Math.abs(Number(num)).toFixed(2)} %
@@ -133,34 +112,31 @@ export const Coins = () => {
         Header: "7 Days",
         Cell: ({ row }: any) => {
           const { price } = row.original.sparkline_in_7d;
-          // console.log("^*^", row.original.price_change_percentage_24h);
           const priceChange = row.original.price_change_percentage_24h;
 
           const color = priceChange > 0 ? "#13bf36" : "#f23d3d";
-          // row.original.price_change_percentage_24h > 0
-          //   ? setColorStatus("#13bf36")
-          //   : setColorStatus("#f23d3d");
-          // Canvas를 그릴 때 사용할 함수
+
           const drawSparkline = (canvas: HTMLCanvasElement) => {
             if (!canvas) return;
             const ctx = canvas.getContext("2d");
-            if (!ctx) return;
+            if (!ctx) return; // context를 지원하지 않는 브라우저 대비 => context 없으면 return
 
             const width = canvas.width;
             const height = canvas.height;
+            // console.log("height", height);
 
             // 데이터를 캔버스 크기에 맞게 정규화
             const max = Math.max(...price);
             const min = Math.min(...price);
-            const normalizedData = price.map(
-              (p: any) => ((p - min) / (max - min)) * height
-            );
+            const normalizedData = price.map((p: number) => {
+              return ((p - min) / (max - min)) * height;
+            });
             // console.log("normalizedData", normalizedData);
 
-            ctx.beginPath();
-            ctx.moveTo(0, height - normalizedData[0]); // 시작점
+            ctx.beginPath(); // Path 시작
+            ctx.moveTo(0, height - normalizedData[0]); // 이동
 
-            normalizedData.forEach((point: any, index: any) => {
+            normalizedData.forEach((point: number, index: number) => {
               ctx.lineTo(
                 (index / (normalizedData.length - 1)) * width,
                 height - point
@@ -179,18 +155,16 @@ export const Coins = () => {
         },
       },
     ],
-    [colorStatus]
+    []
   );
 
   return (
     <Layout isListPage title="List">
-      <div>
-        <div className="flex justify-start items-center py-6 gap-3">
-          <img src={Logo} alt="logo" className="w-10" />
-          <div className="font-black text-black text-3xl">CryptoCurrency</div>
-        </div>
-        <Table columns={columns} data={data} onRowClick={handleCoinClick} />
+      <div className="flex justify-start items-center py-6 gap-3">
+        <img src={Logo} alt="logo" className="w-10" />
+        <div className="font-black text-black text-3xl">CryptoCurrency</div>
       </div>
+      <Table columns={columns} data={data} onRowClick={handleCoinClick} />
     </Layout>
   );
 };
