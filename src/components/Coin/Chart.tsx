@@ -45,6 +45,10 @@ export const Chart = ({ chartData }: ChartProps) => {
       return value + 100;
     }
 
+    if (value > 1000) {
+      return value + 1000;
+    }
+
     if (value > 10000) {
       return value + 10000;
     }
