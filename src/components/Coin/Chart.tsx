@@ -24,7 +24,7 @@ const TimeStampToLabel = (time: number) => {
 };
 
 export const Chart = ({ chartData }: ChartProps) => {
-  console.log("chartData", chartData);
+  // console.log("chartData", chartData);
   const formattedArray = chartData?.map((el: number[], i: number) => ({
     name: "q" + i,
     x: TimeStampToLabel(el[0]),

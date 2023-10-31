@@ -6,7 +6,7 @@ interface NewsProps {
 }
 
 export const News = ({ newsData }: NewsProps) => {
-  console.log("넘어옴?", newsData);
+  // console.log("넘어옴?", newsData);
   return (
     <div className=" mx-auto lg:max-w-7xl mt-3 ">
       <div className="max-w-7xl mx-auto px-5 mb-3">

@@ -21,6 +21,7 @@ export const Coin = () => {
   const { data: chartData, isLoading: chartLoading } = useChart(
     data?.id as string
   );
+  // console.log("chartData", chartData);
 
   const quoteChanges =
     Number(data?.market_data.market_cap_change_percentage_24h) > 0
