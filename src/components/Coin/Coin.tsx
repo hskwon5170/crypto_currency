@@ -7,6 +7,8 @@ import { useChart } from "./api/useChart";
 import { VictoryChart, VictoryArea, VictoryVoronoiContainer } from "victory";
 import { Chart } from "./Chart";
 import "./index.css";
+import { SideButton } from "../commons/SideButton/SideButton";
+import { Title } from "../commons/Title/Title";
 
 const PriceItems = ["High", "Low", "Average"];
 
@@ -39,7 +41,7 @@ export const Coin = () => {
 
   const [limit, setLimit] = useState<number>(300);
   // console.log("limit", limit);
-  const toggleElipsis = (str: string, limit: number) => {
+  const toggleEllipsis = (str: string, limit: number) => {
     return {
       String: str.slice(0, limit),
       isShowMore: str.length > limit,
@@ -69,20 +71,23 @@ export const Coin = () => {
             alt="coinLogo"
             className="coin-logo w-10"
           />
-          <span className="coin-name font-extrabold text-2xl">
+          {/* <span className="coin-name font-extrabold text-2xl">
             {data?.name}
-          </span>
+          </span> */}
+          <Title title={data?.name as string} />
           <span className="text-[#737373]">{data?.symbol}</span>
-          <div className="coin-rank bg-white p-[3px]  border-2 border-[#e9f2ff] font-bold text-md text-gray-600 text-[5px]  bottom-[4px]">
-            # {data?.coingecko_rank}
-          </div>
+
+          <SideButton title={String("# " + data?.coingecko_rank)} />
+
           <div className="flex items-center gap-3 pl-6  bottom-[3px]">
-            <div className="font-semibold text-2xl">
+            {/* <div className="font-semibold text-2xl">
               {`$` + Number(data?.market_data.current_price.usd).toFixed(3)}
-            </div>
-            <div className="coin-rank bg-white p-[3px]  border-2 border-[#e9f2ff] font-bold text-md text-gray-600 text-[5px]  bottom-[4px]">
-              Live
-            </div>
+            </div> */}
+            <Title
+              title={`$` + data?.market_data.current_price.usd.toFixed(3)}
+            />
+
+            <SideButton title="Live" />
           </div>
         </section>
 
@@ -164,14 +169,14 @@ export const Coin = () => {
               <strong>About</strong>
 
               <div
-                // className="linear-gradient"
                 dangerouslySetInnerHTML={{
-                  __html: toggleElipsis(data.description.en ?? "", limit)
+                  __html: toggleEllipsis(data.description.en ?? "", limit)
                     .String,
                 }}
               />
+              {/* <div className="linear-gradient w-full bottom-10">1</div> */}
               <span>
-                {toggleElipsis(data.description.en ?? "", limit).isShowMore ? (
+                {toggleEllipsis(data.description.en ?? "", limit).isShowMore ? (
                   <div
                     className="text-[#fc72ff]  cursor-pointer"
                     onClick={() => onClickMore(data.description.en ?? "")}

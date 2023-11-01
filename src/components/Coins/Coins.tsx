@@ -5,34 +5,16 @@ import Logo from "../../public/kripto.png";
 import Table from "../commons/Table/Table";
 import { CoinDetail, Column } from "./types";
 import { useNavigate } from "react-router-dom";
+import { Title } from "../commons/Title/Title";
+import { PriceElement } from "../commons/PriceElement/PriceElement";
+import { CanvasChart } from "./CanvasChart";
 
 export const Coins = () => {
   const navigate = useNavigate();
   const { data } = useCoins();
 
-  const returnValueAsBillion = (value: number) => {
-    const billion = 1000000000;
-    return (Number(value) / billion).toFixed(2) + "B";
-  };
-
   const handleCoinClick = (coinId: any) => {
     navigate(`/coins/${coinId}`);
-  };
-
-  const quoteChanges = (num: number) => {
-    if (num > 0) {
-      return (
-        <span className="text-[#40b66b]">
-          ▲ {Math.abs(Number(num)).toFixed(2)} %
-        </span>
-      );
-    } else {
-      return (
-        <span className="text-[#f23d3d]">
-          ▼ {Math.abs(Number(num)).toFixed(2)} %
-        </span>
-      );
-    }
   };
 
   const columns = useMemo<Column<CoinDetail>[]>(
@@ -65,97 +47,34 @@ export const Coins = () => {
       {
         accessor: "current_price",
         Header: "Price",
-        Cell: ({ value }) => (
-          <div className="font-bold">${Number(value).toFixed(2)}</div>
-        ),
+        Cell: ({ value }) => <PriceElement price={Number(value)} />,
       },
       {
         accessor: "price_change_24h",
         Header: "Change",
-        Cell: ({ row }: any) => (
-          <div>
+        Cell: ({ row }: any) => {
+          return (
             <div className="quoteChangeClass">
               {quoteChanges(row.original.price_change_percentage_24h)}
             </div>
-          </div>
-        ),
+          );
+        },
       },
       {
         accessor: "market_cap",
         Header: "Market cap",
-        Cell: ({ value }) => (
-          <div className="font-bold">${returnValueAsBillion(value)}</div>
-        ),
+        Cell: ({ value }) => <PriceElement price={value} billion />,
       },
       {
         accessor: "total_volume",
         Header: "Volume",
-        Cell: ({ value }) => (
-          <div className="font-bold">${returnValueAsBillion(value)}</div>
-        ),
+        Cell: ({ value }) => <PriceElement price={value} billion />,
       },
-      // {
-      //   accessor: "sparkline_in_7d",
-      //   Header: "7 Days",
-      //   Cell: ({ row }: any) => {
-      //     // const { price } = value;
-      //     const { price } = row.original.sparkline_in_7d;
-      //     const { market_cap_change_percentage_24h } = row.original;
-      //     return (
-      //       <div>
-      //         {/* <div className="relative left-[28px]">
-      //           {Number(market_cap_change_percentage_24h).toFixed(2)}
-      //         </div> */}
-      //         <CellChart chartData={price} />
-      //       </div>
-      //     );
-      //   },
-      // },
       {
         accessor: "sparkline_in_7d",
         Header: "",
         Cell: ({ row }: any) => {
-          const { price } = row.original.sparkline_in_7d;
-          const priceChange = row.original.price_change_percentage_24h;
-
-          const color = priceChange > 0 ? "#13bf36" : "#f23d3d";
-
-          const drawSparkline = (canvas: HTMLCanvasElement) => {
-            if (!canvas) return;
-            const ctx = canvas.getContext("2d");
-            if (!ctx) return; // context를 지원하지 않는 브라우저 대비 => context 없으면 return
-
-            const width = canvas.width;
-            const height = canvas.height;
-            // console.log("height", height);
-
-            // 데이터를 캔버스 크기에 맞게 정규화
-            const max = Math.max(...price);
-            const min = Math.min(...price);
-            const normalizedData = price.map((p: number) => {
-              return ((p - min) / (max - min)) * height;
-            });
-            // console.log("normalizedData", normalizedData);
-
-            ctx.beginPath(); // Path 시작
-            ctx.moveTo(0, height - normalizedData[0]); // 이동
-
-            normalizedData.forEach((point: number, index: number) => {
-              ctx.lineTo(
-                (index / (normalizedData.length - 1)) * width,
-                height - point
-              );
-            });
-
-            ctx.strokeStyle = color;
-            ctx.stroke();
-          };
-
-          return (
-            <div>
-              <canvas ref={drawSparkline} width="100" height="30" />
-            </div>
-          );
+          return <CanvasChart row={row} />;
         },
       },
     ],
@@ -168,10 +87,24 @@ export const Coins = () => {
         <img src={Logo} alt="logo" className="w-10" />
         <div className="font-black text-3xl">CryptoCurrency</div>
       </div>
-      <div className=" py-10 font-semibold text-2xl ">
-        Top Tokens on CryptoCurrency
-      </div>
+      <Title title="Top Tokens on CryptoCurrency" />
       <Table columns={columns} data={data} onRowClick={handleCoinClick} />
     </Layout>
   );
+};
+
+const quoteChanges = (num: number) => {
+  if (num > 0) {
+    return (
+      <span className="text-[#40b66b]">
+        ▲ {Math.abs(Number(num)).toFixed(2)} %
+      </span>
+    );
+  } else {
+    return (
+      <span className="text-[#f23d3d]">
+        ▼ {Math.abs(Number(num)).toFixed(2)} %
+      </span>
+    );
+  }
 };
