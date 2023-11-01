@@ -6,6 +6,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { useChart } from "./api/useChart";
 import { VictoryChart, VictoryArea, VictoryVoronoiContainer } from "victory";
 import { Chart } from "./Chart";
+import "./index.css";
 
 const PriceItems = ["High", "Low", "Average"];
 
@@ -13,6 +14,7 @@ export const Coin = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { data } = useCoin(id as string);
+  const descriptionData = data?.description.en ?? "";
 
   // api limit 제한으로 주석처리함
   // const { data: newsData } = useNews(id as string);
@@ -33,6 +35,21 @@ export const Coin = () => {
     Low: data?.market_data.low_24h.usd,
     Average:
       (data?.market_data.high_24h.usd + data?.market_data.low_24h.usd) / 2,
+  };
+
+  const [limit, setLimit] = useState<number>(300);
+  // console.log("limit", limit);
+  const toggleElipsis = (str: string, limit: number) => {
+    return {
+      String: str.slice(0, limit),
+      isShowMore: str.length > limit,
+    };
+  };
+  const onClickMore = (str: string) => {
+    setLimit(str.length);
+  };
+  const onClickClose = () => {
+    setLimit(300);
   };
 
   return (
@@ -68,24 +85,6 @@ export const Coin = () => {
             </div>
           </div>
         </section>
-
-        <div className="flex items-center gap-3 py-6">
-          <strong>Summary</strong>
-          <div className="coin-rank p-[3px]  bg-[#e9f2ff] text-md text-gray-600 text-[5px] font-extrabold ">
-            by AI
-          </div>
-          <div className="truncate w-[85%]">{data?.description.en ?? ""}</div>
-          <div
-            className="text-[#fc72ff] font-bold border-b-4 border-[#fc72ff] cursor-pointer"
-            onClick={() => {
-              if (data?.links.homepage) {
-                window.open(data?.links.homepage[0]);
-              }
-            }}
-          >
-            More
-          </div>
-        </div>
 
         <section className="flex items-center">
           <strong className="mr-6">Price chart</strong>
@@ -159,7 +158,38 @@ export const Coin = () => {
           </div>
         </section> */}
 
-        <section className="py-10"></section>
+        {data?.description.en && (
+          <section className="py-10">
+            <div className="flex flex-col items-start gap-3 py-6">
+              <strong>About</strong>
+
+              <div
+                // className="linear-gradient"
+                dangerouslySetInnerHTML={{
+                  __html: toggleElipsis(data.description.en ?? "", limit)
+                    .String,
+                }}
+              />
+              <span>
+                {toggleElipsis(data.description.en ?? "", limit).isShowMore ? (
+                  <div
+                    className="text-[#fc72ff]  cursor-pointer"
+                    onClick={() => onClickMore(data.description.en ?? "")}
+                  >
+                    Show more
+                  </div>
+                ) : (
+                  <div
+                    className="text-[#fc72ff]  cursor-pointer"
+                    onClick={onClickClose}
+                  >
+                    Hide
+                  </div>
+                )}
+              </span>
+            </div>
+          </section>
+        )}
       </Layout>
     </>
   );

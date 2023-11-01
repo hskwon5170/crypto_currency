@@ -14,9 +14,7 @@ export const Layout = ({
   return (
     // <div className="relative max-w-[40rem] min-h-screen m-auto ">
     <div
-      className={`relative max-w-full bg-black m-auto ${
-        isListPage ? "px-3" : "p-6"
-      }`}
+      className={`relative max-w-full  m-auto ${isListPage ? "px-3" : "p-6"}`}
     >
       <div className="flex gap-6"></div>
       <div>{children}</div>

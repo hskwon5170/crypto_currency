@@ -4,7 +4,7 @@ import Lottie from "lottie-react";
 
 export const Loader = () => {
   return (
-    <div className="min-h-[80vh] flex justify-center items-center bg-black">
+    <div className="w-full min-h-[100vh] flex justify-center items-center bg-black">
       <Lottie
         animationData={animationData}
         style={{ width: 500, height: 500 }}

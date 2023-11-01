@@ -10,6 +10,7 @@
     -moz-osx-font-smoothing: grayscale;
     /* font-family: "Montserrat", cursive; */
     color: white;
+    background-color: black;
   }
 
   code {
