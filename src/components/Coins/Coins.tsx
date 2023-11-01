@@ -12,7 +12,7 @@ export const Coins = () => {
 
   const returnValueAsBillion = (value: number) => {
     const billion = 1000000000;
-    return (Number(value) / billion).toFixed(2) + " billion";
+    return (Number(value) / billion).toFixed(2) + "B";
   };
 
   const handleCoinClick = (coinId: any) => {
@@ -22,13 +22,13 @@ export const Coins = () => {
   const quoteChanges = (num: number) => {
     if (num > 0) {
       return (
-        <span className="text-white bg-[#13bf36] rounded-md p-1 font-bold">
+        <span className="text-[#40b66b]">
           ▲ {Math.abs(Number(num)).toFixed(2)} %
         </span>
       );
     } else {
       return (
-        <span className="text-white bg-[#f23d3d] rounded-md p-1 font-bold">
+        <span className="text-[#f23d3d]">
           ▼ {Math.abs(Number(num)).toFixed(2)} %
         </span>
       );
@@ -47,7 +47,7 @@ export const Coins = () => {
 
       {
         accessor: "id",
-        Header: "Coins",
+        Header: "Token name",
         Cell: ({ row }: any) => (
           <div className="flex gap-5 items-center justify-start ml-10 py-6">
             <img
@@ -63,29 +63,33 @@ export const Coins = () => {
         ),
       },
       {
-        accessor: "price_change_24h",
-        Header: "Price change",
-        Cell: ({ row }: any) => (
-          <div>
-            <div className="font-bold pb-3">
-              {+Number(row.original.price_change_24h).toFixed(2) + " $"}
-            </div>
-            <span className="quoteChangeClass">
-              {quoteChanges(row.original.price_change_percentage_24h)}
-            </span>
-          </div>
-        ),
-      },
-      {
         accessor: "current_price",
         Header: "Price",
         Cell: ({ value }) => (
-          <div className="font-bold">$ {Number(value).toFixed(2)}</div>
+          <div className="font-bold">${Number(value).toFixed(2)}</div>
+        ),
+      },
+      {
+        accessor: "price_change_24h",
+        Header: "Change",
+        Cell: ({ row }: any) => (
+          <div>
+            <div className="quoteChangeClass">
+              {quoteChanges(row.original.price_change_percentage_24h)}
+            </div>
+          </div>
         ),
       },
       {
         accessor: "market_cap",
         Header: "Market cap",
+        Cell: ({ value }) => (
+          <div className="font-bold">${returnValueAsBillion(value)}</div>
+        ),
+      },
+      {
+        accessor: "total_volume",
+        Header: "Volume",
         Cell: ({ value }) => (
           <div className="font-bold">${returnValueAsBillion(value)}</div>
         ),
@@ -109,7 +113,7 @@ export const Coins = () => {
       // },
       {
         accessor: "sparkline_in_7d",
-        Header: "7 Days",
+        Header: "",
         Cell: ({ row }: any) => {
           const { price } = row.original.sparkline_in_7d;
           const priceChange = row.original.price_change_percentage_24h;
@@ -162,7 +166,10 @@ export const Coins = () => {
     <Layout isListPage title="List">
       <div className="flex justify-start items-center py-6 gap-3">
         <img src={Logo} alt="logo" className="w-10" />
-        <div className="font-black text-black text-3xl">CryptoCurrency</div>
+        <div className="font-black text-3xl">CryptoCurrency</div>
+      </div>
+      <div className=" py-10 font-semibold text-2xl ">
+        Top Tokens on CryptoCurrency
       </div>
       <Table columns={columns} data={data} onRowClick={handleCoinClick} />
     </Layout>

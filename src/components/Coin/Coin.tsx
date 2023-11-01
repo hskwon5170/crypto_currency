@@ -46,7 +46,7 @@ export const Coin = () => {
           <div>{data?.name}</div>
         </div>
 
-        <section className="flex items-center  gap-3 p-2 py-10 border-b-2 border-[#cee1ff]">
+        <section className="flex items-center  gap-3 p-2 py-10">
           <img
             src={data?.image.large}
             alt="coinLogo"
@@ -76,7 +76,7 @@ export const Coin = () => {
           </div>
           <div className="truncate w-[85%]">{data?.description.en ?? ""}</div>
           <div
-            className="text-primary font-bold border-b-4 border-primary cursor-pointer"
+            className="text-[#fc72ff] font-bold border-b-4 border-[#fc72ff] cursor-pointer"
             onClick={() => {
               if (data?.links.homepage) {
                 window.open(data?.links.homepage[0]);

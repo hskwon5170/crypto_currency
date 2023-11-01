@@ -71,11 +71,10 @@ export const Chart = ({ chartData }: ChartProps) => {
     >
       <defs>
         <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="5%" stopColor="#99bfff" stopOpacity={100} />
-          <stop offset="95%" stopColor="#99bfff" stopOpacity={0} />
+          <stop offset="5%" stopColor="#fb118e" stopOpacity={100} />
+          <stop offset="95%" stopColor="white" stopOpacity={0} />
         </linearGradient>
       </defs>
-      <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="x" ticks={ticks} />
       <YAxis
         dataKey="y"
@@ -87,7 +86,7 @@ export const Chart = ({ chartData }: ChartProps) => {
         type="monotone"
         dataKey="y"
         fill="url(#colorUv)"
-        stroke="#0061ff"
+        stroke="#fb118e"
         strokeWidth={3}
       />
     </AreaChart>
@@ -99,7 +98,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   // console.log("payload", payload);
   // console.log("label", label);
   return (
-    <div className="custom-tooltip bg-white border-2 border-[#0061ff] p-4 rounded-md shadow-lg">
+    <div className="custom-tooltip bg-[#311c31]  text-[#fc72ff]  p-4 rounded-md shadow-lg">
       <table>
         <tbody>
           <tr>
