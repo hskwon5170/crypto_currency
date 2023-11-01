@@ -7,13 +7,13 @@ import { CoinDetail, Column } from "./types";
 import { useNavigate } from "react-router-dom";
 import { Title } from "../commons/Title/Title";
 import { PriceElement } from "../commons/PriceElement/PriceElement";
-import { CanvasChart } from "./CanvasChart";
+import { CanvasChart } from "./components/CanvasChart";
 
 export const Coins = () => {
   const navigate = useNavigate();
   const { data } = useCoins();
 
-  const handleCoinClick = (coinId: any) => {
+  const handleCoinClick = (coinId: string) => {
     navigate(`/coins/${coinId}`);
   };
 

@@ -4,11 +4,15 @@ import { useCoin } from "./api/useCoin";
 import { Layout } from "../commons/layout/Layout";
 import { IoIosArrowForward } from "react-icons/io";
 import { useChart } from "./api/useChart";
-import { VictoryChart, VictoryArea, VictoryVoronoiContainer } from "victory";
 import { Chart } from "./Chart";
 import "./index.css";
-import { SideButton } from "../commons/SideButton/SideButton";
 import { Title } from "../commons/Title/Title";
+import { Description } from "./components/Description";
+import { Spinner } from "../commons/Spinner/Spinner";
+import { useQuoteChanges } from "../../hooks/useQuoteChanges";
+import { PriceNavBar } from "./components/PriceNavBar";
+import { CoinNavBar } from "./components/CoinNavBar";
+import { Navigation } from "./components/Navigation";
 
 const PriceItems = ["High", "Low", "Average"];
 
@@ -25,111 +29,41 @@ export const Coin = () => {
   const { data: chartData, isLoading: chartLoading } = useChart(
     data?.id as string
   );
-  // console.log("chartData", chartData);
 
-  const quoteChanges =
-    Number(data?.market_data.market_cap_change_percentage_24h) > 0
-      ? "text-[#13bf36]"
-      : "text-[#f23d3d]";
-
-  const priceValues: { [key: string]: number | undefined } = {
-    High: data?.market_data.high_24h.usd,
-    Low: data?.market_data.low_24h.usd,
-    Average:
-      (data?.market_data.high_24h.usd + data?.market_data.low_24h.usd) / 2,
-  };
+  const { quoteClass } = useQuoteChanges(
+    data?.market_data.market_cap_change_percentage_24h
+  );
 
   const [limit, setLimit] = useState<number>(300);
-  // console.log("limit", limit);
-  const toggleEllipsis = (str: string, limit: number) => {
-    return {
-      String: str.slice(0, limit),
-      isShowMore: str.length > limit,
-    };
-  };
-  const onClickMore = (str: string) => {
-    setLimit(str.length);
-  };
-  const onClickClose = () => {
-    setLimit(300);
+
+  const onClickMoveToCoinList = () => {
+    navigate(-1);
   };
 
   return (
-    <>
-      <Layout title={id as string}>
-        <div className="flex items-center gap-3 text-[#737373]">
-          <div className="cursor-pointer" onClick={() => navigate(-1)}>
-            Coins
-          </div>
-          <IoIosArrowForward />
-          <div>{data?.name}</div>
-        </div>
+    <Layout title={id as string}>
+      <Navigation onClick={onClickMoveToCoinList} name={data?.name as string} />
 
-        <section className="flex items-center  gap-3 p-2 py-10">
-          <img
-            src={data?.image.large}
-            alt="coinLogo"
-            className="coin-logo w-10"
-          />
-          {/* <span className="coin-name font-extrabold text-2xl">
-            {data?.name}
-          </span> */}
-          <Title title={data?.name as string} />
-          <span className="text-[#737373]">{data?.symbol}</span>
+      <CoinNavBar data={data} />
 
-          <SideButton title={String("# " + data?.coingecko_rank)} />
+      <PriceNavBar
+        val={data?.market_data}
+        priceItems={["High", "Low", "Average"]}
+        quoteClass={quoteClass}
+      />
 
-          <div className="flex items-center gap-3 pl-6  bottom-[3px]">
-            {/* <div className="font-semibold text-2xl">
-              {`$` + Number(data?.market_data.current_price.usd).toFixed(3)}
-            </div> */}
-            <Title
-              title={`$` + data?.market_data.current_price.usd.toFixed(3)}
-            />
+      {chartLoading ? (
+        <Spinner />
+      ) : chartData ? (
+        <Chart chartData={chartData.prices} />
+      ) : (
+        // <div className="flex justify-center items-center w-full min-h-[300px]">
+        //   <strong>Chart is Not Available</strong>
+        // </div>
+        <Title title="Chart is Not Available" />
+      )}
 
-            <SideButton title="Live" />
-          </div>
-        </section>
-
-        <section className="flex items-center">
-          <strong className="mr-6">Price chart</strong>
-          <div>24h</div>
-          <div className={`${quoteChanges} font-semibold py-3 ml-3`}>
-            {Number(
-              data?.market_data.market_cap_change_percentage_24h.toFixed(2)
-            ) > 0
-              ? "▲ "
-              : "▼ "}
-            {data?.market_data.market_cap_change_percentage_24h.toFixed(2) +
-              `%`}
-          </div>
-          <div className="flex ml-3 gap-3">
-            {PriceItems.map((key) => {
-              return (
-                <div key={key}>
-                  <span>{key}</span> :{" "}
-                  <span className="font-bold ml-1">
-                    $ {priceValues[key]?.toFixed(3)}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        {chartLoading ? (
-          <div className="w-full min-h-[300px] bg-transparent flex justify-center items-center">
-            <div className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
-          </div>
-        ) : chartData ? (
-          <Chart chartData={chartData.prices} />
-        ) : (
-          <div className="flex justify-center items-center w-full min-h-[300px]">
-            <strong>Chart is Not Available</strong>
-          </div>
-        )}
-
-        {/* <section>
+      {/* <section>
           <div className="grid grid-cols-2 bg-white rounded-md min-h-[100px]">
             <section className="flex flex-col items-center p-6 border-r-2 border-gray-200">
               <div className="flex items-center gap-1 text-gray-400">
@@ -163,39 +97,13 @@ export const Coin = () => {
           </div>
         </section> */}
 
-        {data?.description.en && (
-          <section className="py-10">
-            <div className="flex flex-col items-start gap-3 py-6">
-              <strong>About</strong>
-
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: toggleEllipsis(data.description.en ?? "", limit)
-                    .String,
-                }}
-              />
-              {/* <div className="linear-gradient w-full bottom-10">1</div> */}
-              <span>
-                {toggleEllipsis(data.description.en ?? "", limit).isShowMore ? (
-                  <div
-                    className="text-[#fc72ff]  cursor-pointer"
-                    onClick={() => onClickMore(data.description.en ?? "")}
-                  >
-                    Show more
-                  </div>
-                ) : (
-                  <div
-                    className="text-[#fc72ff]  cursor-pointer"
-                    onClick={onClickClose}
-                  >
-                    Hide
-                  </div>
-                )}
-              </span>
-            </div>
-          </section>
-        )}
-      </Layout>
-    </>
+      {data?.description.en && (
+        <Description
+          desc={data?.description.en}
+          limit={limit}
+          setLimit={setLimit}
+        />
+      )}
+    </Layout>
   );
 };

@@ -14,5 +14,5 @@ export const useQuoteChanges = ({ num }: QuoteProps) => {
     }
   }, [setQuoteClass, num]);
 
-  return quoteClass;
+  return { quoteClass };
 };

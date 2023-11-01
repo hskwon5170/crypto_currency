@@ -27,7 +27,7 @@ function Table({ columns, data, onRowClick }: any) {
           return (
             <tr
               {...row.getRowProps()}
-              className="cursor-pointer hover:bg-gray-800 hover:transition-all hover:duration-300"
+              className="cursor-pointer hover:bg-gray-900 hover:transition-all hover:duration-100"
               onClick={() => onRowClick(row.original.id as any)}
             >
               {row.cells.map((cell: any) => (

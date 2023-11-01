@@ -1,5 +1,5 @@
 import React from "react";
-import { CoinDetail } from "./types";
+import { CoinDetail } from "../types";
 
 interface Original {
   original: CoinDetail;

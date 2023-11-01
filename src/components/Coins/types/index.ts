@@ -8,6 +8,10 @@ export interface CoinData {
   type: CoinData;
 }
 
+interface Object24 {
+  usd: number;
+}
+
 export interface CoinDetail {
   ath: number;
   ath_change_percentage: number;
@@ -18,11 +22,11 @@ export interface CoinDetail {
   circulating_supply: number;
   current_price: number;
   fully_diluted_valuation: number;
-  high_24h: number;
+  high_24h: Object24;
   id: string;
   image: string;
   last_updated: string;
-  low_24h: number;
+  low_24h: Object24;
   market_cap: number;
   market_cap_change_24h: number;
   market_cap_change_percentage_24h: number;
