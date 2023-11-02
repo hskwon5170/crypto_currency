@@ -11,7 +11,8 @@ import { CanvasChart } from "./components/CanvasChart";
 
 export const Coins = () => {
   const navigate = useNavigate();
-  const { data } = useCoins();
+  const { data, isLoading } = useCoins();
+  console.log("isLoading", isLoading);
 
   const handleCoinClick = (coinId: string) => {
     navigate(`/coins/${coinId}`);

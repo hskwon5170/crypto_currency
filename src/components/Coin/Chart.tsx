@@ -58,17 +58,7 @@ export const Chart = ({ chartData }: ChartProps) => {
   }, [formattedArray]);
 
   return (
-    <AreaChart
-      width={1400}
-      height={400}
-      data={formattedArray}
-      margin={{
-        top: 10,
-        right: 30,
-        left: 100,
-        bottom: 0,
-      }}
-    >
+    <AreaChart width={1400} height={400} data={formattedArray}>
       <defs>
         <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
           <stop offset="5%" stopColor="#fb118e" stopOpacity={100} />

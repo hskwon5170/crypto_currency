@@ -11,11 +11,11 @@ export const getCoins = (): Promise<CoinDetail[]> => {
 };
 
 export const useCoins = () => {
-  const { data, ...rest } = useQuery({
+  const { data, isLoading, ...rest } = useQuery({
     queryKey: ["coins"],
     queryFn: getCoins,
     suspense: true,
   });
 
-  return { data, ...rest };
+  return { data, isLoading, ...rest };
 };

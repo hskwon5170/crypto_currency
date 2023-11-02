@@ -31,7 +31,7 @@ export const Description = ({
   return (
     <div className="py-10">
       <div className="flex flex-col items-start gap-3 py-6">
-        <strong>About</strong>
+        <strong className="text-3xl">About</strong>
 
         <div
           dangerouslySetInnerHTML={{
@@ -42,14 +42,14 @@ export const Description = ({
         <span>
           {toggleEllipsis(desc ?? "", limit as number).isShowMore ? (
             <div
-              className="text-[#fc72ff]  cursor-pointer"
+              className="text-[#fc72ff]  cursor-pointer hover:text-opacity-50 hover:text-[#fc72ff] hover:transition-all hover:duration-300"
               onClick={() => onClickMore(desc ?? "")}
             >
               Show more
             </div>
           ) : (
             <div
-              className="text-[#fc72ff]  cursor-pointer"
+              className="text-[#fc72ff]  cursor-pointer hover:text-opacity-50 hover:text-[#fc72ff] hover:transition-all hover:duration-300"
               onClick={onClickClose}
             >
               Hide

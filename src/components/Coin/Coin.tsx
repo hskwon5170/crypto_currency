@@ -13,6 +13,8 @@ import { useQuoteChanges } from "../../hooks/useQuoteChanges";
 import { PriceNavBar } from "./components/PriceNavBar";
 import { CoinNavBar } from "./components/CoinNavBar";
 import { Navigation } from "./components/Navigation";
+import { Links } from "./components/Links";
+import { ContentsLayout } from "./components/ContentsLayout";
 
 const PriceItems = ["High", "Low", "Average"];
 
@@ -43,7 +45,6 @@ export const Coin = () => {
   return (
     <Layout title={id as string}>
       <Navigation onClick={onClickMoveToCoinList} name={data?.name as string} />
-
       <CoinNavBar data={data} />
 
       <PriceNavBar
@@ -104,6 +105,7 @@ export const Coin = () => {
           setLimit={setLimit}
         />
       )}
+      <Links links={data?.links} />
     </Layout>
   );
 };

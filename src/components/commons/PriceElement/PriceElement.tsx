@@ -11,11 +11,12 @@ export const PriceElement = ({
   billion = false,
   quote = false,
 }: PriceElementProps) => {
+  // console.log("price", typeof parseInt(price.toLocaleString()));
   if (billion) {
     return <div className="font-bold"> {returnValueAsBillion(price)}</div>;
   }
 
-  return <div className="font-bold">{"$" + price.toFixed(2)}</div>;
+  return <div className="font-bold">{"$" + price.toLocaleString()}</div>;
 };
 
 const returnValueAsBillion = (value: number) => {
