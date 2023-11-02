@@ -46,7 +46,7 @@ export const InputArea: FC<InputAreaProps> = ({
             value={calculatedUSD?.toFixed(2)}
           />
           {isImage && (
-            <div className="flex items-center bg-black rounded-full py-2 px-4">
+            <div className="flex items-center bg-black rounded-full py-2 px-4 overflow-x-hidden">
               <img src={imgUrl} alt="imageLogo" className="w-10 mr-2" />
               <div className="text-white text-2xl font-bold pr-3">
                 {symbol.toUpperCase()}

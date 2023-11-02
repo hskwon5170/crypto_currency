@@ -8,10 +8,13 @@ import { useNavigate } from "react-router-dom";
 import { Title } from "../commons/Title/Title";
 import { PriceElement } from "../commons/PriceElement/PriceElement";
 import { CanvasChart } from "./components/CanvasChart";
+import { useNews } from "../News/api/useNews";
 
 export const Coins = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useCoins();
+  // const { data: newsData } = useNews();
+  // console.log("newsData", newsData);
 
   const handleCoinClick = (coinId: string) => {
     navigate(`/coins/${coinId}`);
