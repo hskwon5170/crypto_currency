@@ -12,7 +12,7 @@ export const BottomLayout = ({
   children,
 }: BottomLayoutProps) => {
   return (
-    <div className="py-10">
+    <div className="py-10 max-w-[80%]">
       <strong className="text-3xl">{title}</strong>
       <strong className=" text-[#737373]">{subTitle}</strong>
       <div className="py-6">{children}</div>
