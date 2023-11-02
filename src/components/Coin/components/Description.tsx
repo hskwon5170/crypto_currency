@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
+import { BottomLayout } from "../../commons/BottomLayout/BottomLayout";
 
 interface DescriptionProps {
   desc: string;
@@ -29,10 +30,8 @@ export const Description = ({
   };
 
   return (
-    <div className="py-10">
-      <div className="flex flex-col items-start gap-3 py-6">
-        <strong className="text-3xl">About</strong>
-
+    <BottomLayout title="About">
+      <div>
         <div
           dangerouslySetInnerHTML={{
             __html: toggleEllipsis(desc ?? "", limit as number).Elements,
@@ -57,6 +56,6 @@ export const Description = ({
           )}
         </span>
       </div>
-    </div>
+    </BottomLayout>
   );
 };

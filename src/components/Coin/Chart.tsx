@@ -6,6 +6,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  ResponsiveContainer,
 } from "recharts";
 
 interface ChartProps {
@@ -58,28 +59,30 @@ export const Chart = ({ chartData }: ChartProps) => {
   }, [formattedArray]);
 
   return (
-    <AreaChart width={1400} height={400} data={formattedArray}>
-      <defs>
-        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="5%" stopColor="#fb118e" stopOpacity={100} />
-          <stop offset="95%" stopColor="white" stopOpacity={0} />
-        </linearGradient>
-      </defs>
-      <XAxis dataKey="x" ticks={ticks} />
-      <YAxis
-        dataKey="y"
-        tickFormatter={(value) => value.toLocaleString()}
-        domain={[0, maxY]}
-      />
-      <Tooltip content={<CustomTooltip />} />
-      <Area
-        type="monotone"
-        dataKey="y"
-        fill="url(#colorUv)"
-        stroke="#fb118e"
-        strokeWidth={3}
-      />
-    </AreaChart>
+    <ResponsiveContainer width="95%" height={400}>
+      <AreaChart data={formattedArray}>
+        <defs>
+          <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#fb118e" stopOpacity={100} />
+            <stop offset="95%" stopColor="white" stopOpacity={0} />
+          </linearGradient>
+        </defs>
+        <XAxis dataKey="x" ticks={ticks} />
+        <YAxis
+          dataKey="y"
+          tickFormatter={(value) => value.toLocaleString()}
+          domain={[0, maxY]}
+        />
+        <Tooltip content={<CustomTooltip />} />
+        <Area
+          type="monotone"
+          dataKey="y"
+          fill="url(#colorUv)"
+          stroke="#fb118e"
+          strokeWidth={3}
+        />
+      </AreaChart>
+    </ResponsiveContainer>
   );
 };
 

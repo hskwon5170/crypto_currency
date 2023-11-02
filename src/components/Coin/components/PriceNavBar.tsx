@@ -1,5 +1,6 @@
 import React from "react";
 import { CoinDetail } from "../../Coins/types";
+import { BottomLayout } from "../../commons/BottomLayout/BottomLayout";
 
 interface NavBarProps {
   val: CoinDetail;
@@ -15,28 +16,30 @@ export const PriceNavBar = ({ val, priceItems, quoteClass }: NavBarProps) => {
   };
 
   return (
-    <div className="flex items-center pb-10">
-      <strong className="mr-6">Price chart</strong>
-      <div>24h</div>
-      <div className={`${quoteClass} font-semibold py-3 ml-3`}>
-        {Number(val.market_cap_change_percentage_24h.toFixed(2)) > 0
-          ? "▲ "
-          : "▼ "}
-        {val.market_cap_change_percentage_24h.toFixed(2) + `%`}
-      </div>
-      <div className="flex ml-3 gap-3">
+    <BottomLayout title="Stats">
+      <div className="flex gap-6">
+        <div className="flex flex-col items-start">
+          <div className="text-[#737373]">24h</div>
+          <div className="flex gap-3 text-3xl items-end pt-3">
+            <div>{val.market_cap_change_percentage_24h.toFixed(2) + `%`}</div>
+            <div className={`${quoteClass} font-semibold text-xl`}>
+              {Number(val.market_cap_change_percentage_24h.toFixed(2)) > 0
+                ? "▲ "
+                : "▼ "}
+            </div>
+          </div>
+        </div>
         {priceItems.map((key) => {
           return (
-            <div key={key}>
-              <span>{key}</span> :
-              <span className="font-black">
-                {" "}
+            <div key={key} className="flex flex-col items-start pr-6">
+              <span className="text-[#737373]">{key}</span>
+              <span className="font-medium text-3xl pt-3">
                 $ {priceValues[key]?.toFixed(3)}
               </span>
             </div>
           );
         })}
       </div>
-    </div>
+    </BottomLayout>
   );
 };

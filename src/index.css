@@ -2,13 +2,14 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 /* @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap");
 /* --- Tailwind's Base Styling Override --- */
 @layer base {
   body {
     @apply font-sans antialiased;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* font-family: "Montserrat", cursive; */
+    font-family: "Noto Sans JP", sans-serif;
     color: white;
     background-color: black;
   }

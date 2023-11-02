@@ -16,7 +16,6 @@ export const Layout = ({
     <div
       className={`relative max-w-full  m-auto ${isListPage ? "px-3" : "p-6"}`}
     >
-      <div className="flex gap-6"></div>
       <div>{children}</div>
     </div>
   );

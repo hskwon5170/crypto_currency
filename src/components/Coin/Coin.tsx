@@ -1,8 +1,7 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCoin } from "./api/useCoin";
 import { Layout } from "../commons/layout/Layout";
-import { IoIosArrowForward } from "react-icons/io";
 import { useChart } from "./api/useChart";
 import { Chart } from "./Chart";
 import "./index.css";
@@ -14,7 +13,6 @@ import { PriceNavBar } from "./components/PriceNavBar";
 import { CoinNavBar } from "./components/CoinNavBar";
 import { Navigation } from "./components/Navigation";
 import { Links } from "./components/Links";
-import { ContentsLayout } from "./components/ContentsLayout";
 
 const PriceItems = ["High", "Low", "Average"];
 
@@ -43,69 +41,75 @@ export const Coin = () => {
   };
 
   return (
-    <Layout title={id as string}>
+    <Layout title="">
       <Navigation onClick={onClickMoveToCoinList} name={data?.name as string} />
-      <CoinNavBar data={data} />
+      <div className="grid grid-cols-10">
+        <div className="col-span-10">
+          <CoinNavBar data={data} />
 
-      <PriceNavBar
-        val={data?.market_data}
-        priceItems={["High", "Low", "Average"]}
-        quoteClass={quoteClass}
-      />
+          {chartLoading ? (
+            <Spinner />
+          ) : chartData ? (
+            <Chart chartData={chartData.prices} />
+          ) : (
+            <Title title="Chart is Not Available" />
+          )}
 
-      {chartLoading ? (
-        <Spinner />
-      ) : chartData ? (
-        <Chart chartData={chartData.prices} />
-      ) : (
-        // <div className="flex justify-center items-center w-full min-h-[300px]">
-        //   <strong>Chart is Not Available</strong>
-        // </div>
-        <Title title="Chart is Not Available" />
-      )}
+          <PriceNavBar
+            val={data?.market_data}
+            priceItems={["High", "Low", "Average"]}
+            quoteClass={quoteClass}
+          />
 
-      {/* <section>
-          <div className="grid grid-cols-2 bg-white rounded-md min-h-[100px]">
-            <section className="flex flex-col items-center p-6 border-r-2 border-gray-200">
-              <div className="flex items-center gap-1 text-gray-400">
-                <div>Market Cap</div>
-                <Tooltip
-                  title="Current Price * Circulating Supply"
-                  className="cursor-pointer"
-                >
-                  <FaCircleInfo />
-                </Tooltip>
-              </div>
-              <div className="font-semibold text-3xl">
-                {(Number(data?.marketCap) / 1000000000).toFixed(2)}B
-              </div>
-            </section>
+          {/* <section>
+    <div className="grid grid-cols-2 bg-white rounded-md min-h-[100px]">
+      <section className="flex flex-col items-center p-6 border-r-2 border-gray-200">
+        <div className="flex items-center gap-1 text-gray-400">
+          <div>Market Cap</div>
+          <Tooltip
+            title="Current Price * Circulating Supply"
+            className="cursor-pointer"
+          >
+            <FaCircleInfo />
+          </Tooltip>
+        </div>
+        <div className="font-semibold text-3xl">
+          {(Number(data?.marketCap) / 1000000000).toFixed(2)}B
+        </div>
+      </section>
 
-            <section className="flex flex-col items-center p-6 border-r-2 border-gray-200">
-              <div className="flex items-center gap-1 text-gray-400">
-                <div>24H Volume</div>
-                <Tooltip
-                  title="Total value of crypto traded in the past 24 hours"
-                  className="cursor-pointer"
-                >
-                  <FaCircleInfo />
-                </Tooltip>
-              </div>
-              <div className="font-semibold text-3xl">
-                {(Number(data?.["24hVolume"]) / 1000000000).toFixed(2)}B
-              </div>
-            </section>
+      <section className="flex flex-col items-center p-6 border-r-2 border-gray-200">
+        <div className="flex items-center gap-1 text-gray-400">
+          <div>24H Volume</div>
+          <Tooltip
+            title="Total value of crypto traded in the past 24 hours"
+            className="cursor-pointer"
+          >
+            <FaCircleInfo />
+          </Tooltip>
+        </div>
+        <div className="font-semibold text-3xl">
+          {(Number(data?.["24hVolume"]) / 1000000000).toFixed(2)}B
+        </div>
+      </section>
+    </div>
+  </section> */}
+
+          {data?.description.en && (
+            <Description
+              desc={data?.description.en}
+              limit={limit}
+              setLimit={setLimit}
+            />
+          )}
+          <Links links={data?.links} />
+        </div>
+        {/* <div className="col-span-2">
+          <div className="Uniswap">
+            <SwapWidget />
           </div>
-        </section> */}
-
-      {data?.description.en && (
-        <Description
-          desc={data?.description.en}
-          limit={limit}
-          setLimit={setLimit}
-        />
-      )}
-      <Links links={data?.links} />
+        </div> */}
+      </div>
     </Layout>
   );
 };
