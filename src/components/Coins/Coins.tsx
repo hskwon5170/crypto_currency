@@ -23,15 +23,15 @@ export const Coins = () => {
     () => [
       {
         accessor: "market_cap_rank",
-        Header: "",
+        Header: () => <div className="sm:hidden"></div>,
         Cell: ({ value }) => {
-          return <div>{value}</div>;
+          return <div className="sm:hidden">{value}</div>;
         },
       },
 
       {
         accessor: "id",
-        Header: "Token name",
+        Header: () => <div>Token name</div>,
         Cell: ({ row }: any) => (
           <div className="flex gap-5 items-center justify-start ml-10 py-6">
             <img
@@ -48,15 +48,15 @@ export const Coins = () => {
       },
       {
         accessor: "current_price",
-        Header: "Price",
+        Header: () => <div>Price</div>,
         Cell: ({ value }) => <PriceElement price={Number(value)} />,
       },
       {
         accessor: "price_change_24h",
-        Header: "Change",
+        Header: () => <div className="sm:hidden">Change</div>,
         Cell: ({ row }: any) => {
           return (
-            <div className="quoteChangeClass">
+            <div className="quoteChangeClass sm:hidden">
               {quoteChanges(row.original.price_change_percentage_24h)}
             </div>
           );
@@ -64,19 +64,31 @@ export const Coins = () => {
       },
       {
         accessor: "market_cap",
-        Header: "Market cap",
-        Cell: ({ value }) => <PriceElement price={value} billion />,
+        Header: () => <div className="sm:hidden">Market cap</div>,
+        Cell: ({ value }) => (
+          <div className="sm:hidden">
+            <PriceElement price={value} billion />
+          </div>
+        ),
       },
       {
         accessor: "total_volume",
-        Header: "Volume",
-        Cell: ({ value }) => <PriceElement price={value} billion />,
+        Header: () => <div className="sm:hidden">Volume</div>,
+        Cell: ({ value }) => (
+          <div className="sm:hidden">
+            <PriceElement price={value} billion />
+          </div>
+        ),
       },
       {
         accessor: "sparkline_in_7d",
-        Header: "",
+        Header: () => <div className="sm:hidden"></div>,
         Cell: ({ row }: any) => {
-          return <CanvasChart row={row} />;
+          return (
+            <div className="sm:hidden">
+              <CanvasChart row={row} />
+            </div>
+          );
         },
       },
     ],

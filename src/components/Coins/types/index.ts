@@ -50,6 +50,7 @@ export interface CoinDetail {
 
 export type Column<T extends object> = {
   accessor: keyof T;
-  Header: string | React.ReactNode;
+  // Header: string | React.ReactElement;
+  Header: () => JSX.Element;
   Cell?: (cellProps: { value: any }) => React.ReactNode;
 };
