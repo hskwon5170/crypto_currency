@@ -1,6 +1,5 @@
 import React from "react";
 import { FiArrowUpRight } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
 import { BottomLayout } from "../../commons/BottomLayout/BottomLayout";
 
 interface LinksProps {
@@ -8,8 +7,6 @@ interface LinksProps {
 }
 
 export const Links = ({ links }: LinksProps) => {
-  const navigate = useNavigate();
-
   return (
     // <div>
     //   <strong className=" text-[#737373]">Links</strong>
