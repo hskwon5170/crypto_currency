@@ -1,9 +1,6 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 
-interface ChartProps {
-  coinId?: string;
-}
 export const getChart = (coinId: string) => {
   return axios
     .get(

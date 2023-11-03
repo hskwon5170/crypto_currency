@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { Layout } from "../commons/layout/Layout";
 import { useCoins } from "./api/useCoins";
 import Logo from "../../public/kripto.png";
@@ -8,11 +8,10 @@ import { useNavigate } from "react-router-dom";
 import { Title } from "../commons/Title/Title";
 import { PriceElement } from "../commons/PriceElement/PriceElement";
 import { CanvasChart } from "./components/CanvasChart";
-import { useNews } from "../News/api/useNews";
 
 export const Coins = () => {
   const navigate = useNavigate();
-  const { data, isLoading } = useCoins();
+  const { data } = useCoins();
   // const { data: newsData } = useNews();
   // console.log("newsData", newsData);
 

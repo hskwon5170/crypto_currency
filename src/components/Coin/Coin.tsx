@@ -15,8 +15,6 @@ import { Navigation } from "./components/Navigation";
 import { Links } from "./components/Links";
 import { CoinCalculator } from "./components/CoinCalculator";
 
-const PriceItems = ["High", "Low", "Average"];
-
 export const Coin = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();

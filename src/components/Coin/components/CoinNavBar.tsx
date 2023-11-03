@@ -1,7 +1,5 @@
 import React from "react";
 import { CoinDetailResponse } from "../types";
-import { Title } from "../../commons/Title/Title";
-import { SideButton } from "../../commons/SideButton/SideButton";
 
 interface CoinNavBarProps {
   data?: CoinDetailResponse;
