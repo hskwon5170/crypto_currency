@@ -8,6 +8,7 @@ interface DataProps {
   onChangeToken?(val: number): void;
   calculatedUSD?: number;
   onChangeCurrency?(cur: string): void;
+  currency?: string;
 }
 
 export const CoinCalculator = ({
@@ -15,6 +16,7 @@ export const CoinCalculator = ({
   onChangeToken,
   calculatedUSD,
   onChangeCurrency,
+  currency,
 }: DataProps) => {
   //   console.log("data", data);
   return (
@@ -34,7 +36,7 @@ export const CoinCalculator = ({
           </div>
         </div>
         <InputArea
-          subTitle="You receive (USD)"
+          subTitle={`You receive (${currency?.toUpperCase()})`}
           calculatedUSD={calculatedUSD}
           globalCurrency
           onChangeCurrency={onChangeCurrency}

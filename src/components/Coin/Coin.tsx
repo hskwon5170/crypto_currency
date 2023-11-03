@@ -100,6 +100,7 @@ export const Coin = () => {
             onChangeToken={onChangeToken}
             calculatedUSD={tokenToUSD}
             onChangeCurrency={onChangeCurrency}
+            currency={currency}
           />
         </div>
       </div>
