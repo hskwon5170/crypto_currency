@@ -17,11 +17,11 @@ export const PriceNavBar = ({ val, priceItems, quoteClass }: NavBarProps) => {
 
   return (
     <BottomLayout title="Stats">
-      <div className="flex gap-6">
+      <div className="flex gap-6 sm:grid sm:grid-cols-2 ">
         <div className="flex flex-col items-start">
-          <div className="text-[#737373]">24h</div>
+          <div className="text-[#737373] sm:text-[5vw]">24h</div>
           <div className="flex gap-3 text-3xl items-end pt-3">
-            <div className="text-[1.5vw]">
+            <div className="text-[1.5vw] sm:text-[6vw]">
               {val.market_cap_change_percentage_24h.toFixed(2) + `%`}
             </div>
             <div className={`${quoteClass} font-semibold text-[1vw]`}>
@@ -34,8 +34,8 @@ export const PriceNavBar = ({ val, priceItems, quoteClass }: NavBarProps) => {
         {priceItems.map((key) => {
           return (
             <div key={key} className="flex flex-col items-start pr-6">
-              <span className="text-[#737373]">{key}</span>
-              <span className="font-medium text-[1.5vw] pt-3">
+              <span className="text-[#737373] sm:text-[5vw]">{key}</span>
+              <span className="font-medium text-[1.5vw] pt-3 sm:text-[6vw]">
                 $ {priceValues[key]?.toFixed(3)}
               </span>
             </div>

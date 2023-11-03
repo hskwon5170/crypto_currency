@@ -58,7 +58,11 @@ export const Chart = ({ chartData }: ChartProps) => {
   }, [formattedArray]);
 
   return (
-    <ResponsiveContainer width="95%" height={400}>
+    <ResponsiveContainer
+      width="95%"
+      height={400}
+      className="sm:w-[102vw] sm:relative sm:right-[72px]"
+    >
       <AreaChart data={formattedArray}>
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -66,11 +70,12 @@ export const Chart = ({ chartData }: ChartProps) => {
             <stop offset="95%" stopColor="white" stopOpacity={0} />
           </linearGradient>
         </defs>
-        <XAxis dataKey="x" ticks={ticks} />
+        <XAxis dataKey="x" ticks={ticks} className="sm:hidden" />
         <YAxis
           dataKey="y"
           tickFormatter={(value) => value.toLocaleString()}
           domain={[0, maxY]}
+          className="sm:hidden"
         />
         <Tooltip content={<CustomTooltip />} />
         <Area

@@ -64,7 +64,7 @@ export const Coin = () => {
   return (
     <Layout title="">
       <Navigation onClick={onClickMoveToCoinList} name={data?.name as string} />
-      <div className="grid grid-cols-10 ">
+      <div className="grid grid-cols-10 sm:flex sm:flex-col">
         <div className="col-span-7">
           <div>
             <CoinNavBar data={data} quoteClass={quoteClass} />

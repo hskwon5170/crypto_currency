@@ -8,7 +8,7 @@ interface CoinNavBarProps {
 
 export const CoinNavBar = ({ data, quoteClass }: CoinNavBarProps) => {
   return (
-    <div className="flex flex-col items-start py-20 gap-3">
+    <div className="flex flex-col items-start py-20 gap-3 sm:pl-1 sm:py-6">
       <div className="flex items-center gap-2 max-h-[70px]">
         <img
           src={data?.image.large}

@@ -20,7 +20,7 @@ export const CoinCalculator = ({
 }: DataProps) => {
   //   console.log("data", data);
   return (
-    <div className="bg-black border-[1px] border-[#737373] rounded-3xl max-w-[30rem] max-h-[30rem] p-2 gap-10 relative">
+    <div className="bg-black border-[1px] border-[#737373] rounded-3xl max-w-[30rem] max-h-[30rem] p-2 gap-10 relative sm:w-[85%]">
       <div className="font-semibold pl-3 py-3">Swap</div>
       <div className="flex flex-col items-center space-y-6 relative">
         <InputArea

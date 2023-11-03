@@ -8,7 +8,7 @@ interface NavigationProps {
 
 export const Navigation: FC<NavigationProps> = ({ onClick, name }) => {
   return (
-    <div className="flex items-center gap-3 text-[#737373]">
+    <div className="flex items-center gap-3 text-[#737373] sm:py-3">
       <div className="cursor-pointer" onClick={onClick}>
         Coins
       </div>

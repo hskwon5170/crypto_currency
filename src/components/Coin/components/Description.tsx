@@ -33,6 +33,7 @@ export const Description = ({
     <BottomLayout title="About">
       <div>
         <div
+          className="sm:max-w-[93%]"
           dangerouslySetInnerHTML={{
             __html: toggleEllipsis(desc ?? "", limit as number).Elements,
           }}
