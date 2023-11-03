@@ -29,7 +29,7 @@ export const CalculatorButton: FC<ButtonProps> = ({
           <img
             src={imageUrl}
             alt="imageLogo"
-            className=" w-auto h-[2vw] mx-2"
+            className=" w-auto h-[2vw] mx-2 rounded-full"
           />
           <div className="text-white text-[1.5vw] leading-[2vw] font-bold pr-3">
             {symbol?.toUpperCase()}
