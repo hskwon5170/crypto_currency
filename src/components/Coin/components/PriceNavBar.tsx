@@ -21,8 +21,10 @@ export const PriceNavBar = ({ val, priceItems, quoteClass }: NavBarProps) => {
         <div className="flex flex-col items-start">
           <div className="text-[#737373]">24h</div>
           <div className="flex gap-3 text-3xl items-end pt-3">
-            <div>{val.market_cap_change_percentage_24h.toFixed(2) + `%`}</div>
-            <div className={`${quoteClass} font-semibold text-xl`}>
+            <div className="text-[1.5vw]">
+              {val.market_cap_change_percentage_24h.toFixed(2) + `%`}
+            </div>
+            <div className={`${quoteClass} font-semibold text-[1vw]`}>
               {Number(val.market_cap_change_percentage_24h.toFixed(2)) > 0
                 ? "▲ "
                 : "▼ "}
@@ -33,7 +35,7 @@ export const PriceNavBar = ({ val, priceItems, quoteClass }: NavBarProps) => {
           return (
             <div key={key} className="flex flex-col items-start pr-6">
               <span className="text-[#737373]">{key}</span>
-              <span className="font-medium text-3xl pt-3">
+              <span className="font-medium text-[1.5vw] pt-3">
                 $ {priceValues[key]?.toFixed(3)}
               </span>
             </div>

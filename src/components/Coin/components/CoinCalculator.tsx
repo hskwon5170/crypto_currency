@@ -7,12 +7,14 @@ interface DataProps {
   data: CoinDetailResponse;
   onChangeToken?(val: number): void;
   calculatedUSD?: number;
+  onChangeCurrency?(cur: string): void;
 }
 
 export const CoinCalculator = ({
   data,
   onChangeToken,
   calculatedUSD,
+  onChangeCurrency,
 }: DataProps) => {
   //   console.log("data", data);
   return (
@@ -31,7 +33,12 @@ export const CoinCalculator = ({
             <AiOutlineArrowDown />
           </div>
         </div>
-        <InputArea subTitle="You receive (USD)" calculatedUSD={calculatedUSD} />
+        <InputArea
+          subTitle="You receive (USD)"
+          calculatedUSD={calculatedUSD}
+          globalCurrency
+          onChangeCurrency={onChangeCurrency}
+        />
       </div>
     </div>
   );
