@@ -33,14 +33,16 @@ export const Coins = () => {
         accessor: "id",
         Header: () => <div className="sm:pr-[25vw]">Token name</div>,
         Cell: ({ row }: any) => (
-          <div className="flex gap-5 items-center justify-start ml-10 py-6 sm:pr-[25vw] sm:ml-3">
+          <div className="flex gap-5 items-center justify-start ml-10 py-6 sm:pr-[10vw] sm:ml-3 ">
             <img
               src={row.original.image}
               alt="Coin"
               style={{ width: "40px", height: "40px" }}
             />
             <div className="flex flex-col justify-center items-start">
-              <span className="font-bold text-lg">{row.original.id}</span>
+              <span className="font-bold text-lg whitespace-nowrap">
+                {row.original.id}
+              </span>
               <span>{row.original.symbol}</span>
             </div>
           </div>
