@@ -33,11 +33,11 @@ export const Coins = () => {
         accessor: "id",
         Header: () => <div className="sm:pr-[15vw]">Token name</div>,
         Cell: ({ row }: any) => (
-          <div className="flex gap-5 items-center justify-start ml-10 py-6 sm:pr-[1vw] sm:ml-3 ">
+          <div className="flex gap-5 items-center justify-start ml-10 py-6 sm:pr-[0.5vw] sm:ml-1">
             <img
               src={row.original.image}
               alt="Coin"
-              style={{ width: "2.5rem", height: "2.5rem" }}
+              className="w-[2.3rem] h-[2.3rem]"
             />
             <div className="flex flex-col justify-center items-start">
               <span className="font-bold text-lg whitespace-nowrap">
