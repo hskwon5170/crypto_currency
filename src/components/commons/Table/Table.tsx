@@ -6,14 +6,17 @@ function Table({ columns, data, onRowClick }: any) {
     useTable({ columns, data });
 
   return (
-    <table {...getTableProps()} className="w-full">
+    <table
+      {...getTableProps()}
+      className="w-full sm:border-[1px] sm:border-[#2C2C2C] sm:rounded-lg sm:border-separate"
+    >
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
               <th
                 {...column.getHeaderProps()}
-                className="text-center align-middle pb-6 text-[#7f7f7f] text-sm"
+                className="text-center align-middle pb-6 text-[#7f7f7f] text-sm sm:py-3"
               >
                 {column.render("Header")}
               </th>
@@ -33,7 +36,7 @@ function Table({ columns, data, onRowClick }: any) {
               {row.cells.map((cell: any) => (
                 <td
                   {...cell.getCellProps()}
-                  className="text-center align-middle w-10"
+                  className="text-center align-middle w-10 "
                 >
                   {cell.render("Cell")}
                 </td>

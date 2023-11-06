@@ -31,9 +31,9 @@ export const Coins = () => {
 
       {
         accessor: "id",
-        Header: () => <div>Token name</div>,
+        Header: () => <div className="sm:pr-[25vw]">Token name</div>,
         Cell: ({ row }: any) => (
-          <div className="flex gap-5 items-center justify-start ml-10 py-6">
+          <div className="flex gap-5 items-center justify-start ml-10 py-6 sm:pr-[25vw] sm:ml-3">
             <img
               src={row.original.image}
               alt="Coin"
@@ -48,8 +48,20 @@ export const Coins = () => {
       },
       {
         accessor: "current_price",
-        Header: () => <div>Price</div>,
-        Cell: ({ value }) => <PriceElement price={Number(value)} />,
+        Header: () => <div className="sm:pl-3">Price</div>,
+        Cell: ({ row }: any) => (
+          <div className="sm:pl-3">
+            <div className="sm:hidden">
+              <PriceElement price={Number(row.original.current_price)} />
+            </div>
+            <div className="lg:hidden sm:flex sm:flex-col sm:items-end">
+              <PriceElement price={Number(row.original.current_price)} />
+              <div className="quoteChangeClass sm:text-[2vw]">
+                {quoteChanges(row.original.price_change_percentage_24h)}
+              </div>
+            </div>
+          </div>
+        ),
       },
       {
         accessor: "price_change_24h",

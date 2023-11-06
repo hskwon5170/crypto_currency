@@ -5,5 +5,7 @@ interface TitleProps {
 }
 
 export const Title = ({ title }: TitleProps) => {
-  return <div className=" py-10 font-semibold text-2xl ">{title}</div>;
+  return (
+    <div className=" py-10 font-semibold text-2xl sm:text-center">{title}</div>
+  );
 };

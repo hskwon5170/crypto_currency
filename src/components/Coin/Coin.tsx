@@ -92,7 +92,7 @@ export const Coin = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-3 py-20">
+        <div className="col-span-3 py-20  sm:flex sm:justify-center">
           <CoinCalculator
             data={data!}
             onChangeToken={onChangeToken}
