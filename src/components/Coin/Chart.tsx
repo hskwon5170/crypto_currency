@@ -61,7 +61,7 @@ export const Chart = ({ chartData }: ChartProps) => {
     <ResponsiveContainer
       width="95%"
       height={400}
-      className="sm:w-[118vw] sm:relative sm:right-[5rem]"
+      className="sm:w-[120vw] sm:relative sm:right-[5rem]"
     >
       <AreaChart data={formattedArray}>
         <defs>
