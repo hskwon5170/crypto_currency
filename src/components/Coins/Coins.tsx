@@ -31,13 +31,13 @@ export const Coins = () => {
 
       {
         accessor: "id",
-        Header: () => <div className="sm:pr-[25vw]">Token name</div>,
+        Header: () => <div className="sm:pr-[15vw]">Token name</div>,
         Cell: ({ row }: any) => (
-          <div className="flex gap-5 items-center justify-start ml-10 py-6 sm:pr-[10vw] sm:ml-3 ">
+          <div className="flex gap-5 items-center justify-start ml-10 py-6 sm:pr-[1vw] sm:ml-3 ">
             <img
               src={row.original.image}
               alt="Coin"
-              style={{ width: "40px", height: "40px" }}
+              style={{ width: "2.5rem", height: "2.5rem" }}
             />
             <div className="flex flex-col justify-center items-start">
               <span className="font-bold text-lg whitespace-nowrap">
@@ -112,8 +112,8 @@ export const Coins = () => {
   return (
     <Layout isListPage title="List">
       <div className="flex justify-start items-center py-6 gap-3">
-        <img src={Logo} alt="logo" className="w-10" />
-        <div className="font-black text-3xl">CryptoCurrency</div>
+        <img src={Logo} alt="logo" className="w-[3vw] sm:w-[7vw] sm:mt-2" />
+        <div className="font-black text-3xl sm:text-[6vw]">CryptoCurrency</div>
       </div>
       <Title title="Top Tokens on CryptoCurrency" />
       <Table columns={columns} data={data} onRowClick={handleCoinClick} />
