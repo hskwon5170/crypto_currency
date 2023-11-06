@@ -53,7 +53,7 @@ export const Coins = () => {
         Header: () => <div className="sm:pl-3">Price</div>,
         Cell: ({ row }: any) => (
           <div className="sm:pl-3">
-            <div className="sm:hidden">
+            <div className="sm:hidden md:hidden lg:block">
               <PriceElement price={Number(row.original.current_price)} />
             </div>
             <div className="lg:hidden sm:flex sm:flex-col sm:items-end">
