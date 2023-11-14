@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { Select } from "antd";
 
 interface ButtonProps {
   imageUrl?: string;
@@ -6,6 +7,15 @@ interface ButtonProps {
   globalCurrency?: boolean;
   onChangeCurrency?(cur: string): void;
 }
+
+const currencies = [
+  {
+    label: "usd",
+  },
+  {
+    label: "krw",
+  },
+];
 
 export const CalculatorButton: FC<ButtonProps> = ({
   imageUrl,
@@ -16,14 +26,22 @@ export const CalculatorButton: FC<ButtonProps> = ({
   return (
     <div className="flex items-center justify-center bg-black rounded-full overflow-hidden w-auto h-[2.5vw] px-3 sm:h-[10vw]">
       {globalCurrency ? (
-        <select
-          className="bg-transparent outline-none sm:text-[5vw]"
-          onChange={(e) => onChangeCurrency?.(e.target.value)}
+        // <select
+        //   className="bg-transparent outline-none sm:text-[5vw]"
+        //   onChange={(e) => onChangeCurrency?.(e.target.value)}
+        //   defaultValue="USD"
+        // >
+        //   <option className="bg-transparent outline-none">usd</option>
+        //   <option className="bg-transparent outline-none">krw</option>
+        // </select>
+        <Select
+          onChange={(e) => onChangeCurrency?.(e)}
           defaultValue="USD"
-        >
-          <option className="bg-transparent outline-none">usd</option>
-          <option className="bg-transparent outline-none">krw</option>
-        </select>
+          options={currencies.map((currency) => ({
+            label: currency.label.toUpperCase(),
+            value: currency.label,
+          }))}
+        />
       ) : (
         <>
           <img

@@ -34,7 +34,6 @@ export const Coins = () => {
         accessor: "id",
         Header: () => <div className="sm:pr-[15vw]">Token name</div>,
         Cell: ({ row }: any) => {
-          console.log("row", row);
           return (
             <div className="flex gap-5 items-center justify-start ml-10 py-6 sm:pr-[0.5vw] sm:ml-1">
               <img
