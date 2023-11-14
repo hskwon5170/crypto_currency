@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Select } from "antd";
+// import { Select } from "antd";
 
 interface ButtonProps {
   imageUrl?: string;
@@ -8,14 +8,14 @@ interface ButtonProps {
   onChangeCurrency?(cur: string): void;
 }
 
-const currencies = [
-  {
-    label: "usd",
-  },
-  {
-    label: "krw",
-  },
-];
+// const currencies = [
+//   {
+//     label: "usd",
+//   },
+//   {
+//     label: "krw",
+//   },
+// ];
 
 export const CalculatorButton: FC<ButtonProps> = ({
   imageUrl,
