@@ -35,7 +35,7 @@ export default function PopUpModal() {
     window.open(url);
   };
 
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageLoaded] = useState(false);
   return (
     <>
       {showModal && (
