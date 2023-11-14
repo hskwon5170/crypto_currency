@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useRef } from "react";
 import { Layout } from "../commons/layout/Layout";
 import { useCoins } from "./api/useCoins";
 import Logo from "../../public/kripto.png";
@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Title } from "../commons/Title/Title";
 import { PriceElement } from "../commons/PriceElement/PriceElement";
 import { CanvasChart } from "./components/CanvasChart";
+import { AiOutlineArrowUp } from "react-icons/ai";
 
 export const Coins = () => {
   const navigate = useNavigate();
@@ -32,21 +33,24 @@ export const Coins = () => {
       {
         accessor: "id",
         Header: () => <div className="sm:pr-[15vw]">Token name</div>,
-        Cell: ({ row }: any) => (
-          <div className="flex gap-5 items-center justify-start ml-10 py-6 sm:pr-[0.5vw] sm:ml-1">
-            <img
-              src={row.original.image}
-              alt="Coin"
-              className="w-[2.3rem] h-[2.3rem]"
-            />
-            <div className="flex flex-col justify-center items-start">
-              <span className="font-bold text-lg whitespace-nowrap">
-                {row.original.id}
-              </span>
-              <span>{row.original.symbol}</span>
+        Cell: ({ row }: any) => {
+          console.log("row", row);
+          return (
+            <div className="flex gap-5 items-center justify-start ml-10 py-6 sm:pr-[0.5vw] sm:ml-1">
+              <img
+                src={row.original.image}
+                alt="Coin"
+                className="w-[2.3rem] h-[2.3rem]"
+              />
+              <div className="flex flex-col justify-center items-start">
+                <span className="font-bold text-lg whitespace-nowrap">
+                  {row.original.id}
+                </span>
+                <span>{row.original.symbol}</span>
+              </div>
             </div>
-          </div>
-        ),
+          );
+        },
       },
       {
         accessor: "current_price",
@@ -108,15 +112,34 @@ export const Coins = () => {
     ],
     []
   );
+  const buttonRef = useRef<HTMLDivElement>(null);
+  const onClickMoveToRef = () => {
+    if (buttonRef.current) {
+      buttonRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <Layout isListPage title="List">
-      <div className="flex justify-start items-center py-6 gap-3">
+      <div
+        ref={buttonRef}
+        className="flex justify-start items-center py-6 gap-3"
+      >
         <img src={Logo} alt="logo" className="w-[3vw] sm:w-[7vw] sm:mt-2" />
         <div className="font-black text-3xl sm:text-[6vw]">CryptoCurrency</div>
       </div>
       <Title title="Top Tokens on CryptoCurrency" />
       <Table columns={columns} data={data} onRowClick={handleCoinClick} />
+      <div className="fixed bottom-5 right-10 sm:hidden">
+        <div className="transition-all duration-300 transform hover:scale-110">
+          <button
+            className="bg-gray-400 opacity-80 hover:opacity-90 text-white px-4 py-4 rounded-3xl shadow-lg hover:bg-gray-300 active:bg-gray-600 focus:outline-none   focus:ring-opacity-50 animate-bounce"
+            onClick={onClickMoveToRef}
+          >
+            <AiOutlineArrowUp />
+          </button>
+        </div>
+      </div>
     </Layout>
   );
 };
