@@ -10,7 +10,6 @@ import { PriceElement } from "../commons/PriceElement/PriceElement";
 import { CanvasChart } from "./components/CanvasChart";
 import { AiOutlineArrowUp } from "react-icons/ai";
 import PopUpModal from "../PopupModal/PopupModal";
-import { Carousel } from "../commons/Carousel/Carousel";
 
 export const Coins = () => {
   const navigate = useNavigate();
