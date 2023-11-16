@@ -2,14 +2,15 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 /* @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap"); */
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap"); */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 /* --- Tailwind's Base Styling Override --- */
 @layer base {
   body {
     @apply font-sans antialiased;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: "Noto Sans JP", sans-serif;
+    font-family: "pretendard";
     color: white;
     background-color: black;
   }
