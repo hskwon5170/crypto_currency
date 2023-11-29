@@ -27,7 +27,7 @@ export const Coins = () => {
         accessor: "market_cap_rank",
         Header: () => <div className="sm:hidden"></div>,
         Cell: ({ value }) => {
-          return <div className="sm:hidden">{value}</div>;
+          return <div className="sm:hidden ">{value}</div>;
         },
       },
 
@@ -56,7 +56,7 @@ export const Coins = () => {
         accessor: "current_price",
         Header: () => <div className="sm:pl-3">Price</div>,
         Cell: ({ row }: any) => (
-          <div className="sm:pl-3">
+          <div className="sm:pl-14">
             <div className="sm:hidden md:hidden lg:block">
               <PriceElement price={Number(row.original.current_price)} />
             </div>
@@ -121,7 +121,7 @@ export const Coins = () => {
 
   return (
     <Layout isListPage title="List">
-      <PopUpModal />
+      {/* <PopUpModal /> */}
       <div
         ref={buttonRef}
         className="flex justify-start items-center py-6 gap-3"

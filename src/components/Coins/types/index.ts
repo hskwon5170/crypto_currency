@@ -53,4 +53,5 @@ export type Column<T extends object> = {
   // Header: string | React.ReactElement;
   Header: () => JSX.Element;
   Cell?: (cellProps: { value: any }) => React.ReactNode;
+  width?: number;
 };

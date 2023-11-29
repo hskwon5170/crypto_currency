@@ -8,7 +8,7 @@ function Table({ columns, data, onRowClick }: any) {
   return (
     <table
       {...getTableProps()}
-      className="w-full sm:border-[1px] sm:border-[#2C2C2C] sm:rounded-lg sm:border-separate"
+      className="w-full sm:border-[1px] sm:border-[#2C2C2C] sm:rounded-lg sm:border-separate sm:pl-5"
     >
       <thead>
         {headerGroups.map((headerGroup) => (
