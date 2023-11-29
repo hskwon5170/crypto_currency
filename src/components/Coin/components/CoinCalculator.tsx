@@ -40,6 +40,7 @@ export const CoinCalculator = ({
           calculatedUSD={calculatedUSD}
           globalCurrency
           onChangeCurrency={onChangeCurrency}
+          currency={currency}
         />
       </div>
     </div>

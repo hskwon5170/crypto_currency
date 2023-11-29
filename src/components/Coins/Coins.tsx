@@ -55,7 +55,7 @@ export const Coins = () => {
         accessor: "current_price",
         Header: () => <div className="sm:pl-3">Price</div>,
         Cell: ({ row }: any) => (
-          <div className="sm:pl-14">
+          <div className="sm:pl-6">
             <div className="sm:hidden md:hidden lg:block">
               <PriceElement price={Number(row.original.current_price)} />
             </div>

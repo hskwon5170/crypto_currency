@@ -23,14 +23,10 @@ export const Coin = () => {
   const [token, setToken] = useState<number>(0);
   const [tokenToUSD, setTokenToUSD] = useState<number>(0);
   const [currency, setCurrency] = useState<string>("usd");
-  // console.log("tokenToUSD", tokenToUSD);
-  // console.log("token", token);
-  // console.log("usdCurrency", usdCurrency);
-  // console.log("currency", currency);
+
   useEffect(() => {
     setUsdCurrency(data?.market_data.current_price[currency]);
   }, [data, currency]);
-  // console.log("usdCurrency", usdCurrency);
   const onChangeCurrency = (cur: string) => {
     setCurrency(cur);
   };

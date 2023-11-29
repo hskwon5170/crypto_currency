@@ -105,7 +105,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
           <tr>
             <td className="text-sm pr-2">Price:</td>
             <td className="text-sm font-bold">
-              ${payload[0]?.payload.y.toFixed(3)}
+              ${payload[0]?.payload.y.toFixed(0)}
             </td>
           </tr>
         </tbody>

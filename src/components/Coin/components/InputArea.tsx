@@ -10,6 +10,7 @@ interface InputAreaProps {
   calculatedUSD?: number;
   globalCurrency?: boolean;
   onChangeCurrency?(cur: string): void;
+  currency?: string;
 }
 
 export const InputArea: FC<InputAreaProps> = ({
@@ -21,6 +22,7 @@ export const InputArea: FC<InputAreaProps> = ({
   calculatedUSD,
   globalCurrency,
   onChangeCurrency,
+  currency,
 }) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
@@ -31,6 +33,8 @@ export const InputArea: FC<InputAreaProps> = ({
   const handleBlur = () => {
     setIsFocused(false);
   };
+
+  console.log("currency", currency);
 
   return (
     <div
@@ -48,7 +52,7 @@ export const InputArea: FC<InputAreaProps> = ({
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChange={(e) => onChangeToken?.(Number(e.target.value))}
-            value={calculatedUSD?.toFixed(2)}
+            value={calculatedUSD?.toFixed(0)}
           />
           {isImage && <CalculatorButton imageUrl={imgUrl} symbol={symbol} />}
           {globalCurrency && (
