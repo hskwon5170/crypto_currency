@@ -9,7 +9,6 @@ import { Title } from "../commons/Title/Title";
 import { PriceElement } from "../commons/PriceElement/PriceElement";
 import { CanvasChart } from "./components/CanvasChart";
 import { AiOutlineArrowUp } from "react-icons/ai";
-import PopUpModal from "../PopupModal/PopupModal";
 
 export const Coins = () => {
   const navigate = useNavigate();
