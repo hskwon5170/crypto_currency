@@ -24,8 +24,10 @@ export const CoinCalculator = ({
   return (
     <div
       className={`${
-        dark ? "bg-black border-[#2C2C2C]" : "bg-white border-[#f2f2f2]"
-      } border-[2px] shadow-2xl  rounded-3xl max-w-[30rem] max-h-[30rem] p-2 gap-10 relative sm:w-[95%]`}
+        dark
+          ? "bg-black border-[#2C2C2C] shadow-gray-600 shadow-2xl"
+          : "bg-white border-[#f2f2f2] shadow-2xl"
+      } border-[2px]   rounded-3xl max-w-[30rem] max-h-[30rem] p-2 gap-10 relative sm:w-[95%]`}
     >
       <div className="font-semibold pl-3 py-3">Swap</div>
       <div className="flex flex-col items-center space-y-6 relative">

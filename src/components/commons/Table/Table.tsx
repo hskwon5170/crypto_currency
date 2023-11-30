@@ -15,8 +15,10 @@ function Table({ columns, data, onRowClick }: any) {
     <table
       {...getTableProps()}
       className={`w-full mb-20  ${
-        dark ? "bg-[#1e1e1e]" : "bg-gray-100"
-      } rounded-lg  sm:rounded-lg sm:border-separate sm:pl-5 duration-200 shadow-2xl`}
+        dark
+          ? "bg-[#1e1e1e] shadow-gray-600 shadow-2xl"
+          : "bg-gray-100 shadow-2xl"
+      } rounded-lg  sm:rounded-lg sm:border-separate sm:pl-5 duration-200`}
     >
       <thead>
         {headerGroups.map((headerGroup) => (
