@@ -1,5 +1,7 @@
 import React, { FC, useState } from "react";
 import { CalculatorButton } from "./CalculatorButton";
+import { formatCompactNumber } from "../../../utils/formatCompactNumber";
+// import { FaCircleQuestion } from "react-icons/fa6";
 
 interface InputAreaProps {
   subTitle: string;
@@ -34,8 +36,6 @@ export const InputArea: FC<InputAreaProps> = ({
     setIsFocused(false);
   };
 
-  console.log("currency", currency);
-
   return (
     <div
       className={`bg-[#1b1b1b] mt-3 rounded-3xl p-5 w-full  ${
@@ -52,9 +52,18 @@ export const InputArea: FC<InputAreaProps> = ({
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChange={(e) => onChangeToken?.(Number(e.target.value))}
-            value={calculatedUSD?.toFixed(0)}
+            value={formatCompactNumber(
+              parseInt(calculatedUSD?.toFixed(0) || "")
+            )}
           />
+          {/* {isTokenTooltip && !isImage && (
+            <Tooltip label={calculatedUSD?.toFixed(0) ?? 1}>
+              <FaCircleQuestion />
+            </Tooltip>
+          )} */}
+
           {isImage && <CalculatorButton imageUrl={imgUrl} symbol={symbol} />}
+
           {globalCurrency && (
             <CalculatorButton
               globalCurrency={globalCurrency}
