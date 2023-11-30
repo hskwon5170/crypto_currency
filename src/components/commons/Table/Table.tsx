@@ -14,9 +14,9 @@ function Table({ columns, data, onRowClick }: any) {
   return (
     <table
       {...getTableProps()}
-      className={`w-full sm:border-[1px] mb-20  ${
+      className={`w-full mb-20  ${
         dark ? "bg-[#1e1e1e]" : "bg-gray-100"
-      } rounded-lg sm:border-[#2C2C2C] sm:rounded-lg sm:border-separate sm:pl-5 duration-200 shadow-2xl`}
+      } rounded-lg  sm:rounded-lg sm:border-separate sm:pl-5 duration-200 shadow-2xl`}
     >
       <thead>
         {headerGroups.map((headerGroup) => (

@@ -62,7 +62,7 @@ export const Coins = () => {
             </div>
             <div className="lg:hidden sm:flex sm:flex-col sm:items-end">
               <PriceElement price={Number(row.original.current_price)} />
-              <div className="quoteChangeClass sm:text-[2vw]">
+              <div className="quoteChangeClass sm:text-[3vw] sm:font-bold">
                 {quoteChanges(row.original.price_change_percentage_24h)}
               </div>
             </div>
