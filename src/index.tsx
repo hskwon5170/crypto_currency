@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { useDarkModeStore } from "./components/commons/ZustandStore/ZustandStore";
 
 const Root = () => {
-  const { dark, transitionDuration } = useDarkModeStore();
+  const { dark } = useDarkModeStore();
 
   const bodyStyle = {
     backgroundColor: dark ? "black" : "white",
