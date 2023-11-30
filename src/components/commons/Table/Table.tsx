@@ -1,14 +1,22 @@
 import React from "react";
 import { useTable } from "react-table";
+import { useDarkModeStore } from "../ZustandStore/ZustandStore";
 
 function Table({ columns, data, onRowClick }: any) {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
+  const { dark } = useDarkModeStore();
+
+  const buttonClasses = `${
+    dark ? "hover:bg-black" : "hover:bg-gray-200"
+  } cursor-pointer hover:duration-100 hover:transition-all`;
 
   return (
     <table
       {...getTableProps()}
-      className="w-full sm:border-[1px] sm:border-[#2C2C2C] sm:rounded-lg sm:border-separate sm:pl-5"
+      className={`w-full sm:border-[1px] mb-20  ${
+        dark ? "bg-[#1e1e1e]" : "bg-gray-100"
+      } rounded-lg sm:border-[#2C2C2C] sm:rounded-lg sm:border-separate sm:pl-5 duration-200 shadow-2xl`}
     >
       <thead>
         {headerGroups.map((headerGroup) => (
@@ -16,7 +24,7 @@ function Table({ columns, data, onRowClick }: any) {
             {headerGroup.headers.map((column) => (
               <th
                 {...column.getHeaderProps()}
-                className="text-center align-middle pb-6 text-[#7f7f7f] text-sm sm:py-3"
+                className="text-center align-middle py-6 text-[#7f7f7f] text-sm sm:py-3"
               >
                 {column.render("Header")}
               </th>
@@ -30,7 +38,7 @@ function Table({ columns, data, onRowClick }: any) {
           return (
             <tr
               {...row.getRowProps()}
-              className="cursor-pointer hover:bg-gray-900 hover:transition-all hover:duration-100"
+              className={buttonClasses}
               onClick={() => onRowClick(row.original.id as any)}
             >
               {row.cells.map((cell: any) => (

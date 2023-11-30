@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { useDarkModeStore } from "../../commons/ZustandStore/ZustandStore";
 // import { Select } from "antd";
 
 interface ButtonProps {
@@ -23,8 +24,13 @@ export const CalculatorButton: FC<ButtonProps> = ({
   globalCurrency,
   onChangeCurrency,
 }) => {
+  const { dark } = useDarkModeStore();
   return (
-    <div className="flex items-center justify-center bg-black rounded-full overflow-hidden w-auto h-[2.5vw] px-3 sm:h-[10vw]">
+    <div
+      className={`flex items-center justify-center ${
+        dark ? "bg-black" : "bg-white"
+      } shadow-2xl rounded-full overflow-hidden w-auto h-[2.5vw] px-3 sm:h-[10vw]`}
+    >
       {globalCurrency ? (
         <select
           className="bg-transparent outline-none sm:text-[5vw]"
@@ -49,7 +55,11 @@ export const CalculatorButton: FC<ButtonProps> = ({
             alt="imageLogo"
             className=" w-auto h-[2vw] mx-2 rounded-full sm:h-[8vw]"
           />
-          <div className="text-white text-[1.5vw] leading-[2vw] font-bold pr-3 sm:text-[5vw]">
+          <div
+            className={`${
+              dark ? "text-white" : "text-black"
+            } text-[1.5vw] leading-[2vw] font-bold pr-3 sm:text-[5vw]`}
+          >
             {symbol?.toUpperCase()}
           </div>
         </>

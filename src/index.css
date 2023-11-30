@@ -11,8 +11,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: "pretendard";
-    color: white;
-    background-color: black;
+    @apply transition-colors duration-300;
   }
 
   code {

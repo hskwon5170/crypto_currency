@@ -1,4 +1,5 @@
 import React from "react";
+import { DarkModeToggle } from "../DarkModeToggle/DarkModeToggle";
 
 interface LayoutProps {
   title: string;
@@ -18,6 +19,9 @@ export const Layout = ({
         isListPage ? "px-3" : "p-6"
       }`}
     >
+      <div className="absolute right-28 top-8">
+        <DarkModeToggle />
+      </div>
       <div>{children}</div>
     </div>
   );

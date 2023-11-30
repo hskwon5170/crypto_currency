@@ -9,9 +9,11 @@ import { Title } from "../commons/Title/Title";
 import { PriceElement } from "../commons/PriceElement/PriceElement";
 import { CanvasChart } from "./components/CanvasChart";
 import { AiOutlineArrowUp } from "react-icons/ai";
+import { useDarkModeStore } from "../commons/ZustandStore/ZustandStore";
 
 export const Coins = () => {
   const navigate = useNavigate();
+  const { dark } = useDarkModeStore();
   const { data } = useCoins();
   // const { data: newsData } = useNews();
   // console.log("newsData", newsData);
@@ -26,10 +28,9 @@ export const Coins = () => {
         accessor: "market_cap_rank",
         Header: () => <div className="sm:hidden"></div>,
         Cell: ({ value }) => {
-          return <div className="sm:hidden ">{value}</div>;
+          return <div className="sm:hidden">{value}</div>;
         },
       },
-
       {
         accessor: "id",
         Header: () => <div className="sm:pr-[15vw]">Token name</div>,
@@ -126,9 +127,18 @@ export const Coins = () => {
         className="flex justify-start items-center py-6 gap-3"
       >
         <img src={Logo} alt="logo" className="w-[3vw] sm:w-[7vw] sm:mt-2" />
-        <div className="font-black text-3xl sm:text-[6vw]">CryptoCurrency</div>
+        <div
+          className={`font-black text-3xl sm:text-[6vw] ${
+            dark ? "text-white" : "text-black"
+          }`}
+        >
+          CryptoCurrency
+        </div>
       </div>
-      <Title title="Top Tokens on CryptoCurrency" />
+      <Title
+        title="Top Tokens on CryptoCurrency"
+        className={dark ? "text-white" : "text-black"}
+      />
       <Table columns={columns} data={data} onRowClick={handleCoinClick} />
       <div className="fixed bottom-5 right-10 sm:hidden">
         <div className="transition-all duration-300 transform hover:scale-110">

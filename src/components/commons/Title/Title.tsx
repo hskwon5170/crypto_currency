@@ -2,10 +2,13 @@ import React from "react";
 
 interface TitleProps {
   title: string;
+  className?: string;
 }
 
-export const Title = ({ title }: TitleProps) => {
+export const Title = ({ title, className }: TitleProps) => {
   return (
-    <div className=" py-10 font-semibold text-2xl sm:text-center">{title}</div>
+    <div className={`py-10 font-semibold text-2xl sm:text-center ${className}`}>
+      {title}
+    </div>
   );
 };

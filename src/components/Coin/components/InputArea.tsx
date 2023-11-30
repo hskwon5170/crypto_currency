@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import { CalculatorButton } from "./CalculatorButton";
 import { formatCompactNumber } from "../../../utils/formatCompactNumber";
+import { useDarkModeStore } from "../../commons/ZustandStore/ZustandStore";
 // import { FaCircleQuestion } from "react-icons/fa6";
 
 interface InputAreaProps {
@@ -26,6 +27,7 @@ export const InputArea: FC<InputAreaProps> = ({
   onChangeCurrency,
   currency,
 }) => {
+  const { dark } = useDarkModeStore();
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const handleFocus = () => {
@@ -38,7 +40,9 @@ export const InputArea: FC<InputAreaProps> = ({
 
   return (
     <div
-      className={`bg-[#1b1b1b] mt-3 rounded-3xl p-5 w-full  ${
+      className={` ${
+        dark ? "bg-[#1b1b1b]" : "bg-[#f9f9f9]"
+      } mt-3 rounded-3xl p-5 w-full  ${
         isFocused ? "border-[1px] border-[#737373]" : ""
       }`}
     >
@@ -47,11 +51,12 @@ export const InputArea: FC<InputAreaProps> = ({
         <div className="flex items-center">
           <input
             // type="number"
-            className="bg-transparent outline-none text-5xl w-3/4 mr-3"
+            className="bg-transparent outline-none text-5xl w-3/4 mr-3 text-[#bbbfc8]"
             placeholder="0"
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChange={(e) => onChangeToken?.(Number(e.target.value))}
+            disabled={!isImage}
             value={formatCompactNumber(
               parseInt(calculatedUSD?.toFixed(0) || "")
             )}
