@@ -6,6 +6,6 @@ interface DarkModeInterface {
 }
 
 export const useDarkModeStore = create<DarkModeInterface>((set) => ({
-  dark: false,
+  dark: true,
   toggleDarkMode: () => set((state) => ({ dark: !state.dark })),
 }));
