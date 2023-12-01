@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Layout } from "../commons/layout/Layout";
 import { useCoins } from "./api/useCoins";
 import Logo from "../../public/kripto.png";
@@ -10,13 +10,12 @@ import { PriceElement } from "../commons/PriceElement/PriceElement";
 import { CanvasChart } from "./components/CanvasChart";
 import { AiOutlineArrowUp } from "react-icons/ai";
 import { useDarkModeStore } from "../commons/ZustandStore/ZustandStore";
+import { CoinSearch } from "../Coin/CoinSearch";
 
 export const Coins = () => {
   const navigate = useNavigate();
   const { dark } = useDarkModeStore();
   const { data } = useCoins();
-  // const { data: newsData } = useNews();
-  // console.log("newsData", newsData);
 
   const handleCoinClick = (coinId: string) => {
     navigate(`/coins/${coinId}`);
@@ -33,7 +32,7 @@ export const Coins = () => {
       },
       {
         accessor: "id",
-        Header: () => <div className="sm:pr-[15vw]">Token name</div>,
+        Header: () => <div>Token name</div>,
         Cell: ({ row }: any) => {
           return (
             <div className="flex gap-5 items-center justify-start ml-10 py-6 sm:pr-[0.5vw] sm:ml-1">
@@ -56,7 +55,7 @@ export const Coins = () => {
         accessor: "current_price",
         Header: () => <div className="sm:pl-3">Price</div>,
         Cell: ({ row }: any) => (
-          <div className="sm:pl-6">
+          <div>
             <div className="sm:hidden md:hidden lg:block">
               <PriceElement price={Number(row.original.current_price)} />
             </div>
@@ -119,6 +118,24 @@ export const Coins = () => {
     }
   };
 
+  const [search, setSeacrh] = useState<string>("");
+  const debounceSearch = useDebounce(search, 250);
+  const HandleInputChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setSeacrh(e.target.value);
+  };
+
+  const [isDelete, setIsDelete] = useState<boolean>(false);
+  const filtedData = data?.filter((el) => el.id.includes(debounceSearch));
+
+  useEffect(() => {
+    if (debounceSearch === "") {
+      setIsDelete(false);
+    } else {
+      setIsDelete(true);
+    }
+  }, [debounceSearch]);
+
   return (
     <Layout isListPage title="List">
       {/* <PopUpModal /> */}
@@ -139,7 +156,13 @@ export const Coins = () => {
         title="Top Tokens on CryptoCurrency"
         className={dark ? "text-white" : "text-black"}
       />
-      <Table columns={columns} data={data} onRowClick={handleCoinClick} />
+
+      <CoinSearch onChange={HandleInputChanges} value={search} />
+      <Table
+        columns={columns}
+        data={!isDelete ? data : filtedData}
+        onRowClick={handleCoinClick}
+      />
       <div className="fixed bottom-5 right-10 sm:hidden">
         <div className="transition-all duration-300 transform hover:scale-110">
           <button
@@ -169,3 +192,18 @@ const quoteChanges = (num: number) => {
     );
   }
 };
+
+function useDebounce(value: string, delay: number) {
+  const [debounceValue, setDebounceValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebounceValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+  return debounceValue;
+}

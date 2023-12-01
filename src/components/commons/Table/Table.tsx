@@ -26,7 +26,7 @@ function Table({ columns, data, onRowClick }: any) {
             {headerGroup.headers.map((column) => (
               <th
                 {...column.getHeaderProps()}
-                className="text-center align-middle py-6 text-[#7f7f7f] text-sm sm:py-3"
+                className="py-6 text-[#7f7f7f] text-sm text-center sm:py-3"
               >
                 {column.render("Header")}
               </th>
@@ -44,10 +44,7 @@ function Table({ columns, data, onRowClick }: any) {
               onClick={() => onRowClick(row.original.id as any)}
             >
               {row.cells.map((cell: any) => (
-                <td
-                  {...cell.getCellProps()}
-                  className="text-center align-middle w-10 "
-                >
+                <td {...cell.getCellProps()} className="text-center">
                   {cell.render("Cell")}
                 </td>
               ))}
