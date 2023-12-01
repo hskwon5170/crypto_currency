@@ -25,6 +25,9 @@ export const CanvasChart = ({ row }: CanvasChartProps) => {
     const max = Math.max(...price);
     const min = Math.min(...price);
 
+    // 검색한 결과를 리스트에 렌더링할때 spark_line이 겹쳐보이는 이슈 수정
+    ctx.clearRect(0, 0, width, height);
+
     const normalizedData = price.map((p: number) => {
       return ((p - min) / (max - min)) * height;
     });
@@ -37,6 +40,15 @@ export const CanvasChart = ({ row }: CanvasChartProps) => {
     });
 
     ctx.strokeStyle = colorClass;
+
+    // stroke width
+    ctx.lineWidth = 1.8;
+
+    // stroke 끝부분
+    ctx.lineCap = "round";
+
+    // stroke 꺾이는(연결되는) 부분
+    ctx.lineJoin = "round";
     ctx.stroke();
   };
 
