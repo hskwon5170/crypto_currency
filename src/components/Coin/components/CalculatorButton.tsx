@@ -37,8 +37,20 @@ export const CalculatorButton: FC<ButtonProps> = ({
           onChange={(e) => onChangeCurrency?.(e.target.value)}
           defaultValue="USD"
         >
-          <option className="bg-transparent outline-none">usd</option>
-          <option className="bg-transparent outline-none">krw</option>
+          <option
+            className={`${
+              dark ? "bg-black text-white" : "bg-white text-black"
+            } outline-none`}
+          >
+            usd
+          </option>
+          <option
+            className={`${
+              dark ? "bg-black text-white" : "bg-white text-black"
+            } outline-none`}
+          >
+            krw
+          </option>
         </select>
       ) : (
         // <Select
