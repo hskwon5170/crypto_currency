@@ -43,7 +43,6 @@
   /* -webkit-backdrop-filter: blur(7.5px); */
   border-radius: 0.5rem;
   border: var(--color-border);
-  left: 50px;
 }
 
 .wrap::after {
