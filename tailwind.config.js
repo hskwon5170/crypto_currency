@@ -20,7 +20,7 @@ module.exports = {
         lg: { min: "1080px" },
       },
       animation: {
-        spin: "spin .4s linear infinite",
+        spin: "spin .6s linear infinite",
       },
       backgroundColor: {
         primary: "#DDE9F5",
