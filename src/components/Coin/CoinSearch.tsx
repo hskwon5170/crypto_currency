@@ -38,7 +38,7 @@ export const CoinSearch: FC<CoinSearchProps> = ({ value, onChange }) => {
         <input
           type="search"
           id="default-search"
-          className={`block p-4 pl-10 w-full text-sm  rounded-lg border outline-none transition-all duration-300 focus:border-fuchsia-500 focus:ring-fuchsia-500 ${
+          className={`block p-4 pl-10 w-full text-[1rem]  rounded-lg border outline-none transition-all duration-300 focus:border-fuchsia-500 focus:ring-fuchsia-500 ${
             dark
               ? " text-white placeholder-gray-400  bg-black border-gray-600"
               : "border-gray-300  text-gray-900 bg-gray-50 "
