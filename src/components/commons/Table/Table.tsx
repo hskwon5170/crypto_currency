@@ -8,8 +8,8 @@ function Table({ columns, data, onRowClick }: any) {
   const { dark } = useDarkModeStore();
 
   const buttonClasses = `${
-    dark ? "hover:bg-black" : "hover:bg-gray-200"
-  } cursor-pointer hover:duration-100 hover:transition-all`;
+    dark ? "md:hover:bg-black" : "md:hover:bg-gray-200"
+  } cursor-pointer md:hover:duration-100 md:hover:transition-all`;
 
   return (
     <table

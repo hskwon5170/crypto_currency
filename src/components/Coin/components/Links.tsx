@@ -71,7 +71,7 @@ export const Links = ({ links }: LinksProps) => {
 
           return (
             <div
-              className="text-[#fc72ff] flex items-center cursor-pointer"
+              className="text-[#4ffae5] flex items-center cursor-pointer"
               key={el}
               onClick={() => window.open(link)}
             >

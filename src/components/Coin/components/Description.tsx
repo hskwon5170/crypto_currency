@@ -42,14 +42,14 @@ export const Description = ({
         <span>
           {toggleEllipsis(desc ?? "", limit as number).isShowMore ? (
             <div
-              className="text-[#fc72ff]  cursor-pointer hover:text-opacity-50 hover:text-[#fc72ff] hover:transition-all hover:duration-300"
+              className="text-[#4ffae5]  cursor-pointer hover:text-opacity-50 hover:text-[#4ffae5] hover:transition-all hover:duration-300"
               onClick={() => onClickMore(desc ?? "")}
             >
               Show more
             </div>
           ) : (
             <div
-              className="text-[#fc72ff]  cursor-pointer hover:text-opacity-50 hover:text-[#fc72ff] hover:transition-all hover:duration-300"
+              className="text-[#4ffae5]  cursor-pointer hover:text-opacity-50 hover:text-[#4ffae5] hover:transition-all hover:duration-300"
               onClick={onClickClose}
             >
               Hide

@@ -19,7 +19,7 @@
   --color-border: 1px solid rgb(252, 252, 252);
   --wrap-height: 65vh;
   --wrap-width: 100vw;
-  --color-background-image: #5ddcff, #3c67e3 43%, #4e00c260;
+  --color-background-image: #01f3fc, #0083b1 43%, #4e00c260;
   --color-background: linear-gradient(-45deg, #8c9fd7, #ffffff);
 }
 :root.dark {

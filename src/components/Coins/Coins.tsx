@@ -11,6 +11,8 @@ import { CanvasChart } from "./components/CanvasChart";
 import { AiOutlineArrowUp } from "react-icons/ai";
 import { useDarkModeStore } from "../commons/ZustandStore/ZustandStore";
 import { CoinSearch } from "../Coin/CoinSearch";
+import { useDebounce } from "../../hooks/useDebounce";
+import { GiPlanetCore } from "react-icons/gi";
 
 export const Coins = () => {
   const navigate = useNavigate();
@@ -125,14 +127,14 @@ export const Coins = () => {
     setSeacrh(e.target.value);
   };
 
-  const [isDelete, setIsDelete] = useState<boolean>(false);
+  const [inputChanged, setInputChanged] = useState<boolean>(false);
   const filtedData = data?.filter((el) => el.id.includes(debounceSearch));
 
   useEffect(() => {
     if (debounceSearch === "") {
-      setIsDelete(false);
+      setInputChanged(false);
     } else {
-      setIsDelete(true);
+      setInputChanged(true);
     }
   }, [debounceSearch]);
 
@@ -143,30 +145,31 @@ export const Coins = () => {
         ref={buttonRef}
         className="flex justify-start items-center py-6 gap-3"
       >
-        <img src={Logo} alt="logo" className="w-[3vw] sm:w-[7vw] sm:mt-2" />
+        {/* <img src={Logo} alt="logo" className="w-[3vw] sm:w-[7vw] sm:mt-2" /> */}
+        <GiPlanetCore className="text-3xl" />
         <div
-          className={`font-black text-3xl sm:text-[6vw] ${
+          className={`font-black text-3xl mb-1 sm:text-[6vw] ${
             dark ? "text-white" : "text-black"
           }`}
         >
-          CryptoCurrency
+          Crypto
         </div>
       </div>
       <Title
-        title="Top Tokens on CryptoCurrency"
+        title="Top Tokens on Crypto"
         className={dark ? "text-white" : "text-black"}
       />
 
       <CoinSearch onChange={HandleInputChanges} value={search} />
       <Table
         columns={columns}
-        data={!isDelete ? data : filtedData}
+        data={!inputChanged ? data : filtedData}
         onRowClick={handleCoinClick}
       />
       <div className="fixed bottom-5 right-10 sm:hidden">
         <div className="transition-all duration-300 transform hover:scale-110">
           <button
-            className="bg-gray-400 opacity-80 hover:opacity-90 text-white px-4 py-4 rounded-3xl shadow-lg hover:bg-gray-300 active:bg-gray-600 focus:outline-none   focus:ring-opacity-50 animate-bounce"
+            className="bg-gray-400 opacity-80 hover:opacity-90 text-white px-4 py-4 rounded-3xl shadow-lg hover:bg-[#4ffae5] hover:text-black active:bg-gray-600 focus:outline-none   focus:ring-opacity-50 animate-bounce"
             onClick={onClickMoveToRef}
           >
             <AiOutlineArrowUp />
@@ -192,18 +195,3 @@ const quoteChanges = (num: number) => {
     );
   }
 };
-
-function useDebounce(value: string, delay: number) {
-  const [debounceValue, setDebounceValue] = useState(value);
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebounceValue(value);
-    }, delay);
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value, delay]);
-  return debounceValue;
-}

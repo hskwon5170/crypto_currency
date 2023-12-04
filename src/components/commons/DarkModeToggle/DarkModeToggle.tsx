@@ -18,7 +18,7 @@ export const DarkModeToggle: FC<DarkModeToggleProps> = ({ className }) => {
   return (
     <div
       className={`rounded-3xl w-[68px] h-[40px] absolute right-10 cursor-pointer ${
-        dark ? "bg-[#7a1f50]" : "bg-gray-200"
+        dark ? "bg-[#4ffae5]" : "bg-gray-200"
       } shadow-2xl`}
       onClick={onClickToggle}
     >
