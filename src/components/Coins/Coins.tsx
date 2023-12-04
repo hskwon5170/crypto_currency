@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Layout } from "../commons/layout/Layout";
 import { useCoins } from "./api/useCoins";
-import Logo from "../../public/kripto.png";
 import Table from "../commons/Table/Table";
 import { CoinDetail, Column } from "./types";
 import { useNavigate } from "react-router-dom";

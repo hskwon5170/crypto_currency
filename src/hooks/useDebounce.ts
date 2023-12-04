@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 // 파라미터로 value:string, delay:number를 전달받고
 // delay만큼 지연시킨 후 value를 리턴한다
