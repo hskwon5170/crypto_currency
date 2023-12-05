@@ -15,6 +15,7 @@ export const useCoin = (uuid: string) => {
   const { data, isLoading, ...rest } = useQuery({
     queryKey: ["coin", uuid],
     queryFn: () => getCoin(uuid),
+    staleTime: 10000 * 60 * 5,
     suspense: true,
     onError: (error: any) => {
       throw error;

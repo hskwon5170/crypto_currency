@@ -15,6 +15,7 @@ export const useCoins = () => {
     queryKey: ["coins"],
     queryFn: getCoins,
     suspense: true,
+    staleTime: 10000 * 60 * 5,
   });
 
   return { data, isLoading, ...rest };

@@ -8,10 +8,14 @@ interface DarkModeToggleProps {
 }
 
 export const DarkModeToggle: FC<DarkModeToggleProps> = ({ className }) => {
-  const { dark, toggleDarkMode, isToggle, setIsToggle } = useDarkModeStore();
+  const { dark, isToggle, toggleBoth } = useDarkModeStore((state) => ({
+    dark: state.dark,
+    isToggle: state.isToggle,
+    toggleBoth: state.toggleBoth,
+  }));
+
   const onClickToggle = () => {
-    toggleDarkMode();
-    setIsToggle(!isToggle);
+    toggleBoth();
   };
 
   return (

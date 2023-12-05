@@ -15,6 +15,10 @@ export const useChart = (coinId: string) => {
     queryKey: ["chart", coinId],
     queryFn: () => getChart(coinId),
     retry: 1,
+    // 10초 - 10,000ms
+    // 60초 - 10,000 * 60 (60,000ms)
+    // 5분 - 10,000 * 60 * 5
+    staleTime: 10000 * 60 * 5, // 5분만큼 데이터가 fresh, 그 이후에 stale상태
   });
 
   return { data, isLoading, ...rest };
