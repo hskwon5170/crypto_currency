@@ -21,7 +21,7 @@ export const CoinCalculator = ({
   currency,
 }: DataProps) => {
   //   console.log("data", data);
-  const { dark } = useDarkModeStore();
+  const dark = useDarkModeStore((state) => state.dark);
   return (
     <div
       className={`${

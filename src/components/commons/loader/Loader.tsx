@@ -4,7 +4,7 @@ import Lottie from "lottie-react";
 import { useDarkModeStore } from "../ZustandStore/ZustandStore";
 
 export const Loader = () => {
-  const { dark } = useDarkModeStore();
+  const dark = useDarkModeStore((state) => state.dark);
   return (
     <div
       className={`w-full min-h-[100vh] flex justify-center items-center ${

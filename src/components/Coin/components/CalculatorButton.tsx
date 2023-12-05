@@ -24,7 +24,7 @@ export const CalculatorButton: FC<ButtonProps> = ({
   globalCurrency,
   onChangeCurrency,
 }) => {
-  const { dark } = useDarkModeStore();
+  const dark = useDarkModeStore((state) => state.dark);
   return (
     <div
       className={`flex items-center justify-center ${

@@ -27,7 +27,7 @@ export const InputArea: FC<InputAreaProps> = ({
   onChangeCurrency,
   currency,
 }) => {
-  const { dark } = useDarkModeStore();
+  const dark = useDarkModeStore((state) => state.dark);
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const handleFocus = () => {

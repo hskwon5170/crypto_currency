@@ -16,6 +16,9 @@ export const useCoin = (uuid: string) => {
     queryKey: ["coin", uuid],
     queryFn: () => getCoin(uuid),
     staleTime: 10000 * 60 * 5,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+
     suspense: true,
     onError: (error: any) => {
       throw error;

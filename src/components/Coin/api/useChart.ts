@@ -15,6 +15,8 @@ export const useChart = (coinId: string) => {
     queryKey: ["chart", coinId],
     queryFn: () => getChart(coinId),
     retry: 1,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
     // 10초 - 10,000ms
     // 60초 - 10,000 * 60 (60,000ms)
     // 5분 - 10,000 * 60 * 5

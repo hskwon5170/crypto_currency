@@ -16,6 +16,8 @@ export const useCoins = () => {
     queryFn: getCoins,
     suspense: true,
     staleTime: 10000 * 60 * 5,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 
   return { data, isLoading, ...rest };

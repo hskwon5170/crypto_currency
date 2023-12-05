@@ -1,30 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { useDarkModeStore } from "./components/commons/ZustandStore/ZustandStore";
 import "tailwindcss/tailwind.css";
+import GlobalStyle from "./GlobalStyle";
 
 const Root = () => {
-  const { dark } = useDarkModeStore();
-
-  const bodyStyle = {
-    backgroundColor: dark ? "black" : "white",
-    color: dark ? "white" : "black",
-  };
-
   return (
     <React.StrictMode>
+      <GlobalStyle />
       <App />
-      <style>
-        {`
-          body {
-            background-color: ${bodyStyle.backgroundColor};
-            color: ${bodyStyle.color};
-          }
-        `}
-      </style>
     </React.StrictMode>
   );
 };

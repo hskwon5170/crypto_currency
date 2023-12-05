@@ -2,7 +2,7 @@ import React from "react";
 import { useDarkModeStore } from "../ZustandStore/ZustandStore";
 
 export const Spinner = () => {
-  const { dark } = useDarkModeStore();
+  const dark = useDarkModeStore((state) => state.dark);
   return (
     <div className="w-full min-h-[300px] bg-transparent flex justify-center items-center">
       <div

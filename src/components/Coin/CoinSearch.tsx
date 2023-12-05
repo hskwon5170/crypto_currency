@@ -7,7 +7,7 @@ interface CoinSearchProps {
 }
 
 export const CoinSearch: FC<CoinSearchProps> = ({ value, onChange }) => {
-  const { dark } = useDarkModeStore();
+  const dark = useDarkModeStore((state) => state.dark);
   return (
     <div className="py-6">
       <label

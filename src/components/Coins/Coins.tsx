@@ -15,7 +15,7 @@ import { GiPlanetCore } from "react-icons/gi";
 
 export const Coins = () => {
   const navigate = useNavigate();
-  const { dark } = useDarkModeStore();
+  const dark = useDarkModeStore((state) => state.dark);
   const { data } = useCoins();
 
   const handleCoinClick = (coinId: string) => {

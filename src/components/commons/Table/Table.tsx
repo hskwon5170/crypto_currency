@@ -5,7 +5,7 @@ import { useDarkModeStore } from "../ZustandStore/ZustandStore";
 function Table({ columns, data, onRowClick }: any) {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
-  const { dark } = useDarkModeStore();
+  const dark = useDarkModeStore((state) => state.dark);
 
   const buttonClasses = `${
     dark ? "md:hover:bg-black" : "md:hover:bg-gray-200"
