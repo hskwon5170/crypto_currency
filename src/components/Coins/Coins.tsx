@@ -10,7 +10,6 @@ import { CanvasChart } from "./components/CanvasChart";
 import { AiOutlineArrowUp } from "react-icons/ai";
 import { useDarkModeStore } from "../commons/ZustandStore/ZustandStore";
 import { CoinSearch } from "../Coin/CoinSearch";
-import { useDebounce } from "../../hooks/useDebounce";
 import { GiPlanetCore } from "react-icons/gi";
 
 export const Coins = () => {
@@ -119,23 +118,38 @@ export const Coins = () => {
     }
   };
 
-  const [search, setSeacrh] = useState<string>("");
-  const debounceSearch = useDebounce(search, 250);
-  const HandleInputChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setSeacrh(e.target.value);
+  // const [search, setSeacrh] = useState<string>("");
+  // const debounceSearch = useDebounce(search, 250);
+  // const HandleInputChanges = useCallback(
+  //   (e: React.ChangeEvent<HTMLInputElement>) => {
+  //     e.preventDefault();
+  //     setSeacrh(e.target.value);
+  //   },
+  //   []
+  // );
+
+  const [searches, setSearches] = useState("");
+  const [filted, setFilted] = useState(data);
+  console.log("filted", filted);
+  const onSearchChange = (value: string) => {
+    setSearches(value);
   };
 
+  useEffect(() => {
+    const filted = data?.filter((el) => el.id.includes(searches));
+    setFilted(filted);
+  }, [searches, data]);
+
   const [inputChanged, setInputChanged] = useState<boolean>(false);
-  const filtedData = data?.filter((el) => el.id.includes(debounceSearch));
+  // const filtedData = data?.filter((el) => el.id.includes(debounceSearch));
 
   useEffect(() => {
-    if (debounceSearch === "") {
+    if (searches === "") {
       setInputChanged(false);
     } else {
       setInputChanged(true);
     }
-  }, [debounceSearch]);
+  }, [searches]);
 
   return (
     <Layout isListPage title="List">
@@ -159,10 +173,14 @@ export const Coins = () => {
         className={dark ? "text-white" : "text-black"}
       />
 
-      <CoinSearch onChange={HandleInputChanges} value={search} />
+      <CoinSearch
+        // onChange={HandleInputChanges}
+        // value={search}
+        onSearchChange={onSearchChange}
+      />
       <Table
         columns={columns}
-        data={!inputChanged ? data : filtedData}
+        data={!inputChanged ? data : filted}
         onRowClick={handleCoinClick}
       />
       <div className="fixed bottom-5 right-10 sm:hidden">

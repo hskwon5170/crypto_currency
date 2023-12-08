@@ -1,13 +1,24 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useDarkModeStore } from "../commons/ZustandStore/ZustandStore";
+import { useDebounce } from "../../hooks/useDebounce";
 
 interface CoinSearchProps {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSearchChange: (value: string) => void;
 }
 
-export const CoinSearch: FC<CoinSearchProps> = ({ value, onChange }) => {
+export const CoinSearch: FC<CoinSearchProps> = ({ onSearchChange }) => {
   const dark = useDarkModeStore((state) => state.dark);
+  const [search, setSearch] = useState("");
+  const debounceSearch = useDebounce(search, 250);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
+  useEffect(() => {
+    onSearchChange(debounceSearch);
+  }, [debounceSearch, onSearchChange]);
+
   return (
     <div className="py-6">
       <label
@@ -44,8 +55,8 @@ export const CoinSearch: FC<CoinSearchProps> = ({ value, onChange }) => {
               : "border-gray-300  text-gray-900 bg-gray-50 "
           }`}
           placeholder="Search Tokens"
-          onChange={onChange}
-          value={value}
+          onChange={handleInputChange}
+          value={search}
           required
         />
       </div>
