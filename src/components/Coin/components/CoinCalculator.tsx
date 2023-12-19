@@ -2,8 +2,9 @@ import React from "react";
 import { InputArea } from "./InputArea";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { CoinDetailResponse } from "../types";
-import { useDarkModeStore } from "../../commons/ZustandStore/ZustandStore";
 import "./CoinCalculator.css";
+import { useAtom } from "jotai";
+import { updateDarkAtom } from "../../commons/JotaiStore/JotaiStore";
 
 interface DataProps {
   data: CoinDetailResponse;
@@ -20,8 +21,7 @@ export const CoinCalculator = ({
   onChangeCurrency,
   currency,
 }: DataProps) => {
-  //   console.log("data", data);
-  const dark = useDarkModeStore((state) => state.dark);
+  const [dark] = useAtom(updateDarkAtom);
   return (
     <div
       className={`${

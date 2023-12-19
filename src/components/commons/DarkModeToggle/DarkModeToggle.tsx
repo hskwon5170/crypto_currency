@@ -1,22 +1,28 @@
 import React, { FC } from "react";
-import { useDarkModeStore } from "../ZustandStore/ZustandStore";
 import { BsFillSunFill } from "react-icons/bs";
 import { BsFillMoonFill } from "react-icons/bs";
+import { useAtom, useAtomValue } from "jotai";
+import { toggleStore, updateDarkAtom } from "../JotaiStore/JotaiStore";
 
 interface DarkModeToggleProps {
   className?: string;
 }
 
 export const DarkModeToggle: FC<DarkModeToggleProps> = ({ className }) => {
-  const { dark, isToggle, toggleBoth } = useDarkModeStore((state) => ({
-    dark: state.dark,
-    isToggle: state.isToggle,
-    toggleBoth: state.toggleBoth,
-  }));
-
+  // const { dark, isToggle, toggleBoth } = useDarkModeStore((state) => ({
+  //   dark: state.dark,
+  //   isToggle: state.isToggle,
+  //   toggleBoth: state.toggleBoth,
+  // }));
+  const isToggle = useAtomValue(toggleStore);
+  const [dark, updateDark] = useAtom(updateDarkAtom);
   const onClickToggle = () => {
-    toggleBoth();
+    updateDark();
   };
+
+  // const onClickToggle = () => {
+  //   toggleBoth();
+  // };
 
   return (
     <div

@@ -1,10 +1,13 @@
 import React from "react";
 import animationData from "../../../public/animationData.json";
 import Lottie from "lottie-react";
-import { useDarkModeStore } from "../ZustandStore/ZustandStore";
+import { useAtom } from "jotai";
+import { updateDarkAtom } from "../JotaiStore/JotaiStore";
 
 export const Loader = () => {
-  const dark = useDarkModeStore((state) => state.dark);
+  // const dark = useDarkModeStore((state) => state.dark);
+  const [dark] = useAtom(updateDarkAtom);
+
   return (
     <div
       className={`w-full min-h-[100vh] flex justify-center items-center ${

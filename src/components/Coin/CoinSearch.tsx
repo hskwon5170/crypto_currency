@@ -1,13 +1,14 @@
 import React, { FC, useEffect, useState } from "react";
-import { useDarkModeStore } from "../commons/ZustandStore/ZustandStore";
 import { useDebounce } from "../../hooks/useDebounce";
+import { useAtom } from "jotai";
+import { updateDarkAtom } from "../commons/JotaiStore/JotaiStore";
 
 interface CoinSearchProps {
   onSearchChange: (value: string) => void;
 }
 
 export const CoinSearch: FC<CoinSearchProps> = ({ onSearchChange }) => {
-  const dark = useDarkModeStore((state) => state.dark);
+  const [dark] = useAtom(updateDarkAtom);
   const [search, setSearch] = useState("");
   const debounceSearch = useDebounce(search, 250);
 

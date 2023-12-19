@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { useDarkModeStore } from "../../commons/ZustandStore/ZustandStore";
-// import { Select } from "antd";
+import { useAtom } from "jotai";
+import { updateDarkAtom } from "../../commons/JotaiStore/JotaiStore";
 
 interface ButtonProps {
   imageUrl?: string;
@@ -24,7 +24,8 @@ export const CalculatorButton: FC<ButtonProps> = ({
   globalCurrency,
   onChangeCurrency,
 }) => {
-  const dark = useDarkModeStore((state) => state.dark);
+  const [dark] = useAtom(updateDarkAtom);
+
   return (
     <div
       className={`flex items-center justify-center ${

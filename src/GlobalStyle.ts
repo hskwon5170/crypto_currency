@@ -1,8 +1,9 @@
 import { useEffect } from "react";
-import { useDarkModeStore } from "./components/commons/ZustandStore/ZustandStore";
+import { useAtom } from "jotai";
+import { darkStore } from "./components/commons/JotaiStore/JotaiStore";
 
 const GlobalStyle = () => {
-  const dark = useDarkModeStore((state) => state.dark);
+  const [dark] = useAtom(darkStore);
 
   useEffect(() => {
     document.body.style.backgroundColor = dark ? "black" : "white";

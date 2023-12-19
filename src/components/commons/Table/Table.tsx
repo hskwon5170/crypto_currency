@@ -1,11 +1,13 @@
 import React from "react";
 import { useTable } from "react-table";
-import { useDarkModeStore } from "../ZustandStore/ZustandStore";
+import { useAtom } from "jotai";
+import { updateDarkAtom } from "../JotaiStore/JotaiStore";
 
 function Table({ columns, data, onRowClick }: any) {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
-  const dark = useDarkModeStore((state) => state.dark);
+  // const dark = useDarkModeStore((state) => state.dark);
+  const [dark] = useAtom(updateDarkAtom);
 
   const buttonClasses = `${
     dark ? "md:hover:bg-black" : "md:hover:bg-gray-200"

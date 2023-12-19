@@ -8,13 +8,16 @@ import { Title } from "../commons/Title/Title";
 import { PriceElement } from "../commons/PriceElement/PriceElement";
 import { CanvasChart } from "./components/CanvasChart";
 import { AiOutlineArrowUp } from "react-icons/ai";
-import { useDarkModeStore } from "../commons/ZustandStore/ZustandStore";
 import { CoinSearch } from "../Coin/CoinSearch";
 import { GiPlanetCore } from "react-icons/gi";
+import { useAtom } from "jotai";
+import { updateDarkAtom } from "../commons/JotaiStore/JotaiStore";
 
 export const Coins = () => {
   const navigate = useNavigate();
-  const dark = useDarkModeStore((state) => state.dark);
+  // const dark = useDarkModeStore((state) => state.dark);
+  const [dark] = useAtom(updateDarkAtom);
+
   const { data } = useCoins();
 
   const handleCoinClick = (coinId: string) => {
@@ -130,7 +133,6 @@ export const Coins = () => {
 
   const [searches, setSearches] = useState("");
   const [filted, setFilted] = useState(data);
-  console.log("filted", filted);
   const onSearchChange = (value: string) => {
     setSearches(value);
   };

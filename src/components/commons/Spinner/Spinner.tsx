@@ -1,8 +1,11 @@
 import React from "react";
-import { useDarkModeStore } from "../ZustandStore/ZustandStore";
+import { useAtom } from "jotai";
+import { updateDarkAtom } from "../JotaiStore/JotaiStore";
 
 export const Spinner = () => {
-  const dark = useDarkModeStore((state) => state.dark);
+  // const dark = useDarkModeStore((state) => state.dark);
+  const [dark] = useAtom(updateDarkAtom);
+
   return (
     <div className="w-full min-h-[300px] bg-transparent flex justify-center items-center">
       <div

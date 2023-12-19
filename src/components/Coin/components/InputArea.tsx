@@ -1,7 +1,8 @@
 import React, { FC, useState } from "react";
 import { CalculatorButton } from "./CalculatorButton";
 import { formatCompactNumber } from "../../../utils/formatCompactNumber";
-import { useDarkModeStore } from "../../commons/ZustandStore/ZustandStore";
+import { useAtom } from "jotai";
+import { updateDarkAtom } from "../../commons/JotaiStore/JotaiStore";
 // import { FaCircleQuestion } from "react-icons/fa6";
 
 interface InputAreaProps {
@@ -27,7 +28,8 @@ export const InputArea: FC<InputAreaProps> = ({
   onChangeCurrency,
   currency,
 }) => {
-  const dark = useDarkModeStore((state) => state.dark);
+  const [dark] = useAtom(updateDarkAtom);
+
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const handleFocus = () => {
