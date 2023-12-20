@@ -16,6 +16,7 @@
     "firebase-tools": "^12.8.0",
     "global": "^4.4.0",
     "jotai": "^2.6.0",
+    "jotai-devtools": "^0.7.1",
     "lottie-react": "^2.4.0",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",

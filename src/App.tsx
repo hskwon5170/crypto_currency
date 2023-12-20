@@ -7,11 +7,13 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { ErrorBoundary } from "./components/commons/errorBoundary/ErrorBoundary";
 import { Loader } from "./components/commons/loader/Loader";
 import ErrorFallback from "./components/commons/errorBoundary/ErrorFallback";
+import { DevTools } from "jotai-devtools";
 
 function App() {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
+      <DevTools />
       <BrowserRouter>
         <ErrorBoundary fallback={(code) => <ErrorFallback error={code} />}>
           <Suspense fallback={<Loader />}>
