@@ -19,9 +19,9 @@ export const Layout = ({
         isListPage ? "px-3" : "p-6"
       }`}
     >
-      <div className="absolute right-[-10px] top-8 sm:right-[-10px] sm:top-9">
+      {/* <div className="absolute right-[-10px] top-8 sm:right-[-10px] sm:top-9 z-50">
         <DarkModeToggle />
-      </div>
+      </div> */}
       <div>{children}</div>
     </div>
   );

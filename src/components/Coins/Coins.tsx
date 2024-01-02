@@ -12,6 +12,8 @@ import { CoinSearch } from "../Coin/CoinSearch";
 import { GiPlanetCore } from "react-icons/gi";
 import { useAtom } from "jotai";
 import { updateDarkAtom } from "../commons/JotaiStore/JotaiStore";
+import { useTopbarTheme } from "../../hooks/useTopbarTheme";
+import { DarkModeToggle } from "../commons/DarkModeToggle/DarkModeToggle";
 
 export const Coins = () => {
   const navigate = useNavigate();
@@ -23,6 +25,10 @@ export const Coins = () => {
   const handleCoinClick = (coinId: string) => {
     navigate(`/coins/${coinId}`);
   };
+
+  // const { color } = useAtomValue(topbarAtom);
+  const { topbar } = useTopbarTheme();
+  console.log("topbar", topbar);
 
   const columns = useMemo<Column<CoinDetail>[]>(
     () => [
@@ -158,7 +164,12 @@ export const Coins = () => {
       {/* <PopUpModal /> */}
       <div
         ref={buttonRef}
-        className="flex justify-start items-center py-6 gap-3"
+        className="flex justify-start items-center py-6 transition-all top-0 z-10"
+        style={{
+          position: topbar.position,
+          color: topbar.color.text,
+          background: topbar.color.background,
+        }}
       >
         {/* <img src={Logo} alt="logo" className="w-[3vw] sm:w-[7vw] sm:mt-2" /> */}
         <GiPlanetCore className="text-3xl" />
@@ -169,6 +180,7 @@ export const Coins = () => {
         >
           Crypto
         </div>
+        <DarkModeToggle />
       </div>
       <Title
         title="Top Tokens on Crypto"
