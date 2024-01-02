@@ -24,7 +24,6 @@ const TimeStampToLabel = (time: number) => {
 };
 
 export const Chart = ({ chartData }: ChartProps) => {
-  // console.log("chartData", chartData);
   const formattedArray = chartData?.map((el: number[], i: number) => ({
     name: "q" + i,
     x: TimeStampToLabel(el[0]),
@@ -91,9 +90,6 @@ export const Chart = ({ chartData }: ChartProps) => {
 };
 
 const CustomTooltip = ({ active, payload, label }: any) => {
-  // console.log("active", active);
-  // console.log("payload", payload);
-  // console.log("label", label);
   return (
     <div className="custom-tooltip bg-[black]  text-white  p-4 rounded-md shadow-lg">
       <table>

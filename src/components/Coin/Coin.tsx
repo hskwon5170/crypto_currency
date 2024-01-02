@@ -14,6 +14,8 @@ import { CoinNavBar } from "./components/CoinNavBar";
 import { Navigation } from "./components/Navigation";
 import { Links } from "./components/Links";
 import { CoinCalculator } from "./components/CoinCalculator";
+import { ChartIcon } from "./ChartIcon";
+import { CandleStickChart } from "./CandleStickChart";
 
 export const Coin = () => {
   const navigate = useNavigate();
@@ -52,9 +54,14 @@ export const Coin = () => {
   );
 
   const [limit, setLimit] = useState<number>(300);
+  const [isArea, setIsArea] = useState(false);
 
   const onClickMoveToCoinList = () => {
     navigate(-1);
+  };
+
+  const onClickChartIcon = () => {
+    setIsArea(!isArea);
   };
 
   return (
@@ -67,7 +74,19 @@ export const Coin = () => {
             {chartLoading ? (
               <Spinner />
             ) : chartData ? (
-              <Chart chartData={chartData.prices} />
+              <div>
+                {isArea ? (
+                  <Chart chartData={chartData.prices} />
+                ) : (
+                  <CandleStickChart chartData={chartData.prices} />
+                )}
+                <div
+                  className="flex justify-end mr-12"
+                  onClick={onClickChartIcon}
+                >
+                  <ChartIcon isArea={isArea} />
+                </div>
+              </div>
             ) : (
               <Title title="Chart is Not Available" />
             )}
