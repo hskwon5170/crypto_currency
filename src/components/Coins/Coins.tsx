@@ -9,11 +9,8 @@ import { PriceElement } from "../commons/PriceElement/PriceElement";
 import { CanvasChart } from "./components/CanvasChart";
 import { AiOutlineArrowUp } from "react-icons/ai";
 import { CoinSearch } from "../Coin/CoinSearch";
-import { GiPlanetCore } from "react-icons/gi";
 import { useAtom } from "jotai";
 import { updateDarkAtom } from "../commons/JotaiStore/JotaiStore";
-import { useTopbarTheme } from "../../hooks/useTopbarTheme";
-import { DarkModeToggle } from "../commons/DarkModeToggle/DarkModeToggle";
 
 export const Coins = () => {
   const navigate = useNavigate();
@@ -25,10 +22,6 @@ export const Coins = () => {
   const handleCoinClick = (coinId: string) => {
     navigate(`/coins/${coinId}`);
   };
-
-  // const { color } = useAtomValue(topbarAtom);
-  const { topbar } = useTopbarTheme();
-  console.log("topbar", topbar);
 
   const columns = useMemo<Column<CoinDetail>[]>(
     () => [
@@ -161,50 +154,33 @@ export const Coins = () => {
 
   return (
     <Layout isListPage title="List">
-      {/* <PopUpModal /> */}
-      <div
-        ref={buttonRef}
-        className="flex justify-start items-center py-6 transition-all top-0 z-10"
-        style={{
-          position: topbar.position,
-          color: topbar.color.text,
-          background: topbar.color.background,
-        }}
-      >
-        {/* <img src={Logo} alt="logo" className="w-[3vw] sm:w-[7vw] sm:mt-2" /> */}
-        <GiPlanetCore className="text-3xl" />
-        <div
-          className={`font-black text-3xl mb-1 sm:text-[6vw] ${
-            dark ? "text-white" : "text-black"
-          }`}
-        >
-          Crypto
-        </div>
-        <DarkModeToggle />
-      </div>
-      <Title
-        title="Top Tokens on Crypto"
-        className={dark ? "text-white" : "text-black"}
-      />
+      <div>
+        {/* <PopUpModal /> */}
 
-      <CoinSearch
-        // onChange={HandleInputChanges}
-        // value={search}
-        onSearchChange={onSearchChange}
-      />
-      <Table
-        columns={columns}
-        data={!inputChanged ? data : filted}
-        onRowClick={handleCoinClick}
-      />
-      <div className="fixed bottom-5 right-10 sm:hidden">
-        <div className="transition-all duration-300 transform hover:scale-110">
-          <button
-            className="bg-gray-400 opacity-80 hover:opacity-90 text-white px-4 py-4 rounded-3xl shadow-lg hover:bg-[#4ffae5] hover:text-black active:bg-gray-600 focus:outline-none   focus:ring-opacity-50 animate-bounce"
-            onClick={onClickMoveToRef}
-          >
-            <AiOutlineArrowUp />
-          </button>
+        <Title
+          title="Top Tokens on Crypto"
+          className={dark ? "text-white" : "text-black"}
+        />
+        <div ref={buttonRef}></div>
+        <CoinSearch
+          // onChange={HandleInputChanges}
+          // value={search}
+          onSearchChange={onSearchChange}
+        />
+        <Table
+          columns={columns}
+          data={!inputChanged ? data : filted}
+          onRowClick={handleCoinClick}
+        />
+        <div className="fixed bottom-5 right-10 sm:hidden">
+          <div className="transition-all duration-300 transform hover:scale-110">
+            <button
+              className="bg-gray-400 opacity-80 hover:opacity-90 text-white px-4 py-4 rounded-3xl shadow-lg hover:bg-[#4ffae5] hover:text-black active:bg-gray-600 focus:outline-none   focus:ring-opacity-50 animate-bounce"
+              onClick={onClickMoveToRef}
+            >
+              <AiOutlineArrowUp />
+            </button>
+          </div>
         </div>
       </div>
     </Layout>

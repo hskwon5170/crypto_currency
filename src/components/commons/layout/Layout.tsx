@@ -1,5 +1,5 @@
 import React from "react";
-import { DarkModeToggle } from "../DarkModeToggle/DarkModeToggle";
+import { Topbar } from "./Topbar";
 
 interface LayoutProps {
   title: string;
@@ -13,16 +13,14 @@ export const Layout = ({
   isListPage = false,
 }: LayoutProps) => {
   return (
-    // <div className="relative max-w-[40rem] min-h-screen m-auto ">
+    // <div className="relative min-h-screen m-auto ">
     <div
-      className={`relative max-w-[80%]  m-auto sm:max-w-full  sm:p-3 sm:m-0 sm:overflow-x-hidden ${
-        isListPage ? "px-3" : "p-6"
+      className={`m-auto sm:max-w-full sm:m-0 sm:overflow-x-hidden ${
+        isListPage ? "" : ""
       }`}
     >
-      {/* <div className="absolute right-[-10px] top-8 sm:right-[-10px] sm:top-9 z-50">
-        <DarkModeToggle />
-      </div> */}
-      <div>{children}</div>
+      <Topbar />
+      <div className="w-[80%] m-auto sm:w-full sm:px-3">{children}</div>
     </div>
   );
 };

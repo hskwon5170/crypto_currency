@@ -21,9 +21,9 @@ const landing_top: TopbarState = {
 
 const normal: TopbarState = {
   color: {
-    background: "#1e1e1e",
-    text: "#3c3c3c",
-    logo: "#3c3c3c",
+    background: "black",
+    text: "#fff",
+    logo: "#fff",
   },
   position: "sticky",
 };

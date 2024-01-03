@@ -15,20 +15,20 @@ export const useTopbarTheme = () => {
 
   useEffect(() => {
     const handler = () => {
-      if (window.scrollY === 0 && window.location.pathname === "/coins") {
+      if (window.scrollY === 0) {
         setLandingTopbar();
       } else {
         setNormalTopbar();
       }
     };
 
-    if (window.location.pathname === "/coins") {
-      handler();
-      window.addEventListener("scroll", handler);
-    } else {
-      handler();
-      window.removeEventListener("scroll", handler);
-    }
+    // if (window.location.pathname === "/coins/*") {
+    handler();
+    window.addEventListener("scroll", handler);
+    // } else {
+    //   handler();
+    //   window.removeEventListener("scroll", handler);
+    // }
 
     return () => window.removeEventListener("scroll", handler);
   }, [setLandingTopbar, setNormalTopbar, location.pathname]);

@@ -2,8 +2,6 @@ import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { Coins } from "../components/Coins/Coins";
 import { Coin } from "../components/Coin/Coin";
-import { LogIn } from "../components/LogIn/LogIn";
-import { SignUp } from "../components/SignUp/SignUp";
 
 class AppRoutes extends React.Component {
   render() {
