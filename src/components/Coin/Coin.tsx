@@ -111,7 +111,7 @@ export const Coin = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-3 py-20 ml-10  sm:flex sm:justify-center">
+        <div className="col-span-3 py-20 ml-10  sm:flex sm:justify-center sm:ml-0">
           <CoinCalculator
             data={data!}
             onChangeToken={onChangeToken}
