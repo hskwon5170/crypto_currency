@@ -1,18 +1,28 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useTopbarTheme } from "../../../hooks/useTopbarTheme";
 import { GiPlanetCore } from "react-icons/gi";
 import { useAtom } from "jotai";
 import { updateDarkAtom } from "../JotaiStore/JotaiStore";
 import { DarkModeToggle } from "../DarkModeToggle/DarkModeToggle";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const Topbar = () => {
   const navigate = useNavigate();
   const { topbar } = useTopbarTheme();
   const [dark] = useAtom(updateDarkAtom);
 
+  const location = useLocation();
+  // console.log("location", location.pathname === "/coins");
+
+  const isList = useMemo(
+    () => location.pathname === "/coins",
+    [location.pathname]
+  );
+
   const onClickLogo = () => {
-    navigate("/coins");
+    isList
+      ? window.scrollTo({ top: 0, behavior: "smooth" })
+      : navigate("/coins");
   };
 
   return (

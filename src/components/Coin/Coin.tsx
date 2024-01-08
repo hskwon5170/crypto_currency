@@ -14,7 +14,6 @@ import { CoinNavBar } from "./components/CoinNavBar";
 import { Navigation } from "./components/Navigation";
 import { Links } from "./components/Links";
 import { CoinCalculator } from "./components/CoinCalculator";
-import { ChartIcon } from "./ChartIcon";
 import { CandleStickChart } from "./CandleStickChart";
 
 export const Coin = () => {
@@ -54,7 +53,7 @@ export const Coin = () => {
   );
 
   const [limit, setLimit] = useState<number>(300);
-  const [isArea, setIsArea] = useState(false);
+  const [isArea, setIsArea] = useState(true);
 
   const onClickMoveToCoinList = () => {
     navigate(-1);
@@ -84,7 +83,7 @@ export const Coin = () => {
                   className="flex justify-end mr-12"
                   onClick={onClickChartIcon}
                 >
-                  <ChartIcon isArea={isArea} />
+                  {/* <ChartIcon isArea={isArea} /> */}
                 </div>
               </div>
             ) : (

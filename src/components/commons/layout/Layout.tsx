@@ -14,11 +14,7 @@ export const Layout = ({
 }: LayoutProps) => {
   return (
     // <div className="relative min-h-screen m-auto ">
-    <div
-      className={`m-auto sm:max-w-full sm:m-0 sm:overflow-x-hidden ${
-        isListPage ? "" : ""
-      }`}
-    >
+    <div className={`m-auto sm:max-w-full sm:m-0 ${isListPage ? "" : ""}`}>
       <Topbar />
       <div className="w-[80%] m-auto sm:w-full sm:px-3">{children}</div>
     </div>
