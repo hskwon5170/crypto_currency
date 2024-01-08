@@ -11,7 +11,7 @@ export const ChartIcon: FC<ChartIconProps> = ({ isArea = true }) => {
   return (
     <Button colorScheme="teal" size={"md"}>
       <div className="transition-all ease-in-out duration-300">
-        {isArea ? <MdOutlineShowChart /> : <MdCandlestickChart />}
+        {isArea ? <MdCandlestickChart /> : <MdOutlineShowChart />}
       </div>
     </Button>
   );

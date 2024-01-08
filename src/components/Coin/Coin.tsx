@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCoin } from "./api/useCoin";
 import { Layout } from "../commons/layout/Layout";
@@ -15,6 +15,8 @@ import { Navigation } from "./components/Navigation";
 import { Links } from "./components/Links";
 import { CoinCalculator } from "./components/CoinCalculator";
 import { CandleStickChart } from "./CandleStickChart";
+import { ChartIcon } from "./ChartIcon";
+import { ApexArea } from "./ApexArea";
 
 export const Coin = () => {
   const navigate = useNavigate();
@@ -24,6 +26,8 @@ export const Coin = () => {
   const [token, setToken] = useState<number>(0);
   const [tokenToUSD, setTokenToUSD] = useState<number>(0);
   const [currency, setCurrency] = useState<string>("usd");
+
+  const coinId = useMemo(() => data?.id, [data?.id]);
 
   useEffect(() => {
     setUsdCurrency(data?.market_data.current_price[currency]);
@@ -74,16 +78,18 @@ export const Coin = () => {
               <Spinner />
             ) : chartData ? (
               <div>
+                {/* <div className="w-[55vw] sm:w-full sm:relative sm:right-[4.3rem]"> */}
                 {isArea ? (
-                  <Chart chartData={chartData.prices} />
+                  <div>
+                    {/* <Chart chartData={chartData.prices} /> */}
+                    <ApexArea chartData={chartData.prices} />
+                  </div>
                 ) : (
-                  <CandleStickChart chartData={chartData.prices} />
+                  <CandleStickChart coinId={coinId as string} />
                 )}
-                <div
-                  className="flex justify-end mr-12"
-                  onClick={onClickChartIcon}
-                >
-                  {/* <ChartIcon isArea={isArea} /> */}
+                {/* </div> */}
+                <div className="flex justify-end" onClick={onClickChartIcon}>
+                  <ChartIcon isArea={isArea} />
                 </div>
               </div>
             ) : (
@@ -106,7 +112,7 @@ export const Coin = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-3 py-20   sm:flex sm:justify-center">
+        <div className="col-span-3 py-20 ml-10  sm:flex sm:justify-center">
           <CoinCalculator
             data={data!}
             onChangeToken={onChangeToken}
