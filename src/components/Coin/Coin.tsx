@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useCoin } from "./api/useCoin";
 import { Layout } from "../commons/layout/Layout";
 import { useChart } from "./api/useChart";
-import { Chart } from "./Chart";
 import "./index.css";
 import { Title } from "../commons/Title/Title";
 import { Description } from "./components/Description";
