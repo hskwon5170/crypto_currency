@@ -25,23 +25,23 @@ export const CandleStickChart: FC<CandleStickChartProps> = ({ coinId }) => {
 
   const options: ApexOptions = {
     chart: {
-      animations: {
-        enabled: true,
-        easing: "easeinout",
-        speed: 500,
-        animateGradually: {
-          enabled: true,
-          delay: 500,
-        },
-        dynamicAnimation: {
-          enabled: true,
-          speed: 500,
-        },
-      },
       type: "candlestick",
       height: 350,
       toolbar: {
         show: false,
+      },
+      animations: {
+        enabled: true,
+        easing: "easein",
+        speed: 300,
+        animateGradually: {
+          enabled: true,
+          delay: 150,
+        },
+        dynamicAnimation: {
+          enabled: true,
+          speed: 300,
+        },
       },
     },
 

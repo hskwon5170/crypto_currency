@@ -23,15 +23,15 @@ export const ApexArea = ({ chartData }: ChartDataProps) => {
     chart: {
       animations: {
         enabled: true,
-        easing: "easeinout",
-        speed: 500,
+        easing: "easein",
+        speed: 300,
         animateGradually: {
           enabled: true,
-          delay: 1000,
+          delay: 150,
         },
         dynamicAnimation: {
           enabled: true,
-          speed: 500,
+          speed: 300,
         },
       },
       type: "area",
