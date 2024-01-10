@@ -16,6 +16,7 @@ import { CoinCalculator } from "./components/CoinCalculator";
 import { CandleStickChart } from "./CandleStickChart";
 import { ChartIcon } from "./ChartIcon";
 import { ApexArea } from "./ApexArea";
+import { TestComponent } from "./components/TestComponent";
 
 export const Coin = () => {
   const navigate = useNavigate();
@@ -108,6 +109,7 @@ export const Coin = () => {
                 />
               )}
               <Links links={data?.links} />
+              <TestComponent />
             </div>
           </div>
         </div>
