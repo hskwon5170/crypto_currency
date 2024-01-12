@@ -3,18 +3,15 @@ import { CalculatorButton } from "./CalculatorButton";
 import { formatCompactNumber } from "../../../utils/formatCompactNumber";
 import { useAtom } from "jotai";
 import { updateDarkAtom } from "../../commons/JotaiStore/darkmode";
-// import { FaCircleQuestion } from "react-icons/fa6";
+import { inputValueAtom } from "../../commons/JotaiStore/calculator";
 
 interface InputAreaProps {
   subTitle: string;
   isImage?: boolean;
   imgUrl?: string;
   symbol?: string;
-  onChangeToken?(val: number): void;
   calculatedUSD?: number;
   globalCurrency?: boolean;
-  onChangeCurrency?(cur: string): void;
-  currency?: string;
 }
 
 export const InputArea: FC<InputAreaProps> = ({
@@ -22,13 +19,11 @@ export const InputArea: FC<InputAreaProps> = ({
   isImage = false,
   imgUrl = "",
   symbol = "",
-  onChangeToken,
   calculatedUSD,
   globalCurrency,
-  onChangeCurrency,
-  currency,
 }) => {
   const [dark] = useAtom(updateDarkAtom);
+  const [, setInputValue] = useAtom(inputValueAtom);
 
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
@@ -52,30 +47,21 @@ export const InputArea: FC<InputAreaProps> = ({
         <div className="text-[#737373]">{subTitle} </div>
         <div className="flex items-center">
           <input
-            // type="number"
             className="bg-transparent outline-none text-5xl w-3/4 mr-3 text-[#bbbfc8]"
             placeholder="0"
             onFocus={handleFocus}
             onBlur={handleBlur}
-            onChange={(e) => onChangeToken?.(Number(e.target.value))}
+            onChange={(e) => setInputValue(Number(e.target.value))}
             disabled={!isImage}
             value={formatCompactNumber(
               parseInt(calculatedUSD?.toFixed(0) || "")
             )}
           />
-          {/* {isTokenTooltip && !isImage && (
-            <Tooltip label={calculatedUSD?.toFixed(0) ?? 1}>
-              <FaCircleQuestion />
-            </Tooltip>
-          )} */}
 
           {isImage && <CalculatorButton imageUrl={imgUrl} symbol={symbol} />}
 
           {globalCurrency && (
-            <CalculatorButton
-              globalCurrency={globalCurrency}
-              onChangeCurrency={onChangeCurrency}
-            />
+            <CalculatorButton globalCurrency={globalCurrency} />
           )}
         </div>
       </div>

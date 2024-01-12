@@ -9,8 +9,13 @@ import { PriceElement } from "../commons/PriceElement/PriceElement";
 import { CanvasChart } from "./components/CanvasChart";
 import { AiOutlineArrowUp } from "react-icons/ai";
 import { CoinSearch } from "../Coin/CoinSearch";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { updateDarkAtom } from "../commons/JotaiStore/darkmode";
+import {
+  calculatedValueAtom,
+  inputValueAtom,
+  selectCurrencyAtom,
+} from "../commons/JotaiStore/calculator";
 
 export const Coins = () => {
   const navigate = useNavigate();
@@ -18,8 +23,14 @@ export const Coins = () => {
   const [dark] = useAtom(updateDarkAtom);
 
   const { data } = useCoins();
+  const [, setInputValue] = useAtom(inputValueAtom);
+  const setCalculated = useSetAtom(calculatedValueAtom);
+  const setSelectedCurrency = useSetAtom(selectCurrencyAtom);
 
   const handleCoinClick = (coinId: string) => {
+    setInputValue(0);
+    setCalculated(0);
+    setSelectedCurrency("usd");
     navigate(`/coins/${coinId}`);
   };
 

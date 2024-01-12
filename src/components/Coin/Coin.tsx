@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useCoin } from "./api/useCoin";
 import { Layout } from "../commons/layout/Layout";
 import { useChart } from "./api/useChart";
-import "./index.css";
 import { Title } from "../commons/Title/Title";
 import { Description } from "./components/Description";
 import { Spinner } from "../commons/Spinner/Spinner";
@@ -16,36 +15,18 @@ import { CoinCalculator } from "./components/CoinCalculator";
 import { CandleStickChart } from "./CandleStickChart";
 import { ChartIcon } from "./ChartIcon";
 import { ApexArea } from "./ApexArea";
+import { useAtomValue, useSetAtom } from "jotai";
+import {
+  selectCurrencyAtom,
+  usdCurrencyAtom,
+} from "../commons/JotaiStore/calculator";
+import "./index.css";
 
 export const Coin = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { data } = useCoin(id as string);
-  const [usdCurrency, setUsdCurrency] = useState<number>(0);
-  const [token, setToken] = useState<number>(0);
-  const [tokenToUSD, setTokenToUSD] = useState<number>(0);
-  const [currency, setCurrency] = useState<string>("usd");
-
   const coinId = useMemo(() => data?.id, [data?.id]);
-
-  useEffect(() => {
-    setUsdCurrency(data?.market_data.current_price[currency]);
-  }, [data, currency]);
-  const onChangeCurrency = (cur: string) => {
-    setCurrency(cur);
-  };
-
-  const onChangeToken = (val: number) => {
-    setToken(val);
-  };
-
-  useEffect(() => {
-    setTokenToUSD(token * usdCurrency);
-  }, [token, usdCurrency]);
-
-  // api limit 제한으로 주석처리함
-  // const { data: newsData } = useNews(id as string);
-  // const [tab, setTab] = useState("chart");
 
   const { data: chartData, isLoading: chartLoading } = useChart(
     data?.id as string
@@ -65,6 +46,12 @@ export const Coin = () => {
   const onClickChartIcon = () => {
     setIsArea(!isArea);
   };
+
+  const setUsdCurrency = useSetAtom(usdCurrencyAtom);
+  const currency = useAtomValue(selectCurrencyAtom);
+  useEffect(() => {
+    setUsdCurrency(data?.market_data.current_price[currency]);
+  }, [currency, data?.market_data.current_price, setUsdCurrency]);
 
   return (
     <Layout title="">
@@ -113,13 +100,7 @@ export const Coin = () => {
           </div>
         </div>
         <div className="col-span-3 py-20 ml-10 sm:flex sm:justify-center sm:ml-0">
-          <CoinCalculator
-            data={data!}
-            onChangeToken={onChangeToken}
-            calculatedUSD={tokenToUSD}
-            onChangeCurrency={onChangeCurrency}
-            currency={currency}
-          />
+          <CoinCalculator data={data!} />
         </div>
       </div>
     </Layout>

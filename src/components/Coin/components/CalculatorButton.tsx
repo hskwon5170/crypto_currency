@@ -1,12 +1,13 @@
 import React, { FC } from "react";
 import { useAtom } from "jotai";
 import { updateDarkAtom } from "../../commons/JotaiStore/darkmode";
+import { updateCurrencyAtom } from "../../commons/JotaiStore/calculator";
 
 interface ButtonProps {
   imageUrl?: string;
   symbol?: string;
   globalCurrency?: boolean;
-  onChangeCurrency?(cur: string): void;
+  // onChangeCurrency?(cur: string): void;
 }
 
 // const currencies = [
@@ -22,9 +23,9 @@ export const CalculatorButton: FC<ButtonProps> = ({
   imageUrl,
   symbol,
   globalCurrency,
-  onChangeCurrency,
 }) => {
   const [dark] = useAtom(updateDarkAtom);
+  const [, setCurrency] = useAtom(updateCurrencyAtom);
 
   return (
     <div
@@ -35,7 +36,7 @@ export const CalculatorButton: FC<ButtonProps> = ({
       {globalCurrency ? (
         <select
           className="bg-transparent outline-none sm:text-[5vw]"
-          onChange={(e) => onChangeCurrency?.(e.target.value)}
+          onChange={(e) => setCurrency(e.target.value)}
           defaultValue="USD"
         >
           <option

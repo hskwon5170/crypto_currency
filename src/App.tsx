@@ -15,11 +15,11 @@ function App() {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <DevTools />
       <ChakraProvider>
         <BrowserRouter>
           <ErrorBoundary fallback={(code) => <ErrorFallback error={code} />}>
             <Suspense fallback={<Loader />}>
+              <DevTools />
               <AppRoutes />
             </Suspense>
           </ErrorBoundary>

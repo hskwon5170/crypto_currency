@@ -1,32 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { InputArea } from "./InputArea";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { CoinDetailResponse } from "../types";
 import "./CoinCalculator.css";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { updateDarkAtom } from "../../commons/JotaiStore/darkmode";
+import {
+  calculatedValueAtom,
+  inputValueAtom,
+  selectCurrencyAtom,
+  usdCurrencyAtom,
+} from "../../commons/JotaiStore/calculator";
 
 interface DataProps {
   data: CoinDetailResponse;
-  onChangeToken?(val: number): void;
-  calculatedUSD?: number;
-  onChangeCurrency?(cur: string): void;
-  currency?: string;
 }
 
-export const CoinCalculator = ({
-  data,
-  onChangeToken,
-  calculatedUSD,
-  onChangeCurrency,
-  currency,
-}: DataProps) => {
+export const CoinCalculator = ({ data }: DataProps) => {
   const [dark] = useAtom(updateDarkAtom);
+  const usdCurrency = useAtomValue(usdCurrencyAtom);
+  const [calculated, setCalculated] = useAtom(calculatedValueAtom);
+  const inputVal = useAtomValue(inputValueAtom);
+  const currency = useAtomValue(selectCurrencyAtom);
+
+  useEffect(() => {
+    setCalculated(inputVal * usdCurrency);
+  }, [inputVal, usdCurrency, setCalculated]);
+
   return (
     <div
       className={`${
         dark
-          ? "bg-black border-[#2C2C2C] shadow-gray-600 shadow-2xl"
+          ? "bg-black border-[#1a1212] shadow-gray-600 shadow-2xl"
           : "bg-white border-[#f2f2f2] shadow-2xl"
       } border-[2px]   rounded-3xl max-w-[30rem] max-h-[30rem] p-2 gap-10 relative sm:w-[95%] wrap`}
     >
@@ -38,7 +43,6 @@ export const CoinCalculator = ({
             isImage
             imgUrl={data.image.large}
             symbol={data.symbol}
-            onChangeToken={onChangeToken}
           />
           <div
             className={`absolute top-[calc(50%-20px)] transform -translate-y-1/2 ${
@@ -51,10 +55,8 @@ export const CoinCalculator = ({
           </div>
           <InputArea
             subTitle={`You receive (${currency?.toUpperCase()})`}
-            calculatedUSD={calculatedUSD}
             globalCurrency
-            onChangeCurrency={onChangeCurrency}
-            currency={currency}
+            calculatedUSD={calculated}
           />
         </div>
       </div>
