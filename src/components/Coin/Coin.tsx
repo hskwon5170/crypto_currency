@@ -16,7 +16,6 @@ import { CoinCalculator } from "./components/CoinCalculator";
 import { CandleStickChart } from "./CandleStickChart";
 import { ChartIcon } from "./ChartIcon";
 import { ApexArea } from "./ApexArea";
-import { TestFeature } from "./TestFeature";
 
 export const Coin = () => {
   const navigate = useNavigate();
@@ -109,6 +108,7 @@ export const Coin = () => {
                 />
               )}
               <Links links={data?.links} />
+              <div></div>
             </div>
           </div>
         </div>
@@ -120,7 +120,6 @@ export const Coin = () => {
             onChangeCurrency={onChangeCurrency}
             currency={currency}
           />
-          <TestFeature />
         </div>
       </div>
     </Layout>

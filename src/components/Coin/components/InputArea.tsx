@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import { CalculatorButton } from "./CalculatorButton";
 import { formatCompactNumber } from "../../../utils/formatCompactNumber";
 import { useAtom } from "jotai";
-import { updateDarkAtom } from "../../commons/JotaiStore/JotaiStore";
+import { updateDarkAtom } from "../../commons/JotaiStore/darkmode";
 // import { FaCircleQuestion } from "react-icons/fa6";
 
 interface InputAreaProps {

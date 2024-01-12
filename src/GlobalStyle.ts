@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAtom } from "jotai";
-import { darkStore } from "./components/commons/JotaiStore/JotaiStore";
+import { darkStore } from "./components/commons/JotaiStore/darkmode";
 
 const GlobalStyle = () => {
   const [dark] = useAtom(darkStore);

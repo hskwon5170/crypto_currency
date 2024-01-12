@@ -10,7 +10,7 @@ import { CanvasChart } from "./components/CanvasChart";
 import { AiOutlineArrowUp } from "react-icons/ai";
 import { CoinSearch } from "../Coin/CoinSearch";
 import { useAtom } from "jotai";
-import { updateDarkAtom } from "../commons/JotaiStore/JotaiStore";
+import { updateDarkAtom } from "../commons/JotaiStore/darkmode";
 
 export const Coins = () => {
   const navigate = useNavigate();
@@ -153,37 +153,39 @@ export const Coins = () => {
   }, [searches]);
 
   return (
-    <Layout isListPage title="List">
-      <div>
-        {/* <PopUpModal /> */}
+    <>
+      <Layout isListPage title="List">
+        <div>
+          {/* <PopUpModal /> */}
 
-        <Title
-          title="Top Tokens on Crypto"
-          className={dark ? "text-white" : "text-black"}
-        />
-        <div ref={buttonRef}></div>
-        <CoinSearch
-          // onChange={HandleInputChanges}
-          // value={search}
-          onSearchChange={onSearchChange}
-        />
-        <Table
-          columns={columns}
-          data={!inputChanged ? data : filted}
-          onRowClick={handleCoinClick}
-        />
-        <div className="fixed bottom-5 right-10 sm:hidden">
-          <div className="transition-all duration-300 transform hover:scale-110">
-            <button
-              className="bg-gray-400 opacity-80 hover:opacity-90 text-white px-4 py-4 rounded-3xl shadow-lg hover:bg-[#4ffae5] hover:text-black active:bg-gray-600 focus:outline-none   focus:ring-opacity-50 animate-bounce"
-              onClick={onClickMoveToRef}
-            >
-              <AiOutlineArrowUp />
-            </button>
+          <Title
+            title="Top Tokens on Crypto"
+            className={dark ? "text-white" : "text-black"}
+          />
+          <div ref={buttonRef}></div>
+          <CoinSearch
+            // onChange={HandleInputChanges}
+            // value={search}
+            onSearchChange={onSearchChange}
+          />
+          <Table
+            columns={columns}
+            data={!inputChanged ? data : filted}
+            onRowClick={handleCoinClick}
+          />
+          <div className="fixed bottom-5 right-10 sm:hidden">
+            <div className="transition-all duration-300 transform hover:scale-110">
+              <button
+                className="bg-gray-400 opacity-80 hover:opacity-90 text-white px-4 py-4 rounded-3xl shadow-lg hover:bg-[#4ffae5] hover:text-black active:bg-gray-600 focus:outline-none   focus:ring-opacity-50 animate-bounce"
+                onClick={onClickMoveToRef}
+              >
+                <AiOutlineArrowUp />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   );
 };
 

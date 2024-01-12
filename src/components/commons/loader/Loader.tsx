@@ -2,7 +2,7 @@ import React from "react";
 import animationData from "../../../public/animationData.json";
 import Lottie from "lottie-react";
 import { useAtom } from "jotai";
-import { updateDarkAtom } from "../JotaiStore/JotaiStore";
+import { updateDarkAtom } from "../JotaiStore/darkmode";
 
 export const Loader = () => {
   // const dark = useDarkModeStore((state) => state.dark);

@@ -1,7 +1,7 @@
 import React from "react";
 import { useTable } from "react-table";
 import { useAtom } from "jotai";
-import { updateDarkAtom } from "../JotaiStore/JotaiStore";
+import { updateDarkAtom } from "../JotaiStore/darkmode";
 
 function Table({ columns, data, onRowClick }: any) {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =

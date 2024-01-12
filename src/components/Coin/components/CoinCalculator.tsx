@@ -4,7 +4,7 @@ import { AiOutlineArrowDown } from "react-icons/ai";
 import { CoinDetailResponse } from "../types";
 import "./CoinCalculator.css";
 import { useAtom } from "jotai";
-import { updateDarkAtom } from "../../commons/JotaiStore/JotaiStore";
+import { updateDarkAtom } from "../../commons/JotaiStore/darkmode";
 
 interface DataProps {
   data: CoinDetailResponse;

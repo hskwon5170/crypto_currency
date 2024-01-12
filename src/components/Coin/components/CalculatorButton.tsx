@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useAtom } from "jotai";
-import { updateDarkAtom } from "../../commons/JotaiStore/JotaiStore";
+import { updateDarkAtom } from "../../commons/JotaiStore/darkmode";
 
 interface ButtonProps {
   imageUrl?: string;

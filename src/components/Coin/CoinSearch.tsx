@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDebounce } from "../../hooks/useDebounce";
 import { useAtom } from "jotai";
-import { updateDarkAtom } from "../commons/JotaiStore/JotaiStore";
+import { updateDarkAtom } from "../commons/JotaiStore/darkmode";
 
 interface CoinSearchProps {
   onSearchChange: (value: string) => void;

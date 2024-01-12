@@ -1,6 +1,6 @@
 import React from "react";
 import { useAtom } from "jotai";
-import { updateDarkAtom } from "../JotaiStore/JotaiStore";
+import { updateDarkAtom } from "../JotaiStore/darkmode";
 
 export const Spinner = () => {
   // const dark = useDarkModeStore((state) => state.dark);

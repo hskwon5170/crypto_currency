@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { useTopbarTheme } from "../../../hooks/useTopbarTheme";
 import { GiPlanetCore } from "react-icons/gi";
 import { useAtom } from "jotai";
-import { updateDarkAtom } from "../JotaiStore/JotaiStore";
+import { updateDarkAtom } from "../JotaiStore/darkmode";
 import { DarkModeToggle } from "../DarkModeToggle/DarkModeToggle";
 import { useLocation, useNavigate } from "react-router-dom";
 

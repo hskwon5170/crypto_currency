@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { BsFillSunFill } from "react-icons/bs";
 import { BsFillMoonFill } from "react-icons/bs";
 import { useAtom, useAtomValue } from "jotai";
-import { toggleStore, updateDarkAtom } from "../JotaiStore/JotaiStore";
+import { toggleStore, updateDarkAtom } from "../JotaiStore/darkmode";
 
 interface DarkModeToggleProps {
   className?: string;
