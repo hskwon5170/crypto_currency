@@ -15,12 +15,10 @@ import { CoinCalculator } from "./components/CoinCalculator";
 import { CandleStickChart } from "./CandleStickChart";
 import { ChartIcon } from "./ChartIcon";
 import { ApexArea } from "./ApexArea";
-import { useAtomValue, useSetAtom } from "jotai";
-import {
-  selectCurrencyAtom,
-  usdCurrencyAtom,
-} from "../commons/JotaiStore/calculator";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { selectCurrencyAtom, usdCurrencyAtom } from "../commons/JotaiStore/calculator";
 import "./index.css";
+import { unableCandleAtom } from "../commons/JotaiStore/coin";
 
 export const Coin = () => {
   const navigate = useNavigate();
@@ -28,16 +26,14 @@ export const Coin = () => {
   const { data } = useCoin(id as string);
   const coinId = useMemo(() => data?.id, [data?.id]);
 
-  const { data: chartData, isLoading: chartLoading } = useChart(
-    data?.id as string
-  );
+  const { data: chartData, isLoading: chartLoading } = useChart(data?.id as string);
 
-  const { quoteClass } = useQuoteChanges(
-    data?.market_data.market_cap_change_percentage_24h
-  );
+  const { quoteClass } = useQuoteChanges(data?.market_data.market_cap_change_percentage_24h);
 
   const [limit, setLimit] = useState<number>(300);
-  const [isArea, setIsArea] = useState(false);
+  const [isArea, setIsArea] = useState(true);
+
+  const [unableCandle, setUnableCandle] = useAtom(unableCandleAtom);
 
   const onClickMoveToCoinList = () => {
     navigate(-1);
@@ -74,26 +70,16 @@ export const Coin = () => {
                   <CandleStickChart coinId={coinId as string} />
                 )}
                 {/* </div> */}
-                <div className="flex justify-end" onClick={onClickChartIcon}>
-                  <ChartIcon isArea={isArea} />
+                <div className="flex justify-end" onClick={!unableCandle ? onClickChartIcon : undefined}>
+                  <ChartIcon isArea={isArea} unableCandle={unableCandle} />
                 </div>
               </div>
             ) : (
               <Title title="Chart is Not Available" />
             )}
             <div>
-              <PriceNavBar
-                val={data?.market_data}
-                priceItems={["High", "Low", "Average"]}
-                quoteClass={quoteClass}
-              />
-              {data?.description.en && (
-                <Description
-                  desc={data?.description.en}
-                  limit={limit}
-                  setLimit={setLimit}
-                />
-              )}
+              <PriceNavBar val={data?.market_data} priceItems={["High", "Low", "Average"]} quoteClass={quoteClass} />
+              {data?.description.en && <Description desc={data?.description.en} limit={limit} setLimit={setLimit} />}
               <Links links={data?.links} />
               <div></div>
             </div>

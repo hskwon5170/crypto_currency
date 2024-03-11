@@ -2,6 +2,8 @@ import { ApexOptions } from "apexcharts";
 import ApexCharts from "react-apexcharts";
 import React, { FC } from "react";
 import { useCandleStickChart } from "./api/useCandleStickChart";
+import { useSetAtom } from "jotai";
+import { unableCandleAtom } from "../commons/JotaiStore/coin";
 
 interface CandleStickChartProps {
   coinId: string;
@@ -9,6 +11,10 @@ interface CandleStickChartProps {
 
 export const CandleStickChart: FC<CandleStickChartProps> = ({ coinId }) => {
   const { data } = useCandleStickChart(coinId);
+  const setUnableCandle = useSetAtom(unableCandleAtom);
+  if (data === undefined || data.length === 0) {
+    setUnableCandle(true);
+  }
 
   const formattedCandleData = data?.map(([date, open, high, low, close]) => {
     return {
@@ -91,12 +97,7 @@ export const CandleStickChart: FC<CandleStickChartProps> = ({ coinId }) => {
 
   return (
     <div>
-      <ApexCharts
-        options={options}
-        series={series}
-        type="candlestick"
-        height={300}
-      />
+      <ApexCharts options={options} series={series} type="candlestick" height={300} />
     </div>
   );
 };
