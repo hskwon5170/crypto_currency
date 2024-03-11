@@ -1,11 +1,6 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 import { CoinDetailResponse } from "../types";
-import { useAtomValue, useSetAtom } from "jotai";
-import {
-  selectCurrencyAtom,
-  usdCurrencyAtom,
-} from "../../commons/JotaiStore/calculator";
 
 export const getCoin = (uuid: string): Promise<CoinDetailResponse> => {
   return (

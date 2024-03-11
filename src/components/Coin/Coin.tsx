@@ -15,7 +15,7 @@ import { CoinCalculator } from "./components/CoinCalculator";
 import { CandleStickChart } from "./CandleStickChart";
 import { ChartIcon } from "./ChartIcon";
 import { ApexArea } from "./ApexArea";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { selectCurrencyAtom, usdCurrencyAtom } from "../commons/JotaiStore/calculator";
 import "./index.css";
 import { unableCandleAtom } from "../commons/JotaiStore/coin";
@@ -33,7 +33,7 @@ export const Coin = () => {
   const [limit, setLimit] = useState<number>(300);
   const [isArea, setIsArea] = useState(true);
 
-  const [unableCandle, setUnableCandle] = useAtom(unableCandleAtom);
+  const unableCandle = useAtomValue(unableCandleAtom);
 
   const onClickMoveToCoinList = () => {
     navigate(-1);
