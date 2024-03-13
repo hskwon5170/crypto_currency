@@ -9,9 +9,33 @@ interface ChartIconProps {
 }
 
 export const ChartIcon: FC<ChartIconProps> = ({ isArea = true, unableCandle }) => {
+  // if (!unableCandle)
+  //   return (
+  //     // <Button colorScheme="teal" size="md" isDisabled={unableCandle}>
+  //     //   <div className="transition-all duration-300 ease-in-out">{isArea ? <MdCandlestickChart /> : <MdOutlineShowChart />}</div>
+  //     // </Button>
+  //     <Button colorScheme="teal" size="md">
+  //       <div className="transition-all duration-300 ease-in-out">{isArea ? <MdCandlestickChart /> : <MdOutlineShowChart />}</div>
+  //     </Button>
+  //   );
+
+  // if (unableCandle)
+  //   return (
+  //     <Button colorScheme="teal" size="md">
+  //       <div className="transition-all duration-300 ease-in-out">{<MdOutlineShowChart />}</div>
+  //     </Button>
+  //   );
   return (
-    <Button colorScheme="teal" size="md" isDisabled={unableCandle}>
-      <div className="transition-all duration-300 ease-in-out">{isArea ? <MdCandlestickChart /> : <MdOutlineShowChart />}</div>
-    </Button>
+    <div>
+      {!unableCandle ? (
+        <Button colorScheme="teal" size="md">
+          <div className="transition-all duration-300 ease-in-out">{isArea ? <MdCandlestickChart /> : <MdOutlineShowChart />}</div>
+        </Button>
+      ) : (
+        <Button colorScheme="teal" size="md" className="cursor-none">
+          <div className="transition-all duration-300 ease-in-out">{<MdOutlineShowChart />}</div>
+        </Button>
+      )}
+    </div>
   );
 };

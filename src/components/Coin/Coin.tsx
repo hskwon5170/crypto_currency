@@ -34,6 +34,7 @@ export const Coin = () => {
   const [isArea, setIsArea] = useState(true);
 
   const unableCandle = useAtomValue(unableCandleAtom);
+  console.log("unableCandle", unableCandle);
 
   const onClickMoveToCoinList = () => {
     navigate(-1);

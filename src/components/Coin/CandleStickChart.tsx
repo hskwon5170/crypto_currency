@@ -11,8 +11,9 @@ interface CandleStickChartProps {
 
 export const CandleStickChart: FC<CandleStickChartProps> = ({ coinId }) => {
   const { data } = useCandleStickChart(coinId);
+  console.log("data", data);
   const setUnableCandle = useSetAtom(unableCandleAtom);
-  if (data === undefined || data.length === 0) {
+  if (data?.length === 0) {
     setUnableCandle(true);
   }
 
