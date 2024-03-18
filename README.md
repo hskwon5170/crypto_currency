@@ -1,7 +1,7 @@
 # 👛Crypto Currency
 - React
 - TypeScript
-- React Query
+- React Query (w.axios)
 - Jotai
 - Tailwindcss
   
