@@ -23,8 +23,9 @@ export const Description = ({
   };
 
   const toggleEllipsis = (str: string, limit?: number) => {
+    const slicedText = str.slice(0, limit);
     return {
-      Elements: str.slice(0, limit),
+      Elements: str.length > limit! ? `${slicedText}…` : slicedText,
       isShowMore: str.length > limit!,
     };
   };
