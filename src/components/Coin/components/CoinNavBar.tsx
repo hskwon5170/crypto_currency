@@ -1,6 +1,4 @@
-import React, { Suspense } from "react";
 import { CoinDetailResponse } from "../types";
-import { Spinner } from "@chakra-ui/react";
 
 interface CoinNavBarProps {
   data?: CoinDetailResponse;
